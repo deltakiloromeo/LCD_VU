@@ -4,7 +4,11 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/**",
-                "C:/Damar/My Documents/OneDrive/Documents/Arduino/libraries/**"
+                "C:/Damar/Projects/Arduino/arduino-1.8.12/**",
+                "C:/Damar/Projects/Arduino/arduino-1.8.12/tools/**",
+                "C:/Damar/Projects/Arduino/arduino-1.8.12/hardware/arduino/avr/**",
+                "C:/Damar/OneDrive/Documents/Arduino/libraries/**",
+                "C:/Users/damar.kristianto/AppData/Local/Arduino15/**"
             ],
             "defines": [
                 "_DEBUG",
