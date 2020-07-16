@@ -8,7 +8,8 @@
                 "C:\\Damar\\Projects\\Arduino\\arduino-1.8.12\\hardware\\arduino\\avr\\cores\\arduino\\**",
                 "C:\\Damar\\Projects\\Arduino\\arduino-1.8.12\\hardware\\arduino\\avr\\libraries\\**",
                 "C:\\Damar\\OneDrive\\Documents\\Arduino\\libraries\\**",
-                "C:\\Users\\damar.kristianto\\AppData\\Local\\Arduino15\\packages\\**"
+                "C:\\Users\\damar.kristianto\\AppData\\Local\\Arduino15\\packages\\**",
+                "C:\\Damar\\Projects\\Arduino\\arduino-1.8.12\\hardware\\tools\\avr\\avr\\include\\**"
             ],
             "defines": [
                 "_DEBUG",
