@@ -1,0 +1,10 @@
+# Data types (KEYWORD1)
+LCD_VU (KEYWORD1)
+
+# Methods and functions (KEYWORD2)
+setCursor (KEYWORD2)
+print (KEYWORD2)
+clear (KEYWORD2)
+setPointers (KEYWORD2)
+getVersion (KEYWORD2)
+setReferences (KEYWORD2)
