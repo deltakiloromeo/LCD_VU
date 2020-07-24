@@ -17,7 +17,7 @@
                 "UNICODE",
                 "_UNICODE"
             ],
-            "intelliSenseMode": "msvc-x64",
+            "intelliSenseMode": "clang-x64",
             "forcedInclude": [
                 "C:\\Damar\\Projects\\Arduino\\arduino-1.8.12\\hardware\\arduino\\avr\\cores\\arduino\\Arduino.h"
             ]
