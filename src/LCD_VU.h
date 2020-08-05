@@ -7,7 +7,7 @@
 #define CENTER_LEFT		549 //630
 #define CENTER_RIGHT	743 //773
 
-class LCD_VU : LiquidCrystal_I2C {
+class LCD_VU {// : LiquidCrystal_I2C {
 	private:
 		char blank = (char)260;
 		char fill = (char)262;
@@ -36,6 +36,11 @@ class LCD_VU : LiquidCrystal_I2C {
 		short *pvuRight;
 		short centerLeft;
 		short centerRight;
+		uint8_t address;
+		uint8_t col; 
+		uint8_t row;
+
+		LiquidCrystal_I2C *pLCD;
 
 		byte Bar[8] = {
 			B11111,
@@ -106,12 +111,11 @@ class LCD_VU : LiquidCrystal_I2C {
 		void drawBar(int data, int peakData, int row);
 		
 	public:
-		//LCD_VU(uint8_t address, uint8_t col, uint8_t row, int pinLeftInput, int pinRightInput);
 		LCD_VU(uint8_t address, uint8_t col, uint8_t row);
 		void init();
 		void loop();
 		void setCursor(uint8_t col, uint8_t row);
-		size_t print(const String& text);
+		void print(const String& text);
 		void clear();
 		void setPointers(short *pvuLeftData, short *pvuRightData);
 		String getVersion();

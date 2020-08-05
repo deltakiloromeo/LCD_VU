@@ -1,33 +1,37 @@
 #include "LCD_VU.h"
 
-//LCD_VU::LCD_VU(uint8_t address, uint8_t col, uint8_t row, int pinLeftInput, int pinRightInput) : LiquidCrystal_I2C::LiquidCrystal_I2C(address, col, row) {
-LCD_VU::LCD_VU(uint8_t address, uint8_t col, uint8_t row) : LiquidCrystal_I2C::LiquidCrystal_I2C(address, col, row) {
+LCD_VU::LCD_VU(uint8_t address, uint8_t col, uint8_t row) {
+  this->address = address;
+  this->col = col;
+  this->row = row;
 }
 
 void LCD_VU::init() {
-  LiquidCrystal_I2C::init();
-  this->backlight();
+  pLCD = new LiquidCrystal_I2C(address, col, row);
+
+  pLCD->init();
+  pLCD->backlight();
     
-  this->createChar(1, Bar);
-  this->createChar(2, L);
-  this->createChar(3, R);
-  this->createChar(4, EmptyBar);
-  this->createChar(5, EndMark);
-  this->createChar(6, peakHoldChar);
+  pLCD->createChar(1, Bar);
+  pLCD->createChar(2, L);
+  pLCD->createChar(3, R);
+  pLCD->createChar(4, EmptyBar);
+  pLCD->createChar(5, EndMark);
+  pLCD->createChar(6, peakHoldChar);
 
   decayTime = millis();
 
-  this->setCursor(0, 0);        //L channel index
-  this->write(2);               //L symbol 
-  this->setCursor(0, 1);        //R channel index
-  this->write(3);               //R symbol
-  this->setCursor(15, 0);       //closing tag / end mark index 1
-  this->write(5);               //closing tag / end mark
-  this->setCursor(15, 1);       //closing tag / end mark index 2
-  this->write(5);               //closing tag / end mark
+  pLCD->setCursor(0, 0);        //L channel index
+  pLCD->write(2);               //L symbol 
+  pLCD->setCursor(0, 1);        //R channel index
+  pLCD->write(3);               //R symbol
+  pLCD->setCursor(15, 0);       //closing tag / end mark index 1
+  pLCD->write(5);               //closing tag / end mark
+  pLCD->setCursor(15, 1);       //closing tag / end mark index 2
+  pLCD->write(5);               //closing tag / end mark
 
-  this->centerLeft = CENTER_LEFT;
-  this->centerRight = CENTER_RIGHT;
+  centerLeft = CENTER_LEFT;
+  centerRight = CENTER_RIGHT;
 }
 
 void LCD_VU::loop()
@@ -167,138 +171,138 @@ void LCD_VU::drawBar(int data, int peakData, int row)
     peakData = -1;
   }
 
-  this->setCursor(1,row);
+  pLCD->setCursor(1,row);
   if (data == 0)
   {
       char level0[] = {blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, '\0'};
-      this->print(level0);
+      pLCD->print(level0);
   }
 
   else if( data == 1)
   {
       char level1[] = {fill, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, '\0'};
-      this->print(level1);
+      pLCD->print(level1);
   }
     
   else if( data == 2)
   {
       char level2[] = {fill, fill, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, '\0'};
-      this->print(level2);
+      pLCD->print(level2);
   }
     
   else if (data == 3)
   {
       char level3[] = {fill, fill, fill, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, '\0'};
-      this->print(level3);
+      pLCD->print(level3);
   }
 
   else if (data == 4)
   {
       char level4[] = {fill, fill, fill, fill, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, '\0'};
-      this->print(level4);
+      pLCD->print(level4);
   }
     
   else if (data == 5)
   {
       char level5[] = {fill, fill, fill, fill, fill, blank, blank, blank, blank, blank, blank, blank, blank, blank, '\0'};
-      this->print(level5);
+      pLCD->print(level5);
   }
 
   else if (data == 6)
   {
       char level6[] = {fill, fill, fill, fill, fill, fill, blank, blank, blank, blank, blank, blank, blank, blank, '\0'};
-      this->print(level6);
+      pLCD->print(level6);
   }
 
   else if (data == 7)
   {
       char level7[] = {fill, fill, fill, fill, fill, fill, fill, blank, blank, blank, blank, blank, blank, blank, '\0'};
-      this->print(level7);
+      pLCD->print(level7);
   }
 
   else if (data == 8)
   {
       char level8[] = {fill, fill, fill, fill, fill, fill, fill, fill, blank, blank, blank, blank, blank, blank, '\0'};
-      this->print(level8);
+      pLCD->print(level8);
   }
   
   else if (data == 9)
   {
       char level9[] = {fill, fill, fill, fill, fill, fill, fill, fill, fill, blank, blank, blank, blank, blank, '\0'};
-      this->print(level9);
+      pLCD->print(level9);
   }
 
   else if (data == 10)
   {
       char level10[] = {fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, blank, blank, blank, blank, '\0'};
-      this->print(level10);
+      pLCD->print(level10);
   }
 
   else if (data == 11)
   {
       char level11[] = {fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, blank, blank, blank, '\0'};
-      this->print(level11);
+      pLCD->print(level11);
   }
 
   else if (data == 12)
   {
       char level12[] = {fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, blank, blank, '\0'};
-      this->print(level12);
+      pLCD->print(level12);
   }
 
   else if (data == 13)
   {
       char level13[] = {fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, blank, '\0'};
-      this->print(level13);
+      pLCD->print(level13);
   }
 
   else if (data == 14)
   {
       char level14[] = {fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, '\0'};
-      this->print(level14);
+      pLCD->print(level14);
   }
 
   else if (data == 15)
   {
       char level15[] = {fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, '\0'};
-      this->print(level15);
+      pLCD->print(level15);
   }
 
 
   if (peakData == data)
   {
-      this->setCursor(data,row);
-      this->write(6); //write the peak marker
+      pLCD->setCursor(data,row);
+      pLCD->write(6); //write the peak marker
   }
   else if (peakData > 0)
   {
-      this->setCursor(peakData,row);
-      this->write(6); //write the peak marker
+      pLCD->setCursor(peakData,row);
+      pLCD->write(6); //write the peak marker
   }
 }
 
 void LCD_VU::setCursor(uint8_t col, uint8_t row) {
-  LiquidCrystal_I2C::setCursor(col, row);
+  pLCD->setCursor(col, row);
 }
-size_t LCD_VU::print(const String& text) {
-  LiquidCrystal_I2C::print(text);
+void LCD_VU::print(const String& text) {
+  pLCD->print(text);
 }
 void LCD_VU::clear() {
-  LiquidCrystal_I2C::clear();
+  pLCD->clear();
 }
 
 void LCD_VU::setPointers(short *pvuLeftData, short *pvuRightData) {
-    this->pvuLeft = pvuLeftData;
-    this->pvuRight = pvuRightData;
+    pvuLeft = pvuLeftData;
+    pvuRight = pvuRightData;
 }
 
 String LCD_VU::getVersion() {
-    return "LCD_VU v0.02";
+    return "LCD_VU v0.03";
 }
 
 void LCD_VU::setReferences(short refLeft = CENTER_LEFT, short refRight = CENTER_RIGHT) {
-    this->centerLeft = refLeft;
-    this->centerRight = refRight;
+    centerLeft = refLeft;
+    centerRight = refRight;
     setCursor(0,0);
     print("refLeft: "); print(String(centerLeft));
     setCursor(0,1);
