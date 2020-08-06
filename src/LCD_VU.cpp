@@ -36,12 +36,13 @@ void LCD_VU::init() {
 
 void LCD_VU::loop()
 {    
-  short data;
+  int data;
 
   actualMillis = millis();
 
   //totalL = analogRead(inputPinL) / 4 - 128; //reducing the detected hum and noise
-  data = (*pvuLeft-centerLeft);
+  //data = (*pvuLeft-centerLeft);
+  data = (*pvuLeft-centerLeft) / QUANTIZE - NOISE_OFFSET;
   if(data < 0)
     totalL = -data;
   else
@@ -62,7 +63,8 @@ void LCD_VU::loop()
     maxL = 0;
   }   
   
-  data = (*pvuRight-centerRight);
+  //data = (*pvuRight-centerRight);
+  data = (*pvuRight-centerRight) / QUANTIZE - NOISE_OFFSET;
   if(data < 0)
     totalR = -data;
   else
@@ -88,9 +90,9 @@ void LCD_VU::loop()
     
   volR = right / 3;
     
-  if(volR > 14)
+  if(volR > MAX_VU)
   {
-    volR = 14;
+    volR = MAX_VU;
   }
 
   if (volR < (rightAvg - 2))
@@ -120,9 +122,9 @@ void LCD_VU::loop()
 
   volL = left / 3;
    
-  if(volL > 14)
+  if(volL > MAX_VU)
   {
-    volL = 14;
+    volL = MAX_VU;
   }
 
   if (volL < (leftAvg - 2))
@@ -163,8 +165,11 @@ void LCD_VU::loop()
   Serial.println();
 }
 
-void LCD_VU::drawBar(int data, int peakData, int row)
+void LCD_VU::drawBar(short data, short peakData, short row)
 {
+  // Use this line to skip VU meter display, otherwise just remark it
+  //return;
+
   //If the previous peak data is 1 or 0, then not taking care of the value.
   if (peakData < 2)
   {
@@ -291,16 +296,16 @@ void LCD_VU::clear() {
   pLCD->clear();
 }
 
-void LCD_VU::setPointers(short *pvuLeftData, short *pvuRightData) {
+void LCD_VU::setPointers(int *pvuLeftData, int *pvuRightData) {
     pvuLeft = pvuLeftData;
     pvuRight = pvuRightData;
 }
 
 String LCD_VU::getVersion() {
-    return "LCD_VU v0.03";
+    return "LCD_VU v0.0.3";
 }
 
-void LCD_VU::setReferences(short refLeft = CENTER_LEFT, short refRight = CENTER_RIGHT) {
+void LCD_VU::setReferences(int refLeft = CENTER_LEFT, int refRight = CENTER_RIGHT) {
     centerLeft = refLeft;
     centerRight = refRight;
     setCursor(0,0);
