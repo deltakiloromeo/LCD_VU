@@ -6,6 +6,14 @@
  *  August 6th, 2020 v0.0.3
  *  - Finished revision for linear VU meter
  *  - Need to find out for logarithmic measurement 
+ * 
+ *  August 7th, 2020 v0.0.4
+ * 	- Uses direct reading at analog pins, 
+ * 	  instead of using mux, to eliminate noises
+ * 
+ * 	August 9th, 2020 v0.0.5
+ * 	- Implement logarithmic measurement using dBU
+ * 	- dBU range from -25dBU to 2 dBU with 14 segments VU meter
  ******************************************/
 #ifndef LCD_VU_H
 #define LCD_VU_H
@@ -13,27 +21,31 @@
 #include <Arduino.h>
 #include <LiquidCrystal_I2C.h>
 
-#define CENTER_LEFT		512 //814 //630
-#define CENTER_RIGHT	679	//814 //773
-#define MAX_VU			14
-#define QUANTIZE		4
-#define NOISE_OFFSET	0 // 128
+#define MAX_VU			14 // number of VU segment
+#define VREF			1400 // reference voltage in mV, measured at AREF pin
+#define VCENTER			400 // center voltage in mV, measured at voltage divider resistor 100K
+#define VOFFSET			390 // offset voltage in mV, reads by analog pins when input is connected to ground
+#define	DBLO			-25 // lowest dBu to be dsplayed in VU meter
+#define	DBHI			2 // highest dBu to be displayed in VU meter
 
-class LCD_VU {// : LiquidCrystal_I2C {
+#define dBu(x) (20*log10(x/774.6))	// conversion mV to dBu
+#define volt(x)	(fabs((VREF*x/1024) - VCENTER - VOFFSET))	// conversion analog reading to audio voltage in mV
+
+class LCD_VU {
 	private:
 		char blank = (char)260;
 		char fill = (char)262;
 
 		int left, right;                        //Variables to store and calculate the channel levels             
-		const byte numReadings = 0;              //Refresh rate. Lower value = higher rate. 5 is the defaul
+		const byte numReadings = 5;              //Refresh rate. Lower value = higher rate. 5 is the defaul
 		short indexL = 0;                         //Actual channel index
-		int totalL = 0;                         //Total channel data
+		double totalL = 0;                         //Total channel data
 		int maxL = 0;                           //Maximal level
 		short indexR = 0;                         
-		int totalR = 0;                         
+		double totalR = 0;                         
 		int maxR = 0;
-		//int inputPinL;                     //Input pin Analog 1 for LEFT channel
-		//int inputPinR;                     //Input pin Analog 0 for RIGHT channel
+		byte pinLeft;	//Input analog pin for LEFT channel
+		byte pinRight;	//Input analog pin for RIGHT channel
 		short volL = 0;
 		short volR = 0;
 		int rightAvg = 0;
@@ -44,10 +56,6 @@ class LCD_VU {// : LiquidCrystal_I2C {
 		short leftPeak = 0;
 		long decayTime = 0;
 		long actualMillis = 0;
-		int *pvuLeft;
-		int *pvuRight;
-		int centerLeft;
-		int centerRight;
 		uint8_t address;
 		uint8_t col; 
 		uint8_t row;
@@ -121,17 +129,16 @@ class LCD_VU {// : LiquidCrystal_I2C {
 		};
 
 		void drawBar(short data, short peakData, short row);
+		int mapdBuToVU(double dBuLevel);
 		
 	public:
-		LCD_VU(uint8_t address, uint8_t col, uint8_t row);
+		LCD_VU(uint8_t address, uint8_t col, uint8_t row, byte audioPinLef, byte audioPinRight);
 		void init();
 		void loop();
 		void setCursor(uint8_t col, uint8_t row);
 		void print(const String& text);
 		void clear();
-		void setPointers(int *pvuLeftData, int *pvuRightData);
 		String getVersion();
-		void setReferences(int refLeft, int refRight);
 };
 
 #endif

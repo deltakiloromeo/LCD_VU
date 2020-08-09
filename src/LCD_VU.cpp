@@ -1,9 +1,11 @@
 #include "LCD_VU.h"
 
-LCD_VU::LCD_VU(uint8_t address, uint8_t col, uint8_t row) {
+LCD_VU::LCD_VU(uint8_t address, uint8_t col, uint8_t row, byte audioPinLeft, byte audioPinRight) {
   this->address = address;
   this->col = col;
   this->row = row;
+  this->pinLeft = audioPinLeft;
+  this->pinRight = audioPinRight;
 }
 
 void LCD_VU::init() {
@@ -30,25 +32,27 @@ void LCD_VU::init() {
   pLCD->setCursor(15, 1);       //closing tag / end mark index 2
   pLCD->write(5);               //closing tag / end mark
 
-  centerLeft = CENTER_LEFT;
-  centerRight = CENTER_RIGHT;
+  analogReference(EXTERNAL);    // use external voltage reference in pin AREF
+  pinMode(pinLeft, INPUT);
+  pinMode(pinRight, INPUT);
 }
 
 void LCD_VU::loop()
 {    
-  int data;
+  double data;
 
   actualMillis = millis();
 
-  //totalL = analogRead(inputPinL) / 4 - 128; //reducing the detected hum and noise
-  //data = (*pvuLeft-centerLeft);
-  data = (*pvuLeft-centerLeft) / QUANTIZE - NOISE_OFFSET;
-  if(data < 0)
-    totalL = -data;
-  else
-    totalL = data;// / 4 - 128; //reducing the detected hum and noise
-  Serial.print("L data: "); Serial.print(*pvuLeft);
-    
+  data = analogRead(pinLeft);
+  //Serial.print("Read L: "); Serial.print(data);
+
+  data = volt(data);
+  Serial.print(" Volt L: "); Serial.print(data); Serial.print("mV ");
+
+  totalL = dBu(data);
+  Serial.print("L data: "); Serial.print(totalL); Serial.print("dBu ");
+
+  totalL = mapdBuToVU(totalL);
   if(totalL > maxL)
   {
     maxL = totalL;
@@ -63,17 +67,17 @@ void LCD_VU::loop()
     maxL = 0;
   }   
   
-  //data = (*pvuRight-centerRight);
-  data = (*pvuRight-centerRight) / QUANTIZE - NOISE_OFFSET;
-  if(data < 0)
-    totalR = -data;
-  else
-    totalR = data;
+  
+  data = analogRead(pinRight);
+  //Serial.print("Read R: "); Serial.print(data);
 
-  //totalR = analogRead(inputPinR) / 4 - 128; //reducing the detected hum and noise
-  //totalR = (*pvuRight-CENTER_RIGHT);// / 4 - 128; //reducing the detected hum and noise
-  Serial.print(" R data: "); Serial.print(*pvuRight);
-    
+  data = volt(data);
+  Serial.print(" Volt R: "); Serial.print(data); Serial.print("mV ");
+
+  totalR = dBu(data);
+  Serial.print(" R data: "); Serial.print(totalR); Serial.print("dBu ");
+  
+  totalR = mapdBuToVU(totalR);
   if(totalR > maxR)
   {
     maxR = totalR;
@@ -88,8 +92,7 @@ void LCD_VU::loop()
     maxR = 0;
   } 
     
-  volR = right / 3;
-    
+  volR = right;
   if(volR > MAX_VU)
   {
     volR = MAX_VU;
@@ -119,9 +122,8 @@ void LCD_VU::loop()
 
   drawBar(volR, rightPeak, 1);
   Serial.print(" R: "); Serial.print(volR); Serial.print(", "); Serial.print(rightPeak);
-
-  volL = left / 3;
-   
+  
+  volL = left;   
   if(volL > MAX_VU)
   {
     volL = MAX_VU;
@@ -296,21 +298,17 @@ void LCD_VU::clear() {
   pLCD->clear();
 }
 
-void LCD_VU::setPointers(int *pvuLeftData, int *pvuRightData) {
-    pvuLeft = pvuLeftData;
-    pvuRight = pvuRightData;
-}
-
 String LCD_VU::getVersion() {
-    return "LCD_VU v0.0.3";
+    return "LCD_VU v0.0.4";
 }
 
-void LCD_VU::setReferences(int refLeft = CENTER_LEFT, int refRight = CENTER_RIGHT) {
-    centerLeft = refLeft;
-    centerRight = refRight;
-    setCursor(0,0);
-    print("refLeft: "); print(String(centerLeft));
-    setCursor(0,1);
-    print("refRight: "); print(String(centerRight));
-    delay(2000);
+int LCD_VU::mapdBuToVU(double dBuLevel) {
+  int retVal = 0;
+  int vuRange = DBHI - DBLO;
+
+  if(dBuLevel >= DBLO) {
+    retVal = ceil((dBuLevel - DBLO) / vuRange * MAX_VU);
+  }
+
+  return retVal;
 }
