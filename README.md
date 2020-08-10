@@ -4,12 +4,12 @@ As this is only intended for a simple display unit, and not for measurement unit
 
 ## Requirement
 You need to download LiquidCrystal_I2C library to use this library.
-I use https://github.com/marcoschwartz/LiquidCrystal_I2C.git from Marco Schwartz
+I use https://github.com/marcoschwartz/LiquidCrystal_I2C.git
 
 Atrributes
 -
 - The basic concept for this library is based on the KT Audio VU Meter by ThomAce (https://create.arduino.cc/projecthub/ThomAce/ktaudio-vu-meter-1402b1).
-- Liquid Crystal Display with I2C backpack library from Marco Schwartz (https://github.com/marcoschwartz/LiquidCrystal_I2C.git)
+- Liquid Crystal Display with I2C backpack library (https://github.com/marcoschwartz/LiquidCrystal_I2C.git)
 
 References
 -
