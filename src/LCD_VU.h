@@ -21,12 +21,12 @@
 #include <Arduino.h>
 #include <LiquidCrystal_I2C.h>
 
-#define MAX_VU			14 // number of VU segment
-#define VREF			1400 // reference voltage in mV, measured at AREF pin
-#define VCENTER			400 // center voltage in mV, measured at voltage divider resistor 100K
-#define VOFFSET			390 // offset voltage in mV, reads by analog pins when input is connected to ground
-#define	DBLO			-25 // lowest dBu to be dsplayed in VU meter
-#define	DBHI			2 // highest dBu to be displayed in VU meter
+#define MAX_VU		14 // number of VU segment
+#define VREF		1275 // reference voltage in mV, measured at AREF pin
+#define VCENTER		350 // center voltage in mV, measured at voltage divider resistor 100K
+#define VOFFSET		296 // offset voltage in mV, reads by analog pins when input is connected to ground
+#define	DBLO		-25 // lowest dBu range to be dsplayed in VU meter
+#define	DBHI		2 // highest dBu range to be displayed in VU meter
 
 #define dBu(x) (20*log10(x/774.6))	// conversion mV to dBu
 #define volt(x)	(fabs((VREF*x/1024) - VCENTER - VOFFSET))	// conversion analog reading to audio voltage in mV
