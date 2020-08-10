@@ -13,24 +13,8 @@ void LCD_VU::init() {
 
   pLCD->init();
   pLCD->backlight();
-    
-  pLCD->createChar(1, Bar);
-  pLCD->createChar(2, L);
-  pLCD->createChar(3, R);
-  pLCD->createChar(4, EmptyBar);
-  pLCD->createChar(5, EndMark);
-  pLCD->createChar(6, peakHoldChar);
 
   decayTime = millis();
-
-  pLCD->setCursor(0, 0);        //L channel index
-  pLCD->write(2);               //L symbol 
-  pLCD->setCursor(0, 1);        //R channel index
-  pLCD->write(3);               //R symbol
-  pLCD->setCursor(15, 0);       //closing tag / end mark index 1
-  pLCD->write(5);               //closing tag / end mark
-  pLCD->setCursor(15, 1);       //closing tag / end mark index 2
-  pLCD->write(5);               //closing tag / end mark
 
   analogReference(EXTERNAL);    // use external voltage reference in pin AREF
   pinMode(pinLeft, INPUT);
@@ -45,8 +29,27 @@ void LCD_VU::loop()
 {    
   double data;
 
+  /*********** Refresh display for basic elements *********/
+  pLCD->createChar(1, Bar);
+  pLCD->createChar(2, L);
+  pLCD->createChar(3, R);
+  pLCD->createChar(4, EmptyBar);
+  pLCD->createChar(5, EndMark);
+  pLCD->createChar(6, peakHoldChar);
+  
+  pLCD->setCursor(0, 0);        //L channel index
+  pLCD->write(2);               //L symbol 
+  pLCD->setCursor(0, 1);        //R channel index
+  pLCD->write(3);               //R symbol
+  pLCD->setCursor(15, 0);       //closing tag / end mark index 1
+  pLCD->write(5);               //closing tag / end mark
+  pLCD->setCursor(15, 1);       //closing tag / end mark index 2
+  pLCD->write(5);               //closing tag / end mark
+
+
   actualMillis = millis();
 
+  // Data reading on left channel
   data = analogRead(pinLeft);
   //Serial.print("Read L: "); Serial.print(data);
 
@@ -71,7 +74,7 @@ void LCD_VU::loop()
     maxL = 0;
   }   
   
-  
+  // Data reading on right channel
   data = analogRead(pinRight);
   //Serial.print("Read R: "); Serial.print(data);
 

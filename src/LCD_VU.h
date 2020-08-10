@@ -134,7 +134,7 @@ class LCD_VU {
 		double dBu(double voltData); // conversion mV to dBu
 
 	public:
-		LCD_VU(uint8_t address, uint8_t col, uint8_t row, byte audioPinLef, byte audioPinRight);
+		LCD_VU(uint8_t address, uint8_t col, uint8_t row, byte audioPinLeft, byte audioPinRight);
 		void init();
 		void loop();
 		void setCursor(uint8_t col, uint8_t row);
