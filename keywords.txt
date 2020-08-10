@@ -1,10 +1,20 @@
 # Data types (KEYWORD1)
-LCD_VU (KEYWORD1)
+LCD_VU KEYWORD1
 
 # Methods and functions (KEYWORD2)
-setCursor (KEYWORD2)
-print (KEYWORD2)
-clear (KEYWORD2)
-setPointers (KEYWORD2)
-getVersion (KEYWORD2)
-setReferences (KEYWORD2)
+init KEYWORD2
+loop KEYWORD2
+setCursor KEYWORD2
+print KEYWORD2
+clear KEYWORD2
+getVersion KEYWORD2
+dBu KEYWORD2
+volt KEYWORD2
+setReference KEYWORD2
+
+# Constant and structure (LITERAL1)
+VREF LITERAL1
+VCENTER LITERAL1
+VOFFSET LITERAL1
+DBLO LITERAL1
+DBUP LITERAL1

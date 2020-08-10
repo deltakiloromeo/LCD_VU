@@ -22,14 +22,11 @@
 #include <LiquidCrystal_I2C.h>
 
 #define MAX_VU		14 // number of VU segment
-#define VREF		1275 // reference voltage in mV, measured at AREF pin
-#define VCENTER		350 // center voltage in mV, measured at voltage divider resistor 100K
-#define VOFFSET		296 // offset voltage in mV, reads by analog pins when input is connected to ground
+#define VREF		1500 // reference voltage in mV, measured at AREF pin
+#define VCENTER		450 // center voltage in mV, measured at voltage divider resistor 100K
+#define VOFFSET		315 // offset voltage in mV, reads by analog pins when input is connected to ground
 #define	DBLO		-25 // lowest dBu range to be dsplayed in VU meter
 #define	DBHI		2 // highest dBu range to be displayed in VU meter
-
-#define dBu(x) (20*log10(x/774.6))	// conversion mV to dBu
-#define volt(x)	(fabs((VREF*x/1024) - VCENTER - VOFFSET))	// conversion analog reading to audio voltage in mV
 
 class LCD_VU {
 	private:
@@ -59,6 +56,9 @@ class LCD_VU {
 		uint8_t address;
 		uint8_t col; 
 		uint8_t row;
+		double mvRef;
+		double mvCenter;
+		double mvOffset;
 
 		LiquidCrystal_I2C *pLCD;
 
@@ -130,7 +130,9 @@ class LCD_VU {
 
 		void drawBar(short data, short peakData, short row);
 		int mapdBuToVU(double dBuLevel);
-		
+		double volt(double data); // conversion analog reading to audio voltage in mV
+		double dBu(double voltData); // conversion mV to dBu
+
 	public:
 		LCD_VU(uint8_t address, uint8_t col, uint8_t row, byte audioPinLef, byte audioPinRight);
 		void init();
@@ -138,6 +140,7 @@ class LCD_VU {
 		void setCursor(uint8_t col, uint8_t row);
 		void print(const String& text);
 		void clear();
+		void setReference(double mvRef, double mvCenter, double mvOffset);
 		String getVersion();
 };
 

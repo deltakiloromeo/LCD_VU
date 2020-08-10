@@ -35,6 +35,10 @@ void LCD_VU::init() {
   analogReference(EXTERNAL);    // use external voltage reference in pin AREF
   pinMode(pinLeft, INPUT);
   pinMode(pinRight, INPUT);
+
+  mvCenter = VCENTER;
+  mvOffset = VOFFSET;
+  mvRef = VREF;
 }
 
 void LCD_VU::loop()
@@ -311,4 +315,18 @@ int LCD_VU::mapdBuToVU(double dBuLevel) {
   }
 
   return retVal;
+}
+
+void LCD_VU::setReference(double mvRef, double mvCenter, double mvOffset) {
+  this->mvCenter = mvCenter;
+  this->mvOffset = mvOffset;
+  this->mvRef = mvRef;
+}
+
+double LCD_VU::volt(double data) {
+  return fabs((mvRef*data/1024) - mvCenter) - mvOffset;
+}
+
+double LCD_VU::dBu(double voltData) {
+  return 20*log10(voltData / 774.6);	// conversion mV to dBu
 }
