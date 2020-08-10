@@ -1,10 +1,10 @@
 # LCD_VU
-This is a library for displaying audio level (dBu) using 16x2 LCD, controlled using LiquidCrystal_I2C library. VU level is represented by 14 bars segment, the default audio level range are between -25 to 2 dBu. As this is only intended for a simple display unit, and not for measurement unit, the result may be less acurrate compared to a professional measurement tool.
+This is a library for displaying audio level (dBu) using 16x2 LCD, controlled using LiquidCrystal_I2C library. VU level is represented by 14 bars segment, the default audio level range are between -25dBu to 2dBu. As this is only intended for a simple display unit, and not for measurement unit, the result may be less acurrate compared to a professional measurement tool.
 
 ## Requirement
 You need to download LiquidCrystal_I2C library to use this library. I'm using LCD with I2C driver from https://github.com/marcoschwartz/LiquidCrystal_I2C.git
 
-## Attributes
+## Attribution
 - The basic concept for this library is based on the KT Audio VU Meter by ThomAce (https://create.arduino.cc/projecthub/ThomAce/ktaudio-vu-meter-1402b1).
 - Liquid Crystal Display with I2C backpack library (https://github.com/marcoschwartz/LiquidCrystal_I2C.git)
 
