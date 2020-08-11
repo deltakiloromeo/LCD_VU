@@ -1,7 +1,8 @@
 /***************************************************
  * This is an example on using LCD_VU.
  * This example has been created using Arduino Uno 
- * version 3 board
+ * 
+ * You will need LiquidCrystal_I2C library in your system
  * 
  * Aug 10th, 2020
  * *************************************************/
@@ -13,7 +14,7 @@
 #define pinAudioRight   A2
 
 /******************* LCD declaration **********************
- * 1st argument: address of LCD with I2C backpack
+ * 1st argument: address of LCD with I2C backpack, this address may vary between LCD device
  * 2nd argument: number of columns
  * 3rd argument: number of rows
  * 4th argument: analog pin for audio input left channel
@@ -28,6 +29,7 @@ void setup() {
     // You need to call this method to initialize LCD_VU
     lcd.init();
     
+    /****** The introduction block ******/
     lcd.setCursor(0,0);
     lcd.print("* dBu VU meter *");
 
@@ -38,6 +40,7 @@ void setup() {
 
     delay(2000);
     lcd.clear();
+    /****** End of The introduction block ******/
 
     /**** call this method to calibrate the VU meter ****
     * No need to call this method if with using standard values,
@@ -58,7 +61,13 @@ void setup() {
     *               absolute value only (remove negative sign).
     *               You need to activate Serial for this purpose. 
     * ***************************************************/
-    // use this if necessary ---> lcd.setReference(1800, 800, 200);
+    // Unremark the following codes if you need it
+    
+    // use this if necessary, values are only for sample
+    //lcd.setReference(1800, 800, 200); 
+    
+    // or if you need only to set offset value, and keep the rest the same
+    //lcd.setReference(VREF, VCENTER, 200);
 }
 
 void loop() {

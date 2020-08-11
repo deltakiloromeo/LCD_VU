@@ -320,7 +320,7 @@ int LCD_VU::mapdBuToVU(double dBuLevel) {
   return retVal;
 }
 
-void LCD_VU::setReference(double mvRef, double mvCenter, double mvOffset) {
+void LCD_VU::setReference(double mvRef = VREF, double mvCenter = VCENTER, double mvOffset = VOFFSET) {
   this->mvCenter = mvCenter;
   this->mvOffset = mvOffset;
   this->mvRef = mvRef;

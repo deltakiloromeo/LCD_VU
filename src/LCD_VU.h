@@ -140,7 +140,7 @@ class LCD_VU {
 		void setCursor(uint8_t col, uint8_t row);
 		void print(const String& text);
 		void clear();
-		void setReference(double mvRef, double mvCenter, double mvOffset);
+		void setReference(double mvRef = VREF, double mvCenter = VCENTER, double mvOffset = VOFFSET);
 		String getVersion();
 };
 
