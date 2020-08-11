@@ -306,7 +306,7 @@ void LCD_VU::clear() {
 }
 
 String LCD_VU::getVersion() {
-    return "LCD_VU v0.0.4";
+    return "LCD_VU v1.0.0";
 }
 
 int LCD_VU::mapdBuToVU(double dBuLevel) {

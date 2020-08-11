@@ -14,6 +14,9 @@
  * 	August 9th, 2020 v0.0.5
  * 	- Implement logarithmic measurement using dBU
  * 	- dBU range from -25dBU to 2 dBU with 14 segments VU meter
+ * 
+ * 	August 11th, 2020 v1.0.0
+ * 	- First release
  ******************************************/
 #ifndef LCD_VU_H
 #define LCD_VU_H
