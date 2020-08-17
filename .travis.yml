@@ -1,8 +1,19 @@
 language: cpp
 compiler: gcc
-script:
-  - ./build.sh
-  - ./travis_qmake_gcc_cpp11_gcov
-  - ./get_code_cov.sh # or how ever you get your coverage
+
+addons:
+  apt:
+    packages: lcov
+
+script: 
+  ./build.sh
+  ./travis_qmake_gcc_cpp11_gcov
+  ./get_code_cov.sh
+
 after_success:
-  - bash <(curl -s https://codecov.io/bash) -t ${{ Secrets.CODECOV_TOKEN }}
+# Create lcov report
+  - lcov --capture --directory . --output-file coverage.info
+  - lcov --remove coverage.info '/usr/*' --output-file coverage.info # filter system-files
+  - lcov --list coverage.info # debug info
+# Uploading report to CodeCov
+  - bash <(curl -s https://codecov.io/bash) -f coverage.info || echo "Codecov did not collect coverage reports" -t ${{ Secrets.CODECOV_TOKEN }}
