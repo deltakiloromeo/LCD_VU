@@ -60,10 +60,5 @@ jobs:
         flags: unittests
         env_vars: OS,PYTHON
         name: codecov-umbrella
-        fail_ci_if_error: false
+        fail_ci_if_error: true
         path_to_write_report: ./coverage/codecov_report.gz
-
-    # request codecov to detect CI environment to pass through to docker
-    - name: Upload report to codecov
-      run: |
-        bash <(curl -s https://codecov.io/bash) -t ${{ Secrets.CODECOV_TOKEN }}
