@@ -40,6 +40,10 @@ jobs:
         arduino-board-fqbn: ${{ matrix.arduino-boards-fqbn }}
         build-properties: '{ "All": "${{ matrix.log-options }} ${{  matrix.other-options }}" }'
 
+    - name: Upload to codecov
+      run: |
+        bash <(curl -s https://codecov.io/bash) -t ${{ Secrets.CODECOV_TOKEN }}
+
     #- name: Setup Python
     #  uses: actions/setup-python@master
     #  with:
@@ -66,7 +70,3 @@ jobs:
     #- name: Use Travis build
     #run: |
     #./build.sh
-
-    - name: Upload to codecov
-    run: |
-      bash <(curl -s https://codecov.io/bash) -t ${{ Secrets.CODECOV_TOKEN }}
