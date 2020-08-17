@@ -69,4 +69,4 @@ jobs:
 
     - name: Upload to codecov
     run: |
-      bash <(curl -s https://codecov.io/bash) -f coverage.info || echo "Codecov did not collect coverage reports" -t ${{ Secrets.CODECOV_TOKEN }}
+      bash <(curl -s https://codecov.io/bash) -t ${{ Secrets.CODECOV_TOKEN }}

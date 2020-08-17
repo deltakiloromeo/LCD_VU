@@ -6,9 +6,8 @@ addons:
     packages: lcov
 
 script: 
-  - chmod +x ./build.sh ./travis_qmake_gcc_cpp11_gcov.pro ./get_code_cov.sh
+  - chmod +x ./build.sh ./get_code_cov.sh
   - ./build.sh
-  - ./travis_qmake_gcc_cpp11_gcov
   - ./get_code_cov.sh
 
 after_success:
