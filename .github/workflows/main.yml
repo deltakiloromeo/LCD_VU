@@ -37,6 +37,7 @@ jobs:
         build-properties: '{ "All": "${{ matrix.log-options }} ${{  matrix.other-options }}" }'
 
     # request codecov to detect CI environment to pass through to docker
+    #!/bin/bash
     ci_env=`bash <(curl -s https://codecov.io/env)`
     docker run $ci_env ...
       |----- inside docker container
