@@ -24,14 +24,12 @@ jobs:
     steps:
     - name: Checkout
     uses: actions/checkout@master
-
     - name: Checkout LiquidCrystal_I2C library
     uses: actions/checkout@v2
       with:
         repository: johnrickman/LiquidCrystal_I2C
         ref: master
         path: CustomLiquidCrystal_I2C
-        
     - name: Compile
     uses: ArminJo/arduino-test-compile@v2
       with:
