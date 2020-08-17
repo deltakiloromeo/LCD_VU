@@ -1,3 +1,9 @@
+codecov:
+  token: ${{ Secrets.CODECOV_TOKEN }}
+  ci:
+    - "travis.org"
+  require_ci_to_pass: yes
+  
 # Repository Yaml
 coverage:
   round: up

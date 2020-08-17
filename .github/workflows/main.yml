@@ -38,4 +38,4 @@ jobs:
     # request codecov to detect CI environment to pass through to docker
     - name: Upload report to codecov
       run: |
-        bash <(curl -s https://codecov.io/bash)
+        bash <(curl -s https://codecov.io/bash) -t ${{ Secrets.CODECOV_TOKEN }}
