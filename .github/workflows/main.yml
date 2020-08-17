@@ -8,7 +8,7 @@ on: [ push, pull_request ]
 jobs:
   build:
     name: Test compile for ${{ matrix.arduino-boards-fqbn }} with ${{ matrix.log-options }} ${{ matrix.other-options }}
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         arduino-boards-fqbn: 
@@ -17,6 +17,11 @@ jobs:
           - arduino:avr:nano
         log-options: [-DDEBUG, -DINFO]
         other-options: [-DTEST, -DDUMMY]
+        os: [ubuntu-latest]
+
+    env:
+      OS: ${{ matrix.os }}
+      PYTHON: '3.7'
 
     steps:
     - name: Checkout
@@ -35,13 +40,30 @@ jobs:
         arduino-board-fqbn: ${{ matrix.arduino-boards-fqbn }}
         build-properties: '{ "All": "${{ matrix.log-options }} ${{  matrix.other-options }}" }'
 
-    - name: Generate codecov report with travis
+    - name: Setup Python
+      uses: actions/setup-python@master
+      with:
+        python-version: 3.7
+
+    - name: Generate coverage report
       run: |
-        chmod +x ./build.sh ./get_code_cov.sh
-        ./build.sh
-        ./get_code_cov.sh
+        pip install pytest
+        pip install pytest-cov
+        pytest --cov=./ --cov-report=xml
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v1
+      with:        
+        file: ./coverage.xml
+        files: ./coverage1.xml,./coverage2.xml
+        directory: ./coverage/reports/
+        flags: unittests
+        env_vars: OS,PYTHON
+        name: codecov-umbrella
+        fail_ci_if_error: true
+        path_to_write_report: ./coverage/codecov_report.gz
 
     # request codecov to detect CI environment to pass through to docker
-    - name: Upload report to codecov
-      run: |
-        bash <(curl -s https://codecov.io/bash) -t ${{ Secrets.CODECOV_TOKEN }}
+    #- name: Upload report to codecov
+    #  run: |
+    #    bash <(curl -s https://codecov.io/bash) -t ${{ Secrets.CODECOV_TOKEN }}
