@@ -6,9 +6,9 @@ addons:
     packages: lcov
 
 script: 
-  ./build.sh
-  ./travis_qmake_gcc_cpp11_gcov
-  ./get_code_cov.sh
+  - ./build.sh
+  - ./travis_qmake_gcc_cpp11_gcov
+  - ./get_code_cov.sh
 
 after_success:
 # Create lcov report
