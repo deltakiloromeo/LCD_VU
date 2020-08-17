@@ -35,7 +35,10 @@ jobs:
         arduino-board-fqbn: ${{ matrix.arduino-boards-fqbn }}
         build-properties: '{ "All": "${{ matrix.log-options }} ${{  matrix.other-options }}" }'
 
+    - name: Generate codecov report with travis
+      uses: codecov/example-cpp11@v2
+      
     # request codecov to detect CI environment to pass through to docker
-    - name: Upload report to codecov
-      run: |
-        bash <(curl -s https://codecov.io/bash) -t ${{ Secrets.CODECOV_TOKEN }}
+    #- name: Upload report to codecov
+    #  run: |
+    #    bash <(curl -s https://codecov.io/bash) -t ${{ Secrets.CODECOV_TOKEN }}
