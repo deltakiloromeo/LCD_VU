@@ -1,0 +1,8 @@
+language: cpp
+compiler: gcc
+script:
+  - ./build.sh
+  - ./travis_qmake_gcc_cpp11_gcov
+  - ./get_code_cov.sh # or how ever you get your coverage
+after_success:
+  - bash <(curl -s https://codecov.io/bash) -t ${{ Secrets.CODECOV_TOKEN }}
