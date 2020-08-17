@@ -12,3 +12,7 @@ You need to download LiquidCrystal_I2C library to use this library. I'm using LC
 - http://www.sengpielaudio.com/calculator-db.htm for dBu formula
 - https://www.arduino.cc/en/Reference/MathHeader for math header and calculation functions
 - https://create.arduino.cc/projecthub/damar/lcd-vu-meter-for-audio-signal-0cef6d for project schematic and hardware components
+
+## History
+v1.1.0 Adding support for 20x4 LCD with I2C backpack (DFRobot I2C 20x2 LCD Display)
+v1.0.0 First release

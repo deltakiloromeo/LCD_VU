@@ -67,6 +67,3 @@ jobs:
     #    fail_ci_if_error: true
     #    path_to_write_report: ./coverage/codecov_report.gz
 
-    #- name: Use Travis build
-    #run: |
-    #./build.sh

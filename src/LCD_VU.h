@@ -2,6 +2,10 @@
  *  This wrapper library for LiquidCrystal_I2C
  *	that also has functionality to measure 
  *	audio signal as VU meter.
+ *
+ * 	Attribution:
+ *  - KTAudio VU Meter by ThomAce 
+ * 	(https://create.arduino.cc/projecthub/ThomAce/ktaudio-vu-meter-1402b1)
  *  --------------------------
  *  August 6th, 2020 v0.0.3
  *  - Finished revision for linear VU meter
@@ -13,10 +17,14 @@
  * 
  * 	August 9th, 2020 v0.0.5
  * 	- Implement logarithmic measurement using dBU
- * 	- dBU range from -25dBU to 2 dBU with 14 segments VU meter
+ * 	- dBU range from -25dBU to 2 dBU with 14 segments VU meter 
+ * 	  on 16x2 LCD or 18 segments on 20x4 LCD 
  * 
  * 	August 11th, 2020 v1.0.0
  * 	- First release
+ * 
+ * 	August 17th, 2020 v1.1.0
+ * 	- Adding support for 20x4 LCD with LiquidCrystal_I2C
  ******************************************/
 #ifndef LCD_VU_H
 #define LCD_VU_H
@@ -131,10 +139,11 @@ class LCD_VU {
 			B11111
 		};
 
-		void drawBar(short data, short peakData, short row);
+		void drawBar16(short data, short peakData, short row);
 		int mapdBuToVU(double dBuLevel);
 		double volt(double data); // conversion analog reading to audio voltage in mV
 		double dBu(double voltData); // conversion mV to dBu
+		void drawBar20(short data, short peakData, short row);
 
 	public:
 		LCD_VU(uint8_t address, uint8_t col, uint8_t row, byte audioPinLeft, byte audioPinRight);
