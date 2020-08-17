@@ -39,7 +39,6 @@ jobs:
     # request codecov to detect CI environment to pass through to docker
     #!/bin/bash
     ci_env=`bash <(curl -s https://codecov.io/env)`
-    docker run $ci_env ...
-      |----- inside docker container
-      | # exec tests
-      | bash <(curl -s https://codecov.io/bash)
+    docker run $ci_env
+    # exec tests
+    bash <(curl -s https://codecov.io/bash)
