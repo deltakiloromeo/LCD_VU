@@ -23,7 +23,7 @@ jobs:
           - arduino:avr:nano
         log-options: [-DDEBUG, -DINFO]
         other-options: [-DTEST, -DDUMMY]
-        fail-fast: false 
+
     steps:
     - name: Checkout
       uses: actions/checkout@v2
