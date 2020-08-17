@@ -37,9 +37,8 @@ jobs:
 
     - name: Generate codecov report with travis
       run: |
-        chmod +x ./build.sh ./travis_qmake_gcc_cpp11_gcov ./get_code_cov.sh
+        chmod +x ./build.sh ./get_code_cov.sh
         ./build.sh
-        ./travis_qmake_gcc_cpp11_gcov
         ./get_code_cov.sh
 
     # request codecov to detect CI environment to pass through to docker
