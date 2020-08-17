@@ -1,9 +1,10 @@
 # This is a basic workflow to help you get started with Actions
 
-name: ArduinoBuildTest
+name: "Arduino Build Test"
 
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
+theme: jekyll-theme-minimal
+
+# Controls when the action will run. Triggers the workflow on push or pull request events
 on: [ push, pull_request ]
 
 jobs:
@@ -37,8 +38,9 @@ jobs:
         build-properties: '{ "All": "${{ matrix.log-options }} ${{  matrix.other-options }}" }'
 
     # request codecov to detect CI environment to pass through to docker
-    #!/bin/bash
-    ci_env=`bash <(curl -s https://codecov.io/env)`
-    docker run $ci_env
-    # exec tests
-    bash <(curl -s https://codecov.io/bash)
+    - name: Request codecov to detect CI environment
+      run: |
+        ci_env=`bash <(curl -s https://codecov.io/env)`
+        docker run $ci_env ...
+          | # exec tests
+          | bash <(curl -s https://codecov.io/bash)
