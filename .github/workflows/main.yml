@@ -64,6 +64,6 @@ jobs:
         path_to_write_report: ./coverage/codecov_report.gz
 
     # request codecov to detect CI environment to pass through to docker
-    #- name: Upload report to codecov
-    #  run: |
-    #    bash <(curl -s https://codecov.io/bash) -t ${{ Secrets.CODECOV_TOKEN }}
+    - name: Upload report to codecov
+      run: |
+        bash <(curl -s https://codecov.io/bash) -t ${{ Secrets.CODECOV_TOKEN }}
