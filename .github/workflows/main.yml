@@ -17,7 +17,10 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        arduino-boards-fqbn: [arduino:avr:uno, arduino:avr:leonardo, arduino:avr:nano]
+        arduino-boards-fqbn: 
+          - arduino:avr:uno
+          - arduino:avr:leonardo
+          - arduino:avr:nano
         log-options: [-DDEBUG, -DINFO]
         other-options: [-DTEST, -DDUMMY]
         fail-fast: false 
