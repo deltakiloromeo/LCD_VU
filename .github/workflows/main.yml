@@ -13,10 +13,9 @@ on:
 jobs:
   build:
     name: Test compile for ${{ matrix.arduino-boards-fqbn }} with ${{ matrix.log-options }} ${{ matrix.other-options }}
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
         arduino-boards-fqbn: 
           - arduino:avr:uno
           - arduino:avr:leonardo
