@@ -1,19 +1,26 @@
-language: cpp
-compiler: gcc
-
-addons:
-  apt:
-    packages: lcov
-
-script: 
-  - chmod +x ./build.sh ./get_code_cov.sh
-  - ./build.sh
-  - ./get_code_cov.sh
-
-after_success:
+# Original travis, not working on compiler
+#language: cpp
+#compiler: gcc
+#
+#addons:
+#  apt:
+#    packages: lcov
+#
+#script: 
+#  - chmod +x ./build.sh ./get_code_cov.sh
+#  - ./build.sh
+#  - ./get_code_cov.sh
+#
+#after_success:
 # Create lcov report
-  - lcov --capture --directory . --output-file coverage.info
-  - lcov --remove coverage.info '/usr/*' --output-file coverage.info # filter system-files
-  - lcov --list coverage.info # debug info
+#  - lcov --capture --directory . --output-file coverage.info
+#  - lcov --remove coverage.info '/usr/*' --output-file coverage.info # filter system-files
+#  - lcov --list coverage.info # debug info
 # Uploading report to CodeCov
-  - bash <(curl -s https://codecov.io/bash) -f coverage.info || echo "Codecov did not collect coverage reports" -t ${{ Secrets.CODECOV_TOKEN }}
+#  - bash <(curl -s https://codecov.io/bash) -f coverage.info || echo "Codecov did not collect coverage reports" -t ${{ Secrets.CODECOV_TOKEN }}
+
+# new travis using Arduino-CI
+language: ruby
+script:
+  - bundle: install
+  - bundle exec arduino_ci_remote.rb
