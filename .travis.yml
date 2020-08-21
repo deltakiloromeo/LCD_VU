@@ -20,6 +20,7 @@
 #  - bash <(curl -s https://codecov.io/bash) -f coverage.info || echo "Codecov did not collect coverage reports" -t ${{ Secrets.CODECOV_TOKEN }}
 
 # new travis using Arduino-CI
+sudo: false
 language: ruby
 script:
   - bundle install
