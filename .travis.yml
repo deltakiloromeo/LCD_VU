@@ -30,7 +30,7 @@ script:
 
   #additional library
   - git clone https://github.com/johnrickman/LiquidCrystal_I2C.git
-  - mv custom_library_repo $(bundle exec arduino_library_location.rb)
+  - mv LiquidCrystal_I2C $(bundle exec arduino_library_location.rb)
 
   # run CI 
   - bundle exec arduino_ci_remote.rb
