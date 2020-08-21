@@ -16,7 +16,7 @@ jobs:
           - arduino:avr:leonardo
           - arduino:avr:nano
         log-options: [-DDEBUG, -DINFO]
-        other-options: [-DTEST, -DDUMMY]
+        other-options: [-DTEST, -DDUMMY, --coverage]
         os: [ubuntu-latest]
 
     env:
