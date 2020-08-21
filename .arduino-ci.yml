@@ -1,5 +1,7 @@
 compile:
-  libraries: "LiquidCrystal_I2C"
+  libraries: 
+    - "LiquidCrystal_I2C"
+    
   platforms:
     - uno
     - leonardo
