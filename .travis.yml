@@ -22,5 +22,5 @@
 # new travis using Arduino-CI
 language: ruby
 script:
-  - bundle: install
+  - bundle install
   - bundle exec arduino_ci_remote.rb
