@@ -24,4 +24,13 @@ sudo: false
 language: ruby
 script:
   - bundle install
+
+  # ensure the Arduino installation -- creates the Library directory
+  - bundle exec ensure_arduino_installation.rb
+
+  #additional library
+  - git clone https://github.com/johnrickman/LiquidCrystal_I2C.git
+  - mv custom_library_repo $(bundle exec arduino_library_location.rb)
+
+  # run CI 
   - bundle exec arduino_ci_remote.rb
