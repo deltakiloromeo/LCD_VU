@@ -20,9 +20,14 @@
 #  - bash <(curl -s https://codecov.io/bash) -f coverage.info || echo "Codecov did not collect coverage reports" -t ${{ Secrets.CODECOV_TOKEN }}
 
 # new travis using Arduino-CI
-sudo: false
+sudo: require
 language: ruby
 script:
+  # create example directory for each ino 
+  - mkdir /examples/dBuLevel
+  - cp /examples/dBuLevel.ino /examples/dBuLevel/dBuLevel.ino
+
+  #install bundle
   - bundle install
 
   # ensure the Arduino installation -- creates the Library directory
