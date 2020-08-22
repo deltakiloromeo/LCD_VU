@@ -40,7 +40,7 @@ jobs:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Initialize Task
-      run: task init
+      run: task --init
 
     - name: Check the code is good
       run: task check
