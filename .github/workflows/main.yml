@@ -16,7 +16,16 @@ jobs:
           #- arduino:avr:leonardo
           #- arduino:avr:nano
         log-options: [-DDEBUG, -DINFO]
-        other-options: [-DTEST, -DDUMMY]
+        other-options: 
+          - -DTEST
+          - -DDUMMY
+          - -g 
+          - -O0 
+          - --coverage 
+          - -fprofile-generate 
+          - -fprofile-arcs 
+          - -ftest-coverage 
+          - -lgcov
         os: [ubuntu-latest]
 
     env:
@@ -34,16 +43,16 @@ jobs:
         ref: master
         path: CustomLiquidCrystal_I2C
 
-    - name: Install Taskfile
-      uses: Arduino/actions/setup-taskfile@master
-      with:
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
+#    - name: Install Taskfile
+#      uses: Arduino/actions/setup-taskfile@master
+#      with:
+#        repo-token: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Initialize Task
-      run: task --init
+#    - name: Initialize Task
+#      run: task --init
 
-    - name: Check the code is good
-      run: task check
+#    - name: Check the code is good
+#      run: task check
 
     - name: Compile
       uses: ArminJo/arduino-test-compile@v2
@@ -51,25 +60,25 @@ jobs:
         arduino-board-fqbn: ${{ matrix.arduino-boards-fqbn }}
         build-properties: '{ "All": "${{ matrix.log-options }} ${{  matrix.other-options }}" }'
 
-    - name: Build the CLI
-      run: task build
+#    - name: Build the CLI
+#      run: task build
 
-    - name: Run unit tests
-      run: task test-unit
+#    - name: Run unit tests
+#      run: task test-unit
 
-    - name: Install Python
-      uses: actions/setup-python@v1
-      with:
-        python-version: '3.8'
-        architecture: 'x64'
+#    - name: Install Python
+#      uses: actions/setup-python@v1
+#      with:
+#        python-version: '3.8'
+#        architecture: 'x64'
 
-    - name: Run integration tests
-      run: |
-        pip install -r test/requirements.txt
-        task test-integration
+#    - name: Run integration tests
+#      run: |
+#        pip install -r test/requirements.txt
+#        task test-integration
 
     - name: Send unit tests coverage to Codecov
-      uses: codecov/codecov-action@v1.0.2
+      uses: codecov/codecov-action@master
       with:
         token: ${{secrets.CODECOV_TOKEN}}
         file: ./coverage_unit.txt
@@ -98,6 +107,6 @@ jobs:
     #    fail_ci_if_error: true
     #    path_to_write_report: ./coverage/codecov_report.gz
 
-    - name: Codecov Bash Uploader
-      run: |
-        bash <(curl -s https://codecov.io/bash) -t ${{ Secrets.CODECOV_TOKEN }}
+  #  - name: Codecov Bash Uploader
+  #    run: |
+  #      bash <(curl -s https://codecov.io/bash) -t ${{ Secrets.CODECOV_TOKEN }}
