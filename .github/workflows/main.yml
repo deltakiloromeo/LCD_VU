@@ -16,7 +16,7 @@ jobs:
           #- arduino:avr:leonardo
           #- arduino:avr:nano
         log-options: [-DDEBUG, -DINFO]
-        other-options: [-DTEST, -DDUMMY, -g -O0 -fprofile-generate -fprofile-arcs -ftest-coverage -lgcov]
+        other-options: [-DTEST, -DDUMMY, -g -O0 -fprofile-arcs -ftest-coverage -lgcov]
         os: [ubuntu-latest]
 
     env:
