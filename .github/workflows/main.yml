@@ -15,9 +15,8 @@ jobs:
           - arduino:avr:uno
           #- arduino:avr:leonardo
           #- arduino:avr:nano
-        #log-options: [-DDEBUG, -DINFO]
-        #other-options: [-DTEST, -DDUMMY, --coverage -g -O0]
-        log-options: [--coverage -g -O0]
+        log-options: [-DDEBUG, -DINFO]
+        other-options: [-DTEST, -DDUMMY, --coverage -g -O0]
         os: [ubuntu-latest]
 
     env:
@@ -29,24 +28,17 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Checkout LiquidCrystal_I2C library
-      uses: actions/checkout@v2
+      uses: actions/checkout@master
       with:
         repository: johnrickman/LiquidCrystal_I2C
         ref: master
         path: CustomLiquidCrystal_I2C
 
-#    - name: Install Taskfile
-#      uses: Arduino/actions/setup-taskfile@master
-#      with:
-#        repo-token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Setup Python
+      uses: actions/setup-python@master
+      with:
+        python-version: 3.8
 
-#    - name: Initialize Task
-#      run: task --init
-
-#    - name: Check the code is good
-#      run: task check
-
-    # Install gcovr
     - name: Install gcovr
       run: |
         pip install gcovr
@@ -60,23 +52,6 @@ jobs:
     - name: Invoke gcovr
       run: |
         gcovr -r
-
-#    - name: Build the CLI
-#      run: task build
-
-#    - name: Run unit tests
-#      run: task test-unit
-
-#    - name: Install Python
-#      uses: actions/setup-python@v1
-#      with:
-#        python-version: '3.8'
-#        architecture: 'x64'
-
-#    - name: Run integration tests
-#      run: |
-#        pip install -r test/requirements.txt
-#        task test-integration
 
     - name: Send unit tests coverage to Codecov
       uses: codecov/codecov-action@master

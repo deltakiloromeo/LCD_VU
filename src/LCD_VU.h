@@ -32,7 +32,6 @@
 #include <Arduino.h>
 #include <LiquidCrystal_I2C.h>
 
-#define MAX_VU		14 // number of VU segment
 #define VREF		1500 // reference voltage in mV, measured at AREF pin
 #define VCENTER		450 // center voltage in mV, measured at voltage divider resistor 100K
 #define VOFFSET		315 // offset voltage in mV, reads by analog pins when input is connected to ground
