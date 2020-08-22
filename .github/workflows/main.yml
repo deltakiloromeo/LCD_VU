@@ -45,11 +45,20 @@ jobs:
 #    - name: Check the code is good
 #      run: task check
 
+    # Install gcovr
+    - name: Install gcovr
+      run: |
+        pip install gcovr
+
     - name: Compile
       uses: ArminJo/arduino-test-compile@master
       with:
         arduino-board-fqbn: ${{ matrix.arduino-boards-fqbn }}
         build-properties: '{ "All": "${{ matrix.log-options }} ${{  matrix.other-options }}" }'
+
+    - name: Invoke gcovr
+      run: |
+        gcovr -r
 
 #    - name: Build the CLI
 #      run: task build
