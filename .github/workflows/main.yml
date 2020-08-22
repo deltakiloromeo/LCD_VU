@@ -55,7 +55,7 @@ jobs:
     - name: Generate code coverage
       run: |
         chmod +x ./codecovgen.sh
-        ./codecovgen.sh
+        ./codecovgen.sh ${{ matrix.example-path }} ${{ matrix.ccov-options }} ${{ matrix.include-paths }}
 
     - name: Invoke gcovr
       run: |

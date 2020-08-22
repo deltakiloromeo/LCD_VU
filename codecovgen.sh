@@ -1,5 +1,5 @@
 #!/bin/bash
 find . -name "Arduino.h"
-cp ${{ matrix.example-path }}.ino ${{ matrix.example-path }}.cpp
-g++ ${{ matrix.ccov-options }} ${{ matrix.include-paths }} ${{ matrix.example-path }}.cpp -o program
+cp $1.ino $1.cpp
+g++ $2 $3 $1.cpp -o program
 ./program
