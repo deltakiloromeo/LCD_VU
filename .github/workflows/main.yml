@@ -54,6 +54,7 @@ jobs:
 
     - name: Generate code coverage
       run: |
+        chmode +x ./codecovgen.sh
         ./codecovgen.sh
 
     - name: Invoke gcovr
