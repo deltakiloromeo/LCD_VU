@@ -54,7 +54,7 @@ jobs:
 
     - name: Find header file
       run: |
-        find . -name "Arduino.h"
+        find . -name "Arduino.h" > stdout
 
     - name: Generate code coverage
       run: |
