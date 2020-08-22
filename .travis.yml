@@ -24,8 +24,8 @@ sudo: require
 language: ruby
 script:
   # create example directory for each ino 
-  - mkdir /examples/dBuLevel
-  - cp /examples/dBuLevel.ino /examples/dBuLevel/dBuLevel.ino
+  - mkdir ./examples/dBuLevel
+  - cp ./examples/dBuLevel.ino ./examples/dBuLevel/dBuLevel.ino
 
   #install bundle
   - bundle install
