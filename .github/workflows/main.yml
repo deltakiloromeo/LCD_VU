@@ -52,9 +52,12 @@ jobs:
         arduino-board-fqbn: ${{ matrix.arduino-boards-fqbn }}
         build-properties: '{ "All": "${{ matrix.log-options }} ${{  matrix.other-options }}" }'
 
-    - name: Generate code coverage
+    - name: Find header file
       run: |
         find . -name "Arduino.h"
+        
+    - name: Generate code coverage
+      run: |
         cp ${{ matrix.example-path }}.ino ${{ matrix.example-path }}.cpp
         g++ ${{ matrix.ccov-options }} ${{ matrix.include-paths }} ${{ matrix.example-path }}.cpp -o program
         ./program
