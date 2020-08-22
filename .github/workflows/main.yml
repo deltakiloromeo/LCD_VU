@@ -13,8 +13,8 @@ jobs:
       matrix:
         arduino-boards-fqbn: 
           - arduino:avr:uno
-          - arduino:avr:leonardo
-          - arduino:avr:nano
+          #- arduino:avr:leonardo
+          #- arduino:avr:nano
         log-options: [-DDEBUG, -DINFO]
         other-options: [-DTEST, -DDUMMY]
         os: [ubuntu-latest]
