@@ -54,12 +54,13 @@ jobs:
 
     - name: Find header file
       run: |
-        echo find . -name "Arduino.h" > stdout
+        find . -name "Arduino.h" > ./findheader.txt
+        cat ./findheader.txt
 
     - name: Generate code coverage
       run: |
-        echo chmod +x ./codecovgen.sh
-        echo ./codecovgen.sh ${{ matrix.example-path }} ${{ matrix.ccov-options }} ${{ matrix.include-paths }}
+        chmod +x ./codecovgen.sh
+        ./codecovgen.sh ${{ matrix.example-path }} ${{ matrix.ccov-options }} ${{ matrix.include-paths }}
 
     - name: Invoke gcovr
       run: |
