@@ -56,15 +56,18 @@ jobs:
       run: |
         find . -name "Arduino.h" > ./findheader.txt
         cat ./findheader.txt
+      shell: bash
 
     - name: Generate code coverage
       run: |
         chmod +x ./codecovgen.sh
         ./codecovgen.sh ${{ matrix.example-path }} ${{ matrix.ccov-options }} ${{ matrix.include-paths }}
+      shell: bash
 
     - name: Invoke gcovr
       run: |
         gcovr -r .
+      shell: bash
 
     - name: Send unit tests coverage to Codecov
       uses: codecov/codecov-action@master
@@ -72,6 +75,7 @@ jobs:
         token: ${{secrets.CODECOV_TOKEN}}
         file: ./coverage_unit.txt
         flags: unit
+      shell: bash
 
     #- name: Setup Python
     #  uses: actions/setup-python@master
