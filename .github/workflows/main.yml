@@ -18,7 +18,8 @@ jobs:
         log-options: [-DDEBUG, -DINFO]
         other-options: [-DTEST, -DDUMMY]
         ccov-options: [-fprofile-arcs -ftest-coverage -fPIC -O0]
-        include-paths: [-I/github/home/.arduino15/packages/arduino/hardware/avr/1.8.3/cores/arduino/ -I/github/home/.arduino15/packages/arduino/hardware/avr/1.8.3/variants/standard/ -I/github/home/Arduino/libraries/ -I./src/]
+        #include-paths: [-I/github/home/.arduino15/packages/arduino/hardware/avr/1.8.3/cores/arduino/ -I/github/home/.arduino15/packages/arduino/hardware/avr/1.8.3/variants/standard/ -I/github/home/Arduino/libraries/ -I./src/]
+        include-paths: [-I/github/home/.arduino15/packages/arduino/hardware/avr/1.8.3/cores/arduino/ -I/github/home/Arduino/libraries/ -I./src/]
         example-path: [./examples/dBuLevel]
         os: [ubuntu-latest]
 
@@ -55,7 +56,7 @@ jobs:
     - name: Generate code coverage
       run: |
         cp ${{ matrix.example-path }}.ino ${{ matrix.example-path }}.cpp
-        g++ ${{ matrix.ccov-options }} ${{ matrix.include-paths }}  ${{ matrix.example-path }}.cpp -o program
+        g++ ${{ matrix.ccov-options }} ${{ matrix.include-paths }} ${{ matrix.example-path }}.cpp -o program
         ./program
 
     - name: Invoke gcovr
