@@ -18,6 +18,11 @@ jobs:
         log-options: [-DDEBUG, -DINFO]
         other-options: [-DTEST, -DDUMMY]
         ccov-options: [-fprofile-arcs -ftest-coverage -fPIC -O0]
+        include-dirs:
+          - -I/github/home/Arduino/libraries/
+          - -I./src/
+          - -I/github/home/.arduino15/packages/arduino/hardware/avr/1.8.3/cores/arduino
+          - -I/github/home/.arduino15/packages/arduino/hardware/avr/1.8.3/variants/standard
         os: [ubuntu-latest]
 
     env:
@@ -52,8 +57,8 @@ jobs:
 
     - name: Generate code coverage
       run: |
-        cp ./examples/dBuLevel.ino ./examples/dBuLevel.cpp
-        g++ ${{ matrix.ccov-options }} ./examples/dBuLevel.cpp -o program
+        cp ./examples/dBuLevel/dBuLevel.ino ./examples/dBuLevel/dBuLevel.cpp
+        g++ ${{ matrix.ccov-options }} ${{ matrix.include-dirs }} ./examples/dBuLevel/dBuLevel.cpp -o program
         ./program
 
     - name: Invoke gcovr
