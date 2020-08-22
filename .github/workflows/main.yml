@@ -21,7 +21,7 @@ jobs:
 
     env:
       OS: ${{ matrix.os }}
-      PYTHON: '3.7'
+      PYTHON: '3.8'
 
     steps:
     - name: Checkout
@@ -38,6 +38,9 @@ jobs:
       uses: Arduino/actions/setup-taskfile@master
       with:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Initialize Task
+      run: task init
 
     - name: Check the code is good
       run: task check
