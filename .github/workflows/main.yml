@@ -17,7 +17,7 @@ jobs:
           #- arduino:avr:nano
         log-options: [-DDEBUG, -DINFO]
         other-options: [-DTEST, -DDUMMY]
-        ccov-options: [-fprofile-arcs -ftest-coverage -fPIC -O0 example.cpp -o program]
+        ccov-options: [-fprofile-arcs -ftest-coverage -fPIC -O0]
         os: [ubuntu-latest]
 
     env:
