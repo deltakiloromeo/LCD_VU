@@ -15,8 +15,9 @@ jobs:
           - arduino:avr:uno
           #- arduino:avr:leonardo
           #- arduino:avr:nano
-        log-options: [-DDEBUG, -DINFO]
-        other-options: [-DTEST, -DDUMMY, --coverage -g -O0]
+        #log-options: [-DDEBUG, -DINFO]
+        #other-options: [-DTEST, -DDUMMY, --coverage -g -O0]
+        log-options: [--coverage -g -O0]
         os: [ubuntu-latest]
 
     env:
