@@ -16,7 +16,8 @@ jobs:
           #- arduino:avr:leonardo
           #- arduino:avr:nano
         log-options: [-DDEBUG, -DINFO]
-        other-options: [-DTEST, -DDUMMY, --coverage -g -O0]
+        other-options: [-DTEST, -DDUMMY]
+        ccov-options: [-fprofile-arcs -ftest-coverage -fPIC -O0 example.cpp -o program]
         os: [ubuntu-latest]
 
     env:
@@ -48,6 +49,11 @@ jobs:
       with:
         arduino-board-fqbn: ${{ matrix.arduino-boards-fqbn }}
         build-properties: '{ "All": "${{ matrix.log-options }} ${{  matrix.other-options }}" }'
+
+    - name: Generate code coverage
+      run: |
+        g++ -fprofile-arcs -ftest-coverage -fPIC -O0 ./examples/dBuLevel.ino -o program
+        ./program
 
     - name: Invoke gcovr
       run: |
