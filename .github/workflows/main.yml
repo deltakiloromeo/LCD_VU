@@ -16,7 +16,7 @@ jobs:
           #- arduino:avr:leonardo
           #- arduino:avr:nano
         log-options: [-DDEBUG, -DINFO]
-        other-options: [-DTEST, -DDUMMY, -ftest-coverage, -lgcov]
+        other-options: [-DTEST, -DDUMMY, -ftest-coverage -lgcov]
         os: [ubuntu-latest]
 
     env:
@@ -46,7 +46,7 @@ jobs:
 #      run: task check
 
     - name: Compile
-      uses: ArminJo/arduino-test-compile@v2
+      uses: ArminJo/arduino-test-compile@master
       with:
         arduino-board-fqbn: ${{ matrix.arduino-boards-fqbn }}
         build-properties: '{ "All": "${{ matrix.log-options }} ${{  matrix.other-options }}" }'
