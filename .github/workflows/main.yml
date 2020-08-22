@@ -52,7 +52,8 @@ jobs:
 
     - name: Generate code coverage
       run: |
-        g++ -fprofile-arcs -ftest-coverage -fPIC -O0 ./examples/dBuLevel.ino -o program
+        cp ./examples/dBuLevel.ino ./examples/dBuLevel.cpp
+        g++ ${{ matrix.ccov-options }} ./examples/dBuLevel.cpp -o program
         ./program
 
     - name: Invoke gcovr
