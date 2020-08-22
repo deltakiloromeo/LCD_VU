@@ -34,11 +34,36 @@ jobs:
         ref: master
         path: CustomLiquidCrystal_I2C
 
+    - name: Install Taskfile
+      uses: Arduino/actions/setup-taskfile@master
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Check the code is good
+      run: task check
+
     - name: Compile
       uses: ArminJo/arduino-test-compile@v2
       with:
         arduino-board-fqbn: ${{ matrix.arduino-boards-fqbn }}
         build-properties: '{ "All": "${{ matrix.log-options }} ${{  matrix.other-options }}" }'
+
+    - name: Build the CLI
+      run: task build
+
+    - name: Run unit tests
+      run: task test-unit
+
+    - name: Install Python
+      uses: actions/setup-python@v1
+      with:
+        python-version: '3.8'
+        architecture: 'x64'
+
+    - name: Run integration tests
+      run: |
+        pip install -r test/requirements.txt
+        task test-integration
 
     - name: Send unit tests coverage to Codecov
       uses: codecov/codecov-action@v1.0.2
@@ -50,7 +75,7 @@ jobs:
     #- name: Setup Python
     #  uses: actions/setup-python@master
     #  with:
-    #    python-version: 3.7
+    #    python-version: 3.8
 
     #- name: Generate coverage report
     #  run: |
