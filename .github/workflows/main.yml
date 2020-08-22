@@ -75,7 +75,6 @@ jobs:
         token: ${{secrets.CODECOV_TOKEN}}
         file: ./coverage_unit.txt
         flags: unit
-      shell: bash
 
     #- name: Setup Python
     #  uses: actions/setup-python@master
