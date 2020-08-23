@@ -4,7 +4,7 @@ compile:
   platforms:
     uno:
       gcc:
-        flags: -DDEBUG -DINFO -DTEST -DDUMMY -fprofile-arcs -ftest-coverage -fPIC -O0
+        flags: -fprofile-arcs -ftest-coverage -fPIC -O0
 
 unittest:
   libraries: 
