@@ -1,11 +1,11 @@
 compile:
   libraries: ~
   platforms:
-    - uno
-    - leonardo
+    uno:
+      gcc:
+        flags: -DDEBUG, -DINFO, -DTEST, -DDUMMY, -I/github/home/.arduino15/packages/arduino/hardware/avr/1.8.3/cores/arduino/ -I/github/home/Arduino/libraries/ -I./src/
 
 unittest:
   libraries: ~
   platforms:
     - uno
-    - leonardo
