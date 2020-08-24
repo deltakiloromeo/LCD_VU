@@ -2,6 +2,8 @@ compile:
   libraries: ~
   platforms:
     uno:
+      board: avr:uno:r3
+      package: avr:uno
       gcc:
         flags: -fprofile-arcs -ftest-coverage -fPIC -O0
 
