@@ -1,13 +1,11 @@
 compile:
-  libraries:
-    - uno
+  libraries: ~
   platforms:
     uno:
       gcc:
         flags: -fprofile-arcs -ftest-coverage -fPIC -O0
 
 unittest:
-  libraries: 
-    - uno
+  libraries: ~
   platforms:
     - uno
