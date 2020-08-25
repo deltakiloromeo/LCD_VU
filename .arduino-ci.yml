@@ -1,14 +1,14 @@
 paltforms:
-  uno:
+  uno-compatible:
     board: arduino:avr:uno
-    package: arduini:avr
+    package: arduino:avr
     gcc:
       flags: -fprofile-arcs -ftest-coverage -fPIC -O0
-      
+
 compile:
   libraries: ~
   platforms:
-    - uno
+    - uno-compatible
     #uno:
       #board: arduino:avr:uno
       #package: arduino:avr
@@ -18,4 +18,4 @@ compile:
 unittest:
   libraries: ~
   platforms:
-    - uno
+    - uno-compatible
