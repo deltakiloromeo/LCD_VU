@@ -48,6 +48,10 @@ jobs:
       run: |
         pip install gcovr
 
+    - name: Create build directory
+      run: |
+        mkdir ./build
+
     - name: Compile
       uses: ArminJo/arduino-test-compile@master
       with:
