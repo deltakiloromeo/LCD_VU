@@ -12,10 +12,8 @@ platforms:
         - __AVR_ATmega328P__
       warnings:
       flags:
-        - -fprofile-arcs 
-        - -ftest-coverage 
-        - -fPIC 
-        - -O0
+        - -fprofile-arcs
+        - -ftest-coverage
 
 compile:
   libraries: ~

@@ -43,6 +43,7 @@ script:
 
   #install gcovr
   - git clone https://github.com/gcovr/gcovr.git
+  - pip install gcovr
 
   # run CI 
   - bundle exec arduino_ci_remote.rb
