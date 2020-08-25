@@ -45,15 +45,15 @@ script:
   - mv LiquidCrystal_I2C $(bundle exec arduino_library_location.rb)
 
   #install gcovr
-  - git clone https://github.com/gcovr/gcovr.git
-  - pip install gcovr
+  #- git clone https://github.com/gcovr/gcovr.git
+  #- pip install gcovr
 
   # run CI 
   - bundle exec arduino_ci_remote.rb
 
 after_success:
   # run code coverage builder and send to codecov.io
-  - gcovr -r ./examples/dBuLevel/
+  #- gcovr -r ./examples/dBuLevel/
   #- chmod +x ./get_code_cov.sh
   #- ./get_code_cov.sh
   - bash <(curl -s https://codecov.io/bash)
