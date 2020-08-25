@@ -41,5 +41,5 @@ script:
   - bundle exec arduino_ci_remote.rb
 
   # run code coverage builder and send to codecov.io
-  - gcovr -r .
-  - bash <(curl -s https://codecov.io/bash) -t ${{ Secrets.CODECOV_TOKEN }}
+  #- gcovr -r .
+  - bash <(curl -s https://codecov.io/bash)
