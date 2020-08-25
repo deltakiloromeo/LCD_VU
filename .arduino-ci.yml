@@ -1,10 +1,17 @@
+paltforms:
+  uno:
+    board: arduino:avr:uno
+    package: arduini:avr
+    gcc:
+      flags: -fprofile-arcs -ftest-coverage -fPIC -O0
+      
 compile:
   libraries: ~
   platforms:
     - uno
     #uno:
-      #board: avr:uno:r3
-      #package: avr:uno
+      #board: arduino:avr:uno
+      #package: arduino:avr
       #gcc:
         #flags: -fprofile-arcs -ftest-coverage -fPIC -O0
 
