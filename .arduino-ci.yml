@@ -10,7 +10,7 @@ platforms:
         - __AVR_ATmega328P__
       warnings:
       flags:
-        - -coverage -lgcov
+        - -fprofile-arcs -ftest-coverage -lgcov
 
 compile:
   libraries: ~
