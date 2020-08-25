@@ -47,8 +47,8 @@ script:
 after_success:
   # run code coverage builder and send to codecov.io
   #- gcovr -r .
-  #- chmod +x ./get_code_cov.sh
-  #- ./get_code_cov.sh
+  - chmod +x ./get_code_cov.sh
+  - ./get_code_cov.sh
   #- bash <(curl -s https://codecov.io/bash)
 
 # Create lcov report
