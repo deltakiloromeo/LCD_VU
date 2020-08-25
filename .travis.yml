@@ -31,6 +31,9 @@ script:
   - mkdir ./examples/dBuLevel
   - cp ./examples/dBuLevel.ino ./examples/dBuLevel/dBuLevel.ino
 
+  #upgrade python
+  - /usr/bin/python -m pip install --upgrade pip
+  
   #install bundle
   - bundle install
 
