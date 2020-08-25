@@ -53,22 +53,24 @@ jobs:
         arduino-board-fqbn: ${{ matrix.arduino-boards-fqbn }}
         build-properties: '{ "All": "${{ matrix.log-options }} ${{ matrix.other-options }}" }'
 
-    - name: Generate code coverage
-      run: |
-        cp ${{ matrix.example-path }}.ino ${{ matrix.example-path }}.cpp
-        g++ ${{ matrix.ccov-options }} ${{ matrix.include-paths }} ${{ matrix.example-path }}.cpp -o program
-        ./program
+    #---------Need to find out about this section--------
+    #- name: Generate code coverage
+    #  run: |
+    #    cp ${{ matrix.example-path }}.ino ${{ matrix.example-path }}.cpp
+    #    g++ ${{ matrix.ccov-options }} ${{ matrix.include-paths }} ${{ matrix.example-path }}.cpp -o program
+    #    ./program
 
-    - name: Invoke gcovr
-      run: |
-        gcovr -r .
+    #- name: Invoke gcovr
+    #  run: |
+    #    gcovr -r .
 
-    - name: Send unit tests coverage to Codecov
-      uses: codecov/codecov-action@master
-      with:
-        token: ${{secrets.CODECOV_TOKEN}}
-        file: ./coverage_unit.txt
-        flags: unit
+    #- name: Send unit tests coverage to Codecov
+    #  uses: codecov/codecov-action@master
+    #  with:
+    #    token: ${{secrets.CODECOV_TOKEN}}
+    #    file: ./coverage_unit.txt
+    #    flags: unit
+    #--------------end of code coverage----------------
 
     #- name: Setup Python
     #  uses: actions/setup-python@master
