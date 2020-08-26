@@ -54,8 +54,8 @@ script:
 after_success:
   # run code coverage builder and send to codecov.io
   #- gcovr -r ./examples/dBuLevel/
-  - chmod +x ./get_code_cov.sh
-  - ./get_code_cov.sh
+  #- chmod +x ./get_code_cov.sh
+  #- ./get_code_cov.sh
 
 # Create lcov report
   - lcov --capture --directory . --output-file coverage.info
