@@ -45,13 +45,13 @@ jobs:
       with:
         python-version: 3.8
 
-    - name: Install gcovr
-      run: |
-        pip install gcovr
+    #- name: Install gcovr
+    #  run: |
+    #    pip install gcovr
 
     - name: Create build directory
       run: |
-        mkdir ./build
+        mkdir ${{ matrix.build-path }}
 
     - name: Compile
       uses: ArminJo/arduino-test-compile@master
@@ -67,9 +67,9 @@ jobs:
     #    g++ ${{ matrix.ccov-options }} ${{ matrix.include-paths }} ${{ matrix.example-path }}.cpp -o program
     #    ./program
 
-    - name: Invoke gcovr
-      run: |
-        gcovr -r ./build
+    #- name: Invoke gcovr
+    #  run: |
+    #    gcovr -r ${{ matrix.build-path }}
 
     #- name: Send unit tests coverage to Codecov
     #  uses: codecov/codecov-action@master
@@ -102,6 +102,17 @@ jobs:
     #    fail_ci_if_error: true
     #    path_to_write_report: ./coverage/codecov_report.gz
 
+    - name: Run gcov
+      run: |
+        chmod +x ./get_code_cov.sh
+        ./get_code_cov.sh
+
+    - name: Run lcov
+      run: |
+        lcov --capture --directory . --output-file coverage.info
+        lcov --remove coverage.info '/usr/*' --output-file coverage.info # filter system-files
+        lcov --list coverage.info # debug info
+        
     - name: Codecov Bash Uploader
       run: |
         bash <(curl -s https://codecov.io/bash) -t ${{ Secrets.CODECOV_TOKEN }}

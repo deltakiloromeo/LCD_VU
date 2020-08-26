@@ -32,7 +32,7 @@ script:
   - cp ./examples/dBuLevel.ino ./examples/dBuLevel/dBuLevel.ino
 
   #upgrade python
-  - /usr/bin/python -m pip install --upgrade pip
+  #- /usr/bin/python -m pip install --upgrade pip
   
   #install bundle
   - bundle install
@@ -54,13 +54,12 @@ script:
 after_success:
   # run code coverage builder and send to codecov.io
   #- gcovr -r ./examples/dBuLevel/
-  #- chmod +x ./get_code_cov.sh
-  #- ./get_code_cov.sh
-  - bash <(curl -s https://codecov.io/bash)
+  - chmod +x ./get_code_cov.sh
+  - ./get_code_cov.sh
 
 # Create lcov report
-  #- lcov --capture --directory . --output-file coverage.info
-  #- lcov --remove coverage.info '/usr/*' --output-file coverage.info # filter system-files
-  #- lcov --list coverage.info # debug info
+  - lcov --capture --directory . --output-file coverage.info
+  - lcov --remove coverage.info '/usr/*' --output-file coverage.info # filter system-files
+  - lcov --list coverage.info # debug info
 # Uploading report to CodeCov
-  #- bash <(curl -s https://codecov.io/bash) -f coverage.info || echo "Codecov did not collect coverage reports"
+  - bash <(curl -s https://codecov.io/bash) -f coverage.info || echo "Codecov did not collect coverage reports"
