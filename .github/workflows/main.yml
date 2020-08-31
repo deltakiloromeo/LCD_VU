@@ -69,7 +69,7 @@ jobs:
 
     - name: Invoke gcovr
       run: |
-        gcovr -r .
+        gcovr -r ${{ matrix.build-path }}
 
     #- name: Send unit tests coverage to Codecov
     #  uses: codecov/codecov-action@master
