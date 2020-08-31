@@ -15,8 +15,8 @@ jobs:
           - arduino:avr:mega
           #- arduino:avr:leonardo
           #- arduino:avr:nano
-        log-options: [-DDEBUG -DINFO]
-        other-options: [-DTEST -DDUMMY]
+        log-options: [-DDEBUG, -DINFO]
+        other-options: [-DTEST, -DDUMMY]
         ccov-options: [-fprofile-arcs -ftest-coverage -lgcov] #--> this result in compile error, memory usage too big
         #ccov-options: [-ftest-coverage -lgcov -O0]
         include-paths: [-I/github/home/.arduino15/packages/arduino/hardware/avr/1.8.3/cores/arduino/ -I/github/home/.arduino15/packages/arduino/hardware/avr/1.8.3/variants/standard/ -I/github/home/Arduino/libraries/ -I./src/]
@@ -36,8 +36,8 @@ jobs:
     - name: Checkout LiquidCrystal_I2C library
       uses: actions/checkout@master
       with:
-        #repository: johnrickman/LiquidCrystal_I2C
-        repository: fdebrabander/Arduino-LiquidCrystal-I2C-library
+        repository: johnrickman/LiquidCrystal_I2C
+        #repository: fdebrabander/Arduino-LiquidCrystal-I2C-library
         ref: master
         path: CustomLiquidCrystal_I2C
 
