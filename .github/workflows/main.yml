@@ -118,7 +118,7 @@ jobs:
         sudo add-apt-repository ppa:ubuntu-toolchain-r/test
         sudo apt-get update
         sudo apt-get install lcov
-        
+
     - name: Run lcov
       run: |
         lcov --capture --directory . --output-file coverage.info
@@ -126,4 +126,4 @@ jobs:
         lcov --list coverage.info # debug info
 
     - name: Codecov Bash Uploader
-      run: bash <(curl -s https://codecov.io/bash) -t ${{ Secrets.CODECOV_TOKEN }}
+      run: bash <(curl -s https://codecov.io/bash) -t ${{ Secrets.CODECOV_TOKEN }} -X gcov
