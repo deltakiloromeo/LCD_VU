@@ -17,8 +17,8 @@ jobs:
           #- arduino:avr:nano
         log-options: [-DDEBUG, -DINFO]
         other-options: [-DTEST, -DDUMMY]
-        ccov-options: [-fprofile-arcs -ftest-coverage -lgcov] #--> this result in compile error, memory usage too big
-        #ccov-options: [-ftest-coverage -lgcov -O0]
+        #ccov-options: [-fprofile-arcs -ftest-coverage -lgcov] #--> this result in compile error, memory usage too big
+        ccov-options: [-ftest-coverage -lgcov -O0]
         include-paths: [-I/github/home/.arduino15/packages/arduino/hardware/avr/1.8.3/cores/arduino/ -I/github/home/.arduino15/packages/arduino/hardware/avr/1.8.3/variants/standard/ -I/github/home/Arduino/libraries/ -I./src/]
         #include-paths: [-I/github/home/.arduino15/packages/arduino/hardware/avr/1.8.3/cores/arduino/ -I/github/home/Arduino/libraries/ -I./src/]
         example-path: [./examples/dBuLevel]
@@ -45,6 +45,11 @@ jobs:
       uses: actions/setup-python@master
       with:
         python-version: 3.8
+
+    - name: Check version
+      run: |
+        gcc -v
+        gcov -v
 
     #- name: Install gcovr
     #  run: |
@@ -103,10 +108,10 @@ jobs:
     #    fail_ci_if_error: true
     #    path_to_write_report: ./coverage/codecov_report.gz
 
-    #- name: Run gcov --> gcov not found
-    #  run: |
-    #    chmod +x ./get_code_cov.sh
-    #    ./get_code_cov.sh
+    - name: Run gcov --> gcov not found
+      run: |
+        chmod +x ./get_code_cov.sh
+        ./get_code_cov.sh
 
     #- name: Run lcov
     #  run: |
