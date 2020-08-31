@@ -46,8 +46,8 @@ jobs:
       with:
         python-version: 3.8
 
-    - name: Install gcovr
-      run: pip install gcovr
+    #- name: Install gcovr
+    #  run: pip install gcovr
 
     - name: Create build directory
       run: mkdir ${{ matrix.build-path }}
@@ -66,8 +66,8 @@ jobs:
     #    g++ ${{ matrix.ccov-options }} ${{ matrix.include-paths }} ${{ matrix.example-path }}.cpp -o program
     #    ./program
 
-    - name: Invoke gcovr
-      run: gcovr -r .
+    #- name: Invoke gcovr
+    #  run: gcovr -r .
 
     #- name: Send unit tests coverage to Codecov
     #  uses: codecov/codecov-action@master
@@ -106,4 +106,4 @@ jobs:
     #    ./get_code_cov.sh
 
     - name: Codecov Bash Uploader
-      run: bash <(curl -s https://codecov.io/bash) -t ${{ Secrets.CODECOV_TOKEN }} -X gcov
+      run: bash <(curl -s https://codecov.io/bash) -t ${{ Secrets.CODECOV_TOKEN }}
