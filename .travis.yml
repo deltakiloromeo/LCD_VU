@@ -31,8 +31,8 @@ script:
   - mkdir ./examples/dBuLevel
   - cp ./examples/dBuLevel.ino ./examples/dBuLevel/dBuLevel.ino
 
-  #upgrade python
-  #- /usr/bin/python -m pip install --upgrade pip
+  upgrade python
+  - /usr/bin/python -m pip install --upgrade pip
   
   #install bundle
   - bundle install
@@ -45,8 +45,8 @@ script:
   - mv LiquidCrystal_I2C $(bundle exec arduino_library_location.rb)
 
   #install gcovr
-  #- git clone https://github.com/gcovr/gcovr.git
-  #- pip install gcovr
+  - git clone https://github.com/gcovr/gcovr.git
+  - pip install gcovr
 
   # run CI 
   - bundle exec arduino_ci_remote.rb
@@ -56,10 +56,11 @@ after_success:
   #- gcovr -r ./examples/dBuLevel/
   #- chmod +x ./get_code_cov.sh
   #- ./get_code_cov.sh
+  - gcovr -r .
 
 # Create lcov report
-  - lcov --capture --directory . --output-file coverage.info
-  - lcov --remove coverage.info '/usr/*' --output-file coverage.info # filter system-files
-  - lcov --list coverage.info # debug info
+#  - lcov --capture --directory . --output-file coverage.info
+#  - lcov --remove coverage.info '/usr/*' --output-file coverage.info # filter system-files
+#  - lcov --list coverage.info # debug info
 # Uploading report to CodeCov
   - bash <(curl -s https://codecov.io/bash) -f coverage.info || echo "Codecov did not collect coverage reports" -X gcov
