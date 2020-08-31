@@ -58,7 +58,7 @@ jobs:
     - name: Install lcov
       run: |
         sudo apt update
-        sudo apt install lcov
+        sudo apt install lcov-7.5
 
     - name: Create build directory
       run: |
