@@ -57,7 +57,7 @@ jobs:
       uses: ArminJo/arduino-test-compile@master
       with:
         arduino-board-fqbn: ${{ matrix.arduino-boards-fqbn }}
-        build-properties: '{ "All": " ${{ matrix.log-options }} ${{ matrix.other-options }} ${{ matrix.ccov-options }}" }'
+        build-properties: '{ "All": " ${{ matrix.log-options }} ${{ matrix.other-options }} ${{ matrix.ccov-options }} " }'
         set-build-path: ${{ matrix.build-path }}
 
     #---------Need to find out about this section--------
