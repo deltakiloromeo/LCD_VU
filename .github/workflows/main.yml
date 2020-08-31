@@ -37,7 +37,7 @@ jobs:
       uses: actions/checkout@master
       with:
         #repository: johnrickman/LiquidCrystal_I2C
-        repository: https://gitlab.com/tandembyte/LCD_I2C.git
+        repository: fdebrabander/Arduino-LiquidCrystal-I2C-library
         ref: master
         path: CustomLiquidCrystal_I2C
 
