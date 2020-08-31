@@ -55,12 +55,6 @@ jobs:
     #  run: |
     #    pip install gcovr
 
-    - name: Install lcov
-      run: |
-        sudo add-apt-repository ppa:ubuntu-toolchain-r/test
-        sudo apt-get update
-        sudo apt-get install lcov
-
     - name: Create build directory
       run: |
         mkdir ${{ matrix.build-path }}
@@ -119,6 +113,12 @@ jobs:
     #    chmod +x ./get_code_cov.sh
     #    ./get_code_cov.sh
 
+    - name: Install lcov
+      run: |
+        sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+        sudo apt-get update
+        sudo apt-get install lcov
+        
     - name: Run lcov
       run: |
         lcov --capture --directory . --output-file coverage.info
