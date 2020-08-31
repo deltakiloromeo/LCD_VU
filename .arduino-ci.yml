@@ -1,6 +1,6 @@
 platforms:
   uno-compatible:
-    board: arduino:avr:uno
+    board: arduino:avr:ATmega328P
     package: arduino:avr
     gcc:
       features:
@@ -10,7 +10,7 @@ platforms:
         - __AVR_ATmega328P__
       warnings:
       flags:
-        - -fprofile-arcs -ftest-coverage -lgcov
+        - -fprofile-arcs -ftest-coverage -lgcov O0
 
 compile:
   libraries: ~
