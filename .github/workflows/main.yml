@@ -15,7 +15,6 @@ jobs:
           - arduino:avr:mega
           #- arduino:avr:leonardo
           #- arduino:avr:nano
-        arduino-platform: [arduino:avr@2]
         log-options: [-DDEBUG, -DINFO]
         other-options: [-DTEST, -DDUMMY]
         #ccov-options: [-fprofile-arcs -ftest-coverage -lgcov] #--> this result in compile error, memory usage too big
@@ -57,7 +56,7 @@ jobs:
       uses: ArminJo/arduino-test-compile@master
       with:
         arduino-board-fqbn: ${{ matrix.arduino-boards-fqbn }}
-        arduino-platform: ${{ matrix.arduino-platform }}
+        arduino-platform: arduino:avr@2
         build-properties: '{ "All": "${{ matrix.log-options }} ${{ matrix.other-options }} ${{ matrix.ccov-options }}" }'
         set-build-path: ${{ matrix.build-path }}
 
