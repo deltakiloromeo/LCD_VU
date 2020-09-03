@@ -31,24 +31,24 @@ script:
   - mkdir ./examples/dBuLevel
   - cp ./examples/dBuLevel.ino ./examples/dBuLevel/dBuLevel.ino
 
-  upgrade python
+  # upgrade python
   - /usr/bin/python -m pip install --upgrade pip
   
-  #install bundle
+  # install bundle
   - bundle install
 
   # ensure the Arduino installation -- creates the Library directory
   - bundle exec ensure_arduino_installation.rb
 
-  #additional library
+  # additional library
   - git clone https://github.com/johnrickman/LiquidCrystal_I2C.git
   - mv LiquidCrystal_I2C $(bundle exec arduino_library_location.rb)
 
-  #install gcovr
+  # install gcovr
   #- git clone https://github.com/gcovr/gcovr.git
   #- pip install gcovr
 
-  # run CI 
+  #run CI 
   - bundle exec arduino_ci_remote.rb
 
 after_success:
