@@ -16,14 +16,15 @@ platforms:
 
 compile:
   libraries: ~
-  exclude_dirs:
-    - ./gcovr
   platforms:
     - uno-compatible
-
+  #exclude_dirs:
+  #  - ./gcovr
+  
 unittest:
   libraries: ~
-  exclude_dirs:
-    - ./gcovr
   platforms:
     - uno-compatible
+  #exclude_dirs:
+  #  - ./gcovr
+  
