@@ -22,9 +22,9 @@
 # new travis using Arduino-CI
 sudo: require
 language: ruby
-addons:
-  apt:
-    packages: lcov
+#addons:
+#  apt:
+#    packages: lcov
 
 script:
   # create example directory for each ino 
@@ -45,8 +45,8 @@ script:
   - mv LiquidCrystal_I2C $(bundle exec arduino_library_location.rb)
 
   #install gcovr
-  - git clone https://github.com/gcovr/gcovr.git
-  - pip install gcovr
+  #- git clone https://github.com/gcovr/gcovr.git
+  #- pip install gcovr
 
   # run CI 
   - bundle exec arduino_ci_remote.rb
@@ -56,7 +56,7 @@ after_success:
   #- gcovr -r ./examples/dBuLevel/
   #- chmod +x ./get_code_cov.sh
   #- ./get_code_cov.sh
-  - gcovr -r .
+  #- gcovr -r .
 
 # Create lcov report
 #  - lcov --capture --directory . --output-file coverage.info
