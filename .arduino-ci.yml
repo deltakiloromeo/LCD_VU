@@ -1,5 +1,5 @@
 platforms:
-  uno-compatible:
+  uno:
     board: arduino:avr:uno
     package: arduino:avr
     gcc:
@@ -10,9 +10,11 @@ platforms:
         - DEBUG
         - TEST
         - __AVR_ATmega328P__
+      warnings:
       flags:
         - -lgcov
-  mega-compatible:
+
+  mega2560:
     board: arduino:avr:mega:cpu=atmega2560
     package: arduino:avr
     gcc:
@@ -23,20 +25,21 @@ platforms:
         - DEBUG
         - TEST
         - __AVR_ATmega2560__
+      warnings:
       flags:
         - -lgcov
 
 compile:
   libraries: ~
   platforms:
-    - mega-compatible
+    - mega2560
   #exclude_dirs:
   #  - gcovr
   
 unittest:
   libraries: ~
   platforms:
-    - uno-compatible
+    - uno
   #exclude_dirs:
   #  - gcovr
   
