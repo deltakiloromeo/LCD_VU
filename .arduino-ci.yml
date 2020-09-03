@@ -27,6 +27,7 @@ platforms:
         - __AVR_ATmega2560__
       warnings:
       flags:
+        - -v
         - -lgcov
 
 compile:
