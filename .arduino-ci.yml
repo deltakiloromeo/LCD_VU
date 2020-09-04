@@ -1,5 +1,5 @@
 platforms:
-  uno:
+  uno-ext:
     board: arduino:avr:uno
     package: arduino:avr
     gcc:
@@ -14,7 +14,7 @@ platforms:
       flags:
         - -lgcov
 
-  mega2560:
+  mega2560-ext:
     board: arduino:avr:mega:cpu=atmega2560
     package: arduino:avr
     gcc:
@@ -35,7 +35,7 @@ compile:
     - gcc
   libraries: ~
   platforms:
-    - mega2560
+    - mega2560-ext
   #exclude_dirs:
   #  - gcovr
   
@@ -44,7 +44,7 @@ unittest:
     - gcc
   libraries: ~
   platforms:
-    - uno
+    - uno-ext
   #exclude_dirs:
   #  - gcovr
   
