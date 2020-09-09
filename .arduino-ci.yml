@@ -31,8 +31,6 @@ platforms:
         - -lgcov
 
 compile:
-  compilers:
-    - gcc
   libraries: ~
   platforms:
     - mega2560-ext
@@ -40,8 +38,6 @@ compile:
   #  - gcovr
   
 unittest:
-  compilers:
-    - gcc
   libraries: ~
   platforms:
     - uno-ext
