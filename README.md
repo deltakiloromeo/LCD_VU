@@ -2,7 +2,7 @@
 Branch | Status
 -------|-------
 Master|![Arduino Build Test](https://github.com/deltakiloromeo/LCD_VU/workflows/Arduino%20Build%20Test/badge.svg?branch=master)![Travis Build](https://travis-ci.org/deltakiloromeo/LCD_VU.svg?branch=master)
-Develop|Master|![Arduino Build Test](https://github.com/deltakiloromeo/LCD_VU/workflows/Arduino%20Build%20Test/badge.svg?branch=develop)![Travis Build](https://travis-ci.org/deltakiloromeo/LCD_VU.svg?branch=develop)
+Develop|![Arduino Build Test](https://github.com/deltakiloromeo/LCD_VU/workflows/Arduino%20Build%20Test/badge.svg?branch=develop)![Travis Build](https://travis-ci.org/deltakiloromeo/LCD_VU.svg?branch=develop)
 
 This is a library for displaying audio level (dBu) using 16x2 LCD, controlled using LiquidCrystal_I2C library. VU level is represented by 14 bars segment, the default audio level range are between -25dBu to 2dBu. As this is only intended for a simple display unit, and not for measurement unit, the result may be less acurrate compared to a professional measurement tool.
 
