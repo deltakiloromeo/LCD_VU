@@ -1,0 +1,66 @@
+# Original travis, not working on compiler
+#language: cpp
+#compiler: gcc
+#
+#addons:
+#  apt:
+#    packages: lcov
+#
+#script: 
+#  - chmod +x ./build.sh ./get_code_cov.sh
+#  - ./build.sh
+#  - ./get_code_cov.sh
+#
+#after_success:
+# Create lcov report
+#  - lcov --capture --directory . --output-file coverage.info
+#  - lcov --remove coverage.info '/usr/*' --output-file coverage.info # filter system-files
+#  - lcov --list coverage.info # debug info
+# Uploading report to CodeCov
+#  - bash <(curl -s https://codecov.io/bash) -f coverage.info || echo "Codecov did not collect coverage reports" -t ${{ Secrets.CODECOV_TOKEN }}
+
+# new travis using Arduino-CI
+sudo: require
+language: ruby
+#addons:
+#  apt:
+#    packages: lcov
+
+script:
+  # create example directory for each ino 
+  - mkdir ./examples/dBuLevel
+  - cp ./examples/dBuLevel.ino ./examples/dBuLevel/dBuLevel.ino
+
+  # upgrade python
+  - /usr/bin/python -m pip install --upgrade pip
+  
+  # install bundle
+  - bundle install
+
+  # ensure the Arduino installation -- creates the Library directory
+  - bundle exec ensure_arduino_installation.rb
+
+  # additional library
+  - git clone https://github.com/johnrickman/LiquidCrystal_I2C.git
+  - mv LiquidCrystal_I2C $(bundle exec arduino_library_location.rb)
+
+  # install gcovr
+  #- git clone https://github.com/gcovr/gcovr.git
+  #- pip install gcovr
+
+  #run CI 
+  - bundle exec arduino_ci_remote.rb
+
+after_success:
+  # run code coverage builder and send to codecov.io
+  #- gcovr -r ./examples/dBuLevel/
+  #- chmod +x ./get_code_cov.sh
+  #- ./get_code_cov.sh
+  #- gcovr -r .
+
+# Create lcov report
+#  - lcov --capture --directory . --output-file coverage.info
+#  - lcov --remove coverage.info '/usr/*' --output-file coverage.info # filter system-files
+#  - lcov --list coverage.info # debug info
+# Uploading report to CodeCov
+  - bash <(curl -s https://codecov.io/bash)

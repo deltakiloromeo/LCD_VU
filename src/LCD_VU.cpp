@@ -41,9 +41,9 @@ void LCD_VU::loop()
   pLCD->write(2);               //L symbol 
   pLCD->setCursor(0, 1);        //R channel index
   pLCD->write(3);               //R symbol
-  pLCD->setCursor(15, 0);       //closing tag / end mark index 1
+  pLCD->setCursor(col-1, 0);    //closing tag / end mark index 1
   pLCD->write(5);               //closing tag / end mark
-  pLCD->setCursor(15, 1);       //closing tag / end mark index 2
+  pLCD->setCursor(col-1, 1);    //closing tag / end mark index 2
   pLCD->write(5);               //closing tag / end mark
 
 
@@ -100,9 +100,9 @@ void LCD_VU::loop()
   } 
     
   volR = right;
-  if(volR > MAX_VU)
+  if(volR > (col-2))
   {
-    volR = MAX_VU;
+    volR = col-2;
   }
 
   if (volR < (rightAvg - 2))
@@ -127,13 +127,21 @@ void LCD_VU::loop()
     rightPeak = volR;    
   }
 
-  drawBar(volR, rightPeak, 1);
+  if(col == 16)
+  {
+    drawBar16(volR, rightPeak, 1);
+  }
+  else
+  {
+    drawBar20(volR, rightPeak, 1);
+  }
+  
   Serial.print(" R: "); Serial.print(volR); Serial.print(", "); Serial.print(rightPeak);
   
   volL = left;   
-  if(volL > MAX_VU)
+  if(volL > (col-2))
   {
-    volL = MAX_VU;
+    volL = col-2;
   }
 
   if (volL < (leftAvg - 2))
@@ -158,7 +166,15 @@ void LCD_VU::loop()
     leftPeak = volL;
   }
 
-  drawBar(volL, leftPeak, 0);
+  if(col == 16)
+  {
+    drawBar16(volL, leftPeak, 0);
+  }
+  else
+  {
+    drawBar20(volL, leftPeak, 0);
+  }
+  
   Serial.print(" L: "); Serial.print(volL); Serial.print(", "); Serial.print(leftPeak);
 
   if (decayTime < actualMillis)
@@ -174,7 +190,7 @@ void LCD_VU::loop()
   Serial.println();
 }
 
-void LCD_VU::drawBar(short data, short peakData, short row)
+void LCD_VU::drawBar16(short data, short peakData, short row)
 {
   // Use this line to skip VU meter display, otherwise just remark it
   //return;
@@ -306,7 +322,7 @@ void LCD_VU::clear() {
 }
 
 String LCD_VU::getVersion() {
-    return "LCD_VU v1.0.0";
+    return "LCD_VU v1.1.0";
 }
 
 int LCD_VU::mapdBuToVU(double dBuLevel) {
@@ -314,7 +330,7 @@ int LCD_VU::mapdBuToVU(double dBuLevel) {
   int vuRange = DBHI - DBLO;
 
   if(dBuLevel >= DBLO) {
-    retVal = ceil((dBuLevel - DBLO) / vuRange * MAX_VU);
+    retVal = ceil((dBuLevel - DBLO) / vuRange * (col-2));
   }
 
   return retVal;
@@ -332,4 +348,142 @@ double LCD_VU::volt(double data) {
 
 double LCD_VU::dBu(double voltData) {
   return 20*log10(voltData / 774.6);	// conversion mV to dBu
+}
+
+void LCD_VU::drawBar20(short data, short peakData, short row)
+{
+  // Use this line to skip VU meter display, otherwise just remark it
+  //return;
+
+  //If the previous peak data is 1 or 0, then not taking care of the value.
+  if (peakData < 2)
+  {
+    peakData = -1;
+  }
+
+  pLCD->setCursor(1,row);
+  if (data == 0)
+  {
+      char level0[] = {blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, '\0'};
+      pLCD->print(level0);
+  }
+
+  else if( data == 1)
+  {
+      char level1[] = {fill, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, '\0'};
+      pLCD->print(level1);
+  }
+    
+  else if( data == 2)
+  {
+      char level2[] = {fill, fill, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, '\0'};
+      pLCD->print(level2);
+  }
+    
+  else if (data == 3)
+  {
+      char level3[] = {fill, fill, fill, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, '\0'};
+      pLCD->print(level3);
+  }
+
+  else if (data == 4)
+  {
+      char level4[] = {fill, fill, fill, fill, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, '\0'};
+      pLCD->print(level4);
+  }
+    
+  else if (data == 5)
+  {
+      char level5[] = {fill, fill, fill, fill, fill, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, '\0'};
+      pLCD->print(level5);
+  }
+
+  else if (data == 6)
+  {
+      char level6[] = {fill, fill, fill, fill, fill, fill, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, '\0'};
+      pLCD->print(level6);
+  }
+
+  else if (data == 7)
+  {
+      char level7[] = {fill, fill, fill, fill, fill, fill, fill, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, '\0'};
+      pLCD->print(level7);
+  }
+
+  else if (data == 8)
+  {
+      char level8[] = {fill, fill, fill, fill, fill, fill, fill, fill, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, '\0'};
+      pLCD->print(level8);
+  }
+  
+  else if (data == 9)
+  {
+      char level9[] = {fill, fill, fill, fill, fill, fill, fill, fill, fill, blank, blank, blank, blank, blank, blank, blank, blank, blank, '\0'};
+      pLCD->print(level9);
+  }
+
+  else if (data == 10)
+  {
+      char level10[] = {fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, blank, blank, blank, blank, blank, blank, blank, blank, '\0'};
+      pLCD->print(level10);
+  }
+
+  else if (data == 11)
+  {
+      char level11[] = {fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, blank, blank, blank, blank, blank, blank, blank, '\0'};
+      pLCD->print(level11);
+  }
+
+  else if (data == 12)
+  {
+      char level12[] = {fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, blank, blank, blank, blank, blank, blank, '\0'};
+      pLCD->print(level12);
+  }
+
+  else if (data == 13)
+  {
+      char level13[] = {fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, blank, blank, blank, blank, blank, '\0'};
+      pLCD->print(level13);
+  }
+
+  else if (data == 14)
+  {
+      char level14[] = {fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, blank, blank, blank, blank, '\0'};
+      pLCD->print(level14);
+  }
+
+  else if (data == 15)
+  {
+      char level15[] = {fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, blank, blank, blank, '\0'};
+      pLCD->print(level15);
+  }
+
+  else if (data == 16)
+  {
+      char level16[] = {fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, blank, blank, '\0'};
+      pLCD->print(level16);
+  }
+
+  else if (data == 17)
+  {
+      char level17[] = {fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, blank, '\0'};
+      pLCD->print(level17);
+  }
+
+  else if (data == 18)
+  {
+      char level18[] = {fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, '\0'};
+      pLCD->print(level18);
+  }
+
+  if (peakData == data)
+  {
+      pLCD->setCursor(data,row);
+      pLCD->write(6); //write the peak marker
+  }
+  else if (peakData > 0)
+  {
+      pLCD->setCursor(peakData,row);
+      pLCD->write(6); //write the peak marker
+  }
 }

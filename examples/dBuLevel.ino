@@ -4,7 +4,8 @@
  * 
  * You will need LiquidCrystal_I2C library in your system
  * 
- * Aug 10th, 2020
+ * Aug 10th, 2020 - initial release (v1.0.0)
+ * Aug 21st, 2020 - Adding support for 20x4 LCD device (v.1.1.0)
  * *************************************************/
 
 #include <LCD_VU.h>
@@ -20,7 +21,10 @@
  * 4th argument: analog pin for audio input left channel
  * 5th argument: analog pin for audio input right channel
  * ********************************************************/
-LCD_VU lcd (0x27, 16, 2, pinAudioLeft, pinAudioRight);
+// This is for 16x2 size LCD
+LCD_VU lcd (0x127, 16, 2, pinAudioLeft, pinAudioRight);
+// Use following declaration if your LCD is 20x4 size
+//LCD_VU lcd (0x127, 16, 2, pinAudioLeft, pinAudioRight);
 
 void setup() {
     // Activate Serial if you want to debug or calibrate
