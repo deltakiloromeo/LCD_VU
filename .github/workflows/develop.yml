@@ -5,6 +5,7 @@ name: "Develop Build Test"
 # Controls when the action will run. Triggers the workflow on push or pull request events
 on: 
   push: {branches: develop}
+  pull_request: {branches: develop}
 
 jobs:
   build:
