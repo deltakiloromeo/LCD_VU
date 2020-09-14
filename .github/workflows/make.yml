@@ -58,6 +58,11 @@ jobs:
         export AVR_TOOLS_DIR=${{ env.AVR_TOOLS_DIR }}
         export LIB_DIR=${{ env.LIB_DIR }}
 
+    - name: Install Dependencies
+      run: |
+        apt-get install libdevice-serialport-perl
+        apt-get install libyaml-perl
+
     - name: Make Arduino
-      run: make
+      run: $ARDMK_DIR/make
     
