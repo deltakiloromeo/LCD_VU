@@ -14,9 +14,10 @@ jobs:
     env:
       OS: ${{ matrix.os }}
       PYTHON: '3.8'
-      ARDUINO_DIR: 'Arduino'
-      ARDMK_DIR: 'Arduino_MK'
-      AVR_TOOLS_DIR: 'AVR_Tool' #Directory where avr tools are installed
+      ARDUINO_DIR: '${{ env.HOME}}/Arduino'
+      ARDMK_DIR: '${{ env.HOME}}/Arduino_MK'
+      AVR_TOOLS_DIR: '${{ env.HOME}}/AVR_Tool' #Directory where avr tools are installed
+      LIB_DIR: '${{ env.HOME}}/Lib'
 
     steps:
     - name: Checkout
@@ -27,7 +28,7 @@ jobs:
       with:
         repository: johnrickman/LiquidCrystal_I2C
         ref: master
-        path: CustomLiquidCrystal_I2C
+        path: ${{ env.LIB_DIR}}/LiquidCrystal_I2C
 
     - name: Checkout Arduino Makefile
       uses: actions/checkout@master
@@ -40,12 +41,17 @@ jobs:
       uses: actions/setup-python@master
       with:
         python-version: 3.8
+      
+    - name: Upgrade Python
+      run: python -m pip install --upgrade pip
 
     - name: Setup Python Serial
       run: pip install pyserial
 
     - name: Setup Arduino CLI
-      run: curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
+      run: |
+        curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | BINDIR=${{ env.ARDUINO_DIR }}
+        export PATH = $PATH;BINDIR
 
 
     
