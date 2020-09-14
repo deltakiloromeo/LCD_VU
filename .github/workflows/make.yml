@@ -1,0 +1,51 @@
+name: "Make manual build"
+on:
+  push: {branches: develop}
+  pull_request: {branches: develop}
+
+jobs:
+  build:
+    name: Test build with make
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+
+    env:
+      OS: ${{ matrix.os }}
+      PYTHON: '3.8'
+      ARDUINO_DIR: 'Arduino'
+      ARDMK_DIR: 'Arduino_MK'
+      AVR_TOOLS_DIR: 'AVR_Tool' #Directory where avr tools are installed
+
+    steps:
+    - name: Checkout
+        uses: actions/checkout@v2
+
+    - name: Checkout LiquidCrystal_I2C library
+      uses: actions/checkout@master
+      with:
+        repository: johnrickman/LiquidCrystal_I2C
+        ref: master
+        path: CustomLiquidCrystal_I2C
+
+    - name: Checkout Arduino Makefile
+      uses: actions/checkout@master
+      with:
+        repository: sudar/Arduino-Makefile
+        ref: master
+        path: ${{ env.ARDMK_DIR }}
+
+    - name: Setup Python
+      uses: actions/setup-python@master
+      with:
+        python-version: 3.8
+
+    - name: Setup Python Serial
+      run: pip install pyserial
+
+    - name: Setup Arduino CLI
+      run: curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
+      
+
+    
