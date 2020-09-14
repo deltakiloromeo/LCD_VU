@@ -60,8 +60,8 @@ jobs:
 
     - name: Install Dependencies
       run: |
-        apt-get install libdevice-serialport-perl
-        apt-get install libyaml-perl
+        sudo apt-get install libdevice-serialport-perl
+        sudo apt-get install libyaml-perl
 
     - name: Make Arduino
       run: $ARDMK_DIR/make
