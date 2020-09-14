@@ -52,7 +52,7 @@ jobs:
     - name: Setup Arduino CLI
       run: |
         curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | BINDIR=${{ env.ARDUINO_PATH }}/bin
-        export PATH = $PATH;BINDIR
+        #export PATH = $PATH;BINDIR
         arduino-cli -v
 
 
