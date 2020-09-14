@@ -14,10 +14,10 @@ jobs:
     env:
       OS: ${{ matrix.os }}
       PYTHON: '3.8'
-      ARDUINO_DIR: '${{GITHUB_WORKSPACE}}/Arduino'
-      ARDMK_DIR: '${{GITHUB_WORKSPACE}}/Arduino_MK'
-      AVR_TOOLS_DIR: '${{GITHUB_WORKSPACE}}/AVR_Tool' #Directory where avr tools are installed
-      LIB_DIR: '${{GITHUB_WORKSPACE}}/Lib'
+      ARDUINO_PATH: '${{GITHUB_WORKSPACE}}/Arduino'
+      ARDMK_PATH: '${{GITHUB_WORKSPACE}}/Arduino_MK'
+      AVR_TOOLS_PATH: '${{GITHUB_WORKSPACE}}/AVR_Tool' #Directory where avr tools are installed
+      LIB_PATH: '${{GITHUB_WORKSPACE}}/Lib'
       
     steps:
     - name: Checkout
@@ -28,14 +28,14 @@ jobs:
       with:
         repository: johnrickman/LiquidCrystal_I2C
         ref: master
-        path: ${{ env.LIB_DIR}}/LiquidCrystal_I2C
+        path: ${{ env.LIB_PATH }}/LiquidCrystal_I2C
 
     - name: Checkout Arduino Makefile
       uses: actions/checkout@master
       with:
         repository: sudar/Arduino-Makefile
         ref: master
-        path: ${{ env.ARDMK_DIR }}
+        path: ${{ env.ARDMK_PATH }}
 
     - name: Setup Python
       uses: actions/setup-python@master
@@ -50,7 +50,7 @@ jobs:
 
     - name: Setup Arduino CLI
       run: |
-        curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | BINDIR=${{ env.ARDUINO_DIR }}/bin
+        curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | BINDIR=${{ env.ARDUINO_PATH }}/bin
         export PATH = $PATH;BINDIR
         arduino-cli -v
 
