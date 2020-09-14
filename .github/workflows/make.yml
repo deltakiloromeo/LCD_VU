@@ -65,7 +65,9 @@ jobs:
         sudo apt-get install libyaml-perl
         
     - name: Init makefile
-      run: ${{ env.ARDMK_DIR }}/bin/ardmk-init -v -d ${{ matrix.WORK_DIR }}/script -b uno
+      run: |
+        ${{ env.ARDMK_DIR }}/bin/ardmk-init -v -d ${{ matrix.WORK_DIR }}/script -b uno
+        ls -al ${{ matrix.WORK_DIR }}/script
 
     - name: Make Arduino
       run: make
