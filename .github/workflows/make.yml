@@ -15,7 +15,7 @@ jobs:
     env:
       OS: ${{ matrix.os }}
       PYTHON: '3.8'      
-      ARDUINO_PATH: '${{matrix.WORK_PATH}}/Arduino/bin'
+      ARDUINO_PATH: '${{matrix.WORK_PATH}}/bin'
       ARDMK_PATH: '${{matrix.WORK_PATH}}/Arduino_MK'
       AVR_TOOLS_PATH: '${{matrix.WORK_PATH}}/AVR_Tool' #Directory where avr tools are installed
       LIB_PATH: '${{matrix.WORK_PATH}}/Lib'
@@ -50,9 +50,7 @@ jobs:
       run: pip install pyserial
 
     - name: Setup Arduino CLI
-      run: |
-        mkdir ${{ env.ARDUINO_PATH }}
-        curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | BINDIR=${{env.ARDUINO_PATH}} sh
+      run: curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
 
 
     
