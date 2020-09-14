@@ -63,7 +63,10 @@ jobs:
       run: |
         sudo apt-get install libdevice-serialport-perl
         sudo apt-get install libyaml-perl
+        
+    - name: Init makefile
+      run: ardmk-init -qb uno
 
     - name: Make Arduino
-      run: make ${{ matrix.WORK_DIR }}/script/Makefile.mk
+      run: make
     
