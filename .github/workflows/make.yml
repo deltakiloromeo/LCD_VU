@@ -10,15 +10,15 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
+        WORK_PATH: ['/home/runner/work/LCD_VU']
 
     env:
       OS: ${{ matrix.os }}
-      PYTHON: '3.8'
-      WORK_PATH: '/home/runner/work/LCD_VU'
-      ARDUINO_PATH: '${{env.WORK_PATH}}/Arduino'
-      ARDMK_PATH: '${{env.WORK_PATH}}/Arduino_MK'
-      AVR_TOOLS_PATH: '${{env.WORK_PATH}}/AVR_Tool' #Directory where avr tools are installed
-      LIB_PATH: '${{env.WORK_PATH}}/Lib'
+      PYTHON: '3.8'      
+      ARDUINO_PATH: '${{matrix.WORK_PATH}}/Arduino'
+      ARDMK_PATH: '${{matrix.WORK_PATH}}/Arduino_MK'
+      AVR_TOOLS_PATH: '${{matrix.WORK_PATH}}/AVR_Tool' #Directory where avr tools are installed
+      LIB_PATH: '${{matrix.WORK_PATH}}/Lib'
       
     steps:
     - name: Checkout
