@@ -67,7 +67,7 @@ jobs:
     - name: Init makefile
       run: |
         ${{ env.ARDMK_DIR }}/bin/ardmk-init -v -d ${{ matrix.WORK_DIR }}/script -b uno
-        ls -al ${{ matrix.WORK_DIR }}/script
+        cat ${{ matrix.WORK_DIR }}/script/Makefile
 
     - name: Make Arduino
       run: make ${{ matrix.WORK_DIR }}/script/Makefile
