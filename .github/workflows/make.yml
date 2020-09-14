@@ -70,5 +70,5 @@ jobs:
         ls -al ${{ matrix.WORK_DIR }}/script
 
     - name: Make Arduino
-      run: make
+      run: make ${{ matrix.WORK_DIR }}/script/Makefile
     
