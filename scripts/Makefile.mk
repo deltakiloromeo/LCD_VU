@@ -37,7 +37,7 @@ MONITOR_BAUDRATE  = 9600
 
 ### AVRDUDE
 ### Path to avrdude directory.
-AVRDUDE          = /usr/bin/avrdude
+#AVRDUDE          = /usr/bin/avrdude
 
 ### CFLAGS_STD
 ### Set the C standard to be used during compilation. Documentation (https://github.com/WeAreLeka/Arduino-Makefile/blob/std-flags/arduino-mk-vars.md#cflags_std)

@@ -65,5 +65,5 @@ jobs:
         sudo apt-get install libyaml-perl
 
     - name: Make Arduino
-      run: make src/Makefile.mk
+      run: make ${{ matrix.WORK_DIR }}/src/Makefile.mk
     
