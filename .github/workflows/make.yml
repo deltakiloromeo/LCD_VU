@@ -14,10 +14,11 @@ jobs:
     env:
       OS: ${{ matrix.os }}
       PYTHON: '3.8'
-      ARDUINO_PATH: '${{GITHUB_WORKSPACE}}/Arduino'
-      ARDMK_PATH: '${{GITHUB_WORKSPACE}}/Arduino_MK'
-      AVR_TOOLS_PATH: '${{GITHUB_WORKSPACE}}/AVR_Tool' #Directory where avr tools are installed
-      LIB_PATH: '${{GITHUB_WORKSPACE}}/Lib'
+      WORK_PATH: '/home/runner/work/LCD_VU'
+      ARDUINO_PATH: '${{env.WORK_PATH}}/Arduino'
+      ARDMK_PATH: '${{env.WORK_PATH}}/Arduino_MK'
+      AVR_TOOLS_PATH: '${{env.WORK_PATH}}/AVR_Tool' #Directory where avr tools are installed
+      LIB_PATH: '${{env.WORK_PATH}}/Lib'
       
     steps:
     - name: Checkout
