@@ -18,7 +18,7 @@ jobs:
       ARDUINO_DIR: '${{matrix.WORK_DIR}}/bin'
       ARDMK_DIR: '${{matrix.WORK_DIR}}/Arduino_MK'
       AVR_TOOLS_DIR: '${{matrix.WORK_DIR}}/AVR_Tool' #Directory where avr tools are installed
-      LIB_DIR: '${{matrix.WORK_DIR}}/Lib'
+      USER_LIB_PATH: '${{matrix.WORK_DIR}}/Lib'
       
     steps:
     - name: Checkout
@@ -29,7 +29,7 @@ jobs:
       with:
         repository: johnrickman/LiquidCrystal_I2C
         ref: master
-        path: ${{ env.LIB_DIR }}/LiquidCrystal_I2C
+        path: ${{ env.USER_LIB_PATH }}/LiquidCrystal_I2C
 
     - name: Checkout Arduino Makefile
       uses: actions/checkout@master
@@ -56,7 +56,8 @@ jobs:
         export ARDUINO_DIR=${{ env.ARDUINO_DIR }}
         export ARDMK_DIR=${{ env.ARDMK_DIR }}
         export AVR_TOOLS_DIR=${{ env.AVR_TOOLS_DIR }}
-        export LIB_DIR=${{ env.LIB_DIR }}
+        export USER_LIB_PATH=${{ env.USER_LIB_PATH }}
+        export WORK_DIR=${{ matrix.WORK_DIR }}
 
     - name: Install Dependencies
       run: |
@@ -64,5 +65,5 @@ jobs:
         sudo apt-get install libyaml-perl
 
     - name: Make Arduino
-      run: $ARDMK_DIR/make
+      run: make src/Makefile.mk
     
