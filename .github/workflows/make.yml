@@ -14,10 +14,10 @@ jobs:
     env:
       OS: ${{ matrix.os }}
       PYTHON: '3.8'
-      ARDUINO_DIR: '${{ env.HOME}}/Arduino'
-      ARDMK_DIR: '${{ env.HOME}}/Arduino_MK'
-      AVR_TOOLS_DIR: '${{ env.HOME}}/AVR_Tool' #Directory where avr tools are installed
-      LIB_DIR: '${{ env.HOME}}/Lib'
+      ARDUINO_DIR: '${{ HOME}}/Arduino'
+      ARDMK_DIR: '${{ HOME}}/Arduino_MK'
+      AVR_TOOLS_DIR: '${{ HOME}}/AVR_Tool' #Directory where avr tools are installed
+      LIB_DIR: '${{ HOME}}/Lib'
 
     steps:
     - name: Checkout
