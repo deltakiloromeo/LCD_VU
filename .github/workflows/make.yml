@@ -18,7 +18,7 @@ jobs:
       ARDMK_DIR: '${{GITHUB_WORKSPACE}}/Arduino_MK'
       AVR_TOOLS_DIR: '${{GITHUB_WORKSPACE}}/AVR_Tool' #Directory where avr tools are installed
       LIB_DIR: '${{GITHUB_WORKSPACE}}/Lib'
-
+      
     steps:
     - name: Checkout
       uses: actions/checkout@v2
@@ -50,8 +50,9 @@ jobs:
 
     - name: Setup Arduino CLI
       run: |
-        curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | BINDIR=${{ env.ARDUINO_DIR }}
+        curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | BINDIR=${{ env.ARDUINO_DIR }}/bin
         export PATH = $PATH;BINDIR
+        arduino-cli -v
 
 
     
