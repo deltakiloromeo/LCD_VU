@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        WORK_PATH: ['/home/runner/work/LCD_VU']
+        WORK_PATH: ['/home/runner/work/LCD_VU/LCD_VU']
 
     env:
       OS: ${{ matrix.os }}
