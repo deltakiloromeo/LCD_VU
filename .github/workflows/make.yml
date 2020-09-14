@@ -50,7 +50,7 @@ jobs:
       run: pip install pyserial
 
     - name: Setup Arduino CLI
-      run: curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | BINDIR=${{ env.ARDUINO_PATH }}/bin sh
+      run: curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
 
 
     
