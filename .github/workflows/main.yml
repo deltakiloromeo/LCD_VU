@@ -20,8 +20,6 @@ jobs:
           - arduino:avr:uno
         log-options: [-DDEBUG -DINFO]
         other-options: [-DTEST -DDUMMY]
-        example-path: [./examples/dBuLevel]
-        build-path: [./build]
         os: [ubuntu-latest]
 
     env:
@@ -44,15 +42,11 @@ jobs:
       with:
         python-version: 3.8
 
-    - name: Create build directory
-      run: mkdir ${{ matrix.build-path }}
-
     - name: Compile
       uses: ArminJo/arduino-test-compile@master
       with:
         arduino-board-fqbn: ${{ matrix.arduino-boards-fqbn }}
         build-properties: '{ "All": "${{ matrix.log-options }} ${{ matrix.other-options }}"}'
-        set-build-path: ${{ matrix.build-path }}
         
     - name: Codecov Bash Uploader
       run: bash <(curl -s https://codecov.io/bash) -t ${{ Secrets.CODECOV_TOKEN }}
