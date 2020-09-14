@@ -16,3 +16,4 @@ vendor
 # C++ stuff
 *.bin
 *.bin.dSYM
+/archives
