@@ -20,7 +20,7 @@ jobs:
 
     steps:
     - name: Checkout
-        uses: actions/checkout@v2
+      uses: actions/checkout@v2
 
     - name: Checkout LiquidCrystal_I2C library
       uses: actions/checkout@master
@@ -46,6 +46,6 @@ jobs:
 
     - name: Setup Arduino CLI
       run: curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
-      
+
 
     
