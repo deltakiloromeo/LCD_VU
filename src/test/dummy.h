@@ -49,6 +49,7 @@ class DummySerial {
         size_t print(int n);
         size_t println(const char * str);
         size_t println(int n);
+        size_t println();
         void begin(unsigned long baud);
 };
 
