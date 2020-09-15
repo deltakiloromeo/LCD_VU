@@ -386,6 +386,8 @@ void LCD_VU::clear() {
 
 #ifndef CODECOV
 String LCD_VU::getVersion() {
+#else
+char[] LCD_VU::getVersion() {
   return "LCD_VU v1.1.0";
 }
 #endif

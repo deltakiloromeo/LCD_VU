@@ -169,6 +169,7 @@ class LCD_VU {
 		#else
 		void print(const char[] text);
 		void setReference(double mvRef, double mvCenter, double mvOffset);
+		char[] getVersion();
 		#endif
 };
 
