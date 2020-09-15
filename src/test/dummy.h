@@ -55,10 +55,6 @@ class DummySerial {
         void begin(unsigned long baud);
 };
 
-#ifdef Serial
-#undef Serial
-#endif
-
 #ifndef Serial
 DummySerial Serial;
 #endif
