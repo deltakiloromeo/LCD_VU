@@ -374,7 +374,7 @@ void LCD_VU::setCursor(uint8_t col, uint8_t row) {
 void LCD_VU::print(const String& text) {
   pLCD->print(text);
 #else
-void LCD_VU::print(char* text) {
+void LCD_VU::print(const string& text) {
 #endif
 }
 
@@ -386,12 +386,10 @@ void LCD_VU::clear() {
 
 #ifndef CODECOV
 String LCD_VU::getVersion() {
-  return "LCD_VU v1.1.0";
 #else
-char* LCD_VU::getVersion() {
-  char[] ret = "LCD_VU v1.1.0";
-  return ret;
+string LCD_VU::getVersion() {
 #endif
+  return "LCD_VU v1.1.0";
 }
 
 

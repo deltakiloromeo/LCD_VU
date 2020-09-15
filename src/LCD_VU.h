@@ -167,9 +167,9 @@ class LCD_VU {
 		void setReference(double mvRef = VREF, double mvCenter = VCENTER, double mvOffset = VOFFSET);
 		String getVersion();
 		#else
-		void print(char* text);
+		void print(const string& text);
 		void setReference(double mvRef, double mvCenter, double mvOffset);
-		char* getVersion();
+		string getVersion();
 		#endif
 };
 
