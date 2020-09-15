@@ -30,12 +30,14 @@ void LCD_VU::loop()
   double data;
 
   /*********** Refresh display for basic elements *********/
+  #ifndef CODECOV
   pLCD->createChar(1, Bar);
   pLCD->createChar(2, L);
   pLCD->createChar(3, R);
   pLCD->createChar(4, EmptyBar);
   pLCD->createChar(5, EndMark);
   pLCD->createChar(6, peakHoldChar);
+  #endif
   
   pLCD->setCursor(0, 0);        //L channel index
   pLCD->write(2);               //L symbol 

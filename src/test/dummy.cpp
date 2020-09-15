@@ -67,7 +67,7 @@ size_t DummySerial::println() {
 
 long millis() {
     long ret = 2000;
-    printf("millis() returns %l\n", ret);
+    printf("millis() returns %d\n", ret);
     return ret;
 }
 
