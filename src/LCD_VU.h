@@ -35,7 +35,7 @@
 #else
 #include <stdio.h>
 #include <math.h>
-#include <string.h>
+#include <string>
 #include <stddef.h>
 using namespace std;
 typedef u_int8_t uint8_t;
