@@ -82,7 +82,6 @@ class LCD_VU {
 
 		#ifndef CODECOV
 		LiquidCrystal_I2C *pLCD;
-		#endif
 
 		byte Bar[8] = {
 			B11111,
@@ -149,6 +148,7 @@ class LCD_VU {
 			B00000,
 			B11111
 		};
+		#endif
 
 		void drawBar16(short data, short peakData, short row);
 		int mapdBuToVU(double dBuLevel);
