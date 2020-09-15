@@ -33,13 +33,7 @@
 #include <Arduino.h>
 #include <LiquidCrystal_I2C.h>
 #else
-#include <stdio.h>
-#include <math.h>
-#include <string>
-#include <stddef.h>
-using namespace std;
-typedef u_int8_t uint8_t;
-typedef uint8_t byte;
+#include <dummy.h>
 #endif
 
 #define VREF		1500 // reference voltage in mV, measured at AREF pin
@@ -80,9 +74,9 @@ class LCD_VU {
 		double mvCenter;
 		double mvOffset;
 
-		#ifndef CODECOV
 		LiquidCrystal_I2C *pLCD;
 
+		#ifndef CODECOV
 		byte Bar[8] = {
 			B11111,
 			B00000,
@@ -162,14 +156,13 @@ class LCD_VU {
 		void loop();
 		void setCursor(uint8_t col, uint8_t row);
 		void clear();
-		#ifndef CODECOV
 		void print(const String& text);
-		void setReference(double mvRef = VREF, double mvCenter = VCENTER, double mvOffset = VOFFSET);
 		String getVersion();
+		
+		#ifndef CODECOV
+		void setReference(double mvRef = VREF, double mvCenter = VCENTER, double mvOffset = VOFFSET);
 		#else
-		void print(const string& text);
 		void setReference(double mvRef, double mvCenter, double mvOffset);
-		string getVersion();
 		#endif
 };
 

@@ -9,7 +9,6 @@ LCD_VU::LCD_VU(uint8_t address, uint8_t col, uint8_t row, byte audioPinLeft, byt
 }
 
 void LCD_VU::init() {
-  #ifndef CODECOV
   pLCD = new LiquidCrystal_I2C(address, col, row);
 
   pLCD->init();
@@ -20,7 +19,6 @@ void LCD_VU::init() {
   analogReference(EXTERNAL);    // use external voltage reference in pin AREF
   pinMode(pinLeft, INPUT);
   pinMode(pinRight, INPUT);
-  #endif
 
   mvCenter = VCENTER;
   mvOffset = VOFFSET;
@@ -31,7 +29,6 @@ void LCD_VU::loop()
 {    
   double data;
 
-  #ifndef CODECOV
   /*********** Refresh display for basic elements *********/
   pLCD->createChar(1, Bar);
   pLCD->createChar(2, L);
@@ -55,17 +52,12 @@ void LCD_VU::loop()
   // Data reading on left channel
   data = analogRead(pinLeft);
   //Serial.print("Read L: "); Serial.print(data);
-  #endif
 
   data = volt(data);
-  #ifndef CODECOV
   Serial.print(" Volt L: "); Serial.print(data); Serial.print("mV ");
-  #endif
 
   totalL = dBu(data);
-  #ifndef CODECOV
   Serial.print("L data: "); Serial.print(totalL); Serial.print("dBu ");
-  #endif
 
   totalL = mapdBuToVU(totalL);
   if(totalL > maxL)
@@ -82,21 +74,15 @@ void LCD_VU::loop()
     maxL = 0;
   }   
   
-  #ifndef CODECOV
   // Data reading on right channel
   data = analogRead(pinRight);
   //Serial.print("Read R: "); Serial.print(data);
-  #endif
-
+  
   data = volt(data);
-  #ifndef CODECOV
   Serial.print(" Volt R: "); Serial.print(data); Serial.print("mV ");
-  #endif
-
+  
   totalR = dBu(data);
-  #ifndef CODECOV
   Serial.print(" R data: "); Serial.print(totalR); Serial.print("dBu ");
-  #endif
   
   totalR = mapdBuToVU(totalR);
   if(totalR > maxR)
@@ -150,9 +136,7 @@ void LCD_VU::loop()
     drawBar20(volR, rightPeak, 1);
   }
 
-  #ifndef CODECOV
   Serial.print(" R: "); Serial.print(volR); Serial.print(", "); Serial.print(rightPeak);
-  #endif
   
   volL = left;   
   if(volL > (col-2))
@@ -191,7 +175,6 @@ void LCD_VU::loop()
     drawBar20(volL, leftPeak, 0);
   }
   
-  #ifndef CODECOV
   Serial.print(" L: "); Serial.print(volL); Serial.print(", "); Serial.print(leftPeak);
 
   if (decayTime < actualMillis)
@@ -205,7 +188,6 @@ void LCD_VU::loop()
   }
 
   Serial.println();
-  #endif
 }
 
 void LCD_VU::drawBar16(short data, short peakData, short row)
@@ -219,138 +201,104 @@ void LCD_VU::drawBar16(short data, short peakData, short row)
     peakData = -1;
   }
 
-  #ifndef CODECOV
   pLCD->setCursor(1,row);
-  #endif
+  
   if (data == 0)
   {
       char level0[] = {blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, '\0'};
-      #ifndef CODECOV
       pLCD->print(level0);
-      #endif
   }
 
   else if( data == 1)
   {
       char level1[] = {fill, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, '\0'};
-      #ifndef CODECOV
       pLCD->print(level1);
-      #endif
   }
     
   else if( data == 2)
   {
       char level2[] = {fill, fill, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, '\0'};
-      #ifndef CODECOV
       pLCD->print(level2);
-      #endif
   }
     
   else if (data == 3)
   {
       char level3[] = {fill, fill, fill, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, '\0'};
-      #ifndef CODECOV
       pLCD->print(level3);
-      #endif
   }
 
   else if (data == 4)
   {
       char level4[] = {fill, fill, fill, fill, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, '\0'};
-      #ifndef CODECOV
       pLCD->print(level4);
-      #endif
   }
     
   else if (data == 5)
   {
       char level5[] = {fill, fill, fill, fill, fill, blank, blank, blank, blank, blank, blank, blank, blank, blank, '\0'};
-      #ifndef CODECOV
       pLCD->print(level5);
-      #endif
   }
 
   else if (data == 6)
   {
       char level6[] = {fill, fill, fill, fill, fill, fill, blank, blank, blank, blank, blank, blank, blank, blank, '\0'};
-      #ifndef CODECOV
       pLCD->print(level6);
-      #endif
   }
 
   else if (data == 7)
   {
       char level7[] = {fill, fill, fill, fill, fill, fill, fill, blank, blank, blank, blank, blank, blank, blank, '\0'};
-      #ifndef CODECOV
       pLCD->print(level7);
-      #endif
   }
 
   else if (data == 8)
   {
       char level8[] = {fill, fill, fill, fill, fill, fill, fill, fill, blank, blank, blank, blank, blank, blank, '\0'};
-      #ifndef CODECOV
       pLCD->print(level8);
-      #endif
   }
   
   else if (data == 9)
   {
       char level9[] = {fill, fill, fill, fill, fill, fill, fill, fill, fill, blank, blank, blank, blank, blank, '\0'};
-      #ifndef CODECOV
       pLCD->print(level9);
-      #endif
   }
 
   else if (data == 10)
   {
       char level10[] = {fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, blank, blank, blank, blank, '\0'};
-      #ifndef CODECOV
       pLCD->print(level10);
-      #endif
   }
 
   else if (data == 11)
   {
       char level11[] = {fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, blank, blank, blank, '\0'};
-      #ifndef CODECOV
       pLCD->print(level11);
-      #endif
   }
 
   else if (data == 12)
   {
       char level12[] = {fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, blank, blank, '\0'};
-      #ifndef CODECOV
       pLCD->print(level12);
-      #endif
   }
 
   else if (data == 13)
   {
       char level13[] = {fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, blank, '\0'};
-      #ifndef CODECOV
       pLCD->print(level13);
-      #endif
   }
 
   else if (data == 14)
   {
       char level14[] = {fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, '\0'};
-      #ifndef CODECOV
       pLCD->print(level14);
-      #endif
   }
 
   else if (data == 15)
   {
       char level15[] = {fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, '\0'};
-      #ifndef CODECOV
       pLCD->print(level15);
-      #endif
   }
 
-  #ifndef CODECOV
   if (peakData == data)
   {
       pLCD->setCursor(data,row);
@@ -361,35 +309,21 @@ void LCD_VU::drawBar16(short data, short peakData, short row)
       pLCD->setCursor(peakData,row);
       pLCD->write(6); //write the peak marker
   }
-  #endif
 }
 
 void LCD_VU::setCursor(uint8_t col, uint8_t row) {
-  #ifndef CODECOV
   pLCD->setCursor(col, row);
-  #endif
 }
 
-#ifndef CODECOV
 void LCD_VU::print(const String& text) {
   pLCD->print(text);
-#else
-void LCD_VU::print(const string& text) {
-  printf("%s\n", text);
-#endif
 }
 
 void LCD_VU::clear() {
-  #ifndef CODECOV
   pLCD->clear();
-  #endif
 }
 
-#ifndef CODECOV
 String LCD_VU::getVersion() {
-#else
-string LCD_VU::getVersion() {
-#endif
   return "LCD_VU v1.1.0";
 }
 
@@ -434,160 +368,120 @@ void LCD_VU::drawBar20(short data, short peakData, short row)
     peakData = -1;
   }
 
-  #ifndef CODECOV
   pLCD->setCursor(1,row);
-  #endif
 
   if (data == 0)
   {
       char level0[] = {blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, '\0'};
-      #ifndef CODECOV
       pLCD->print(level0);
-      #endif
   }
 
   else if( data == 1)
   {
       char level1[] = {fill, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, '\0'};
-      #ifndef CODECOV
       pLCD->print(level1);
-      #endif
   }
     
   else if( data == 2)
   {
       char level2[] = {fill, fill, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, '\0'};
-      #ifndef CODECOV
       pLCD->print(level2);
-      #endif
   }
     
   else if (data == 3)
   {
       char level3[] = {fill, fill, fill, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, '\0'};
-      #ifndef CODECOV
       pLCD->print(level3);
-      #endif
   }
 
   else if (data == 4)
   {
       char level4[] = {fill, fill, fill, fill, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, '\0'};
-      #ifndef CODECOV
       pLCD->print(level4);
-      #endif
   }
     
   else if (data == 5)
   {
       char level5[] = {fill, fill, fill, fill, fill, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, '\0'};
-      #ifndef CODECOV
       pLCD->print(level5);
-      #endif
   }
 
   else if (data == 6)
   {
       char level6[] = {fill, fill, fill, fill, fill, fill, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, '\0'};
-      #ifndef CODECOV
       pLCD->print(level6);
-      #endif
   }
 
   else if (data == 7)
   {
       char level7[] = {fill, fill, fill, fill, fill, fill, fill, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, '\0'};
-      #ifndef CODECOV
       pLCD->print(level7);
-      #endif
   }
 
   else if (data == 8)
   {
       char level8[] = {fill, fill, fill, fill, fill, fill, fill, fill, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, '\0'};
-      #ifndef CODECOV
       pLCD->print(level8);
-      #endif
   }
   
   else if (data == 9)
   {
       char level9[] = {fill, fill, fill, fill, fill, fill, fill, fill, fill, blank, blank, blank, blank, blank, blank, blank, blank, blank, '\0'};
-      #ifndef CODECOV
       pLCD->print(level9);
-      #endif
   }
 
   else if (data == 10)
   {
       char level10[] = {fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, blank, blank, blank, blank, blank, blank, blank, blank, '\0'};
-      #ifndef CODECOV
       pLCD->print(level10);
-      #endif
   }
 
   else if (data == 11)
   {
       char level11[] = {fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, blank, blank, blank, blank, blank, blank, blank, '\0'};
-      #ifndef CODECOV
       pLCD->print(level11);
-      #endif
   }
 
   else if (data == 12)
   {
       char level12[] = {fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, blank, blank, blank, blank, blank, blank, '\0'};
-      #ifndef CODECOV
       pLCD->print(level12);
-      #endif
   }
 
   else if (data == 13)
   {
       char level13[] = {fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, blank, blank, blank, blank, blank, '\0'};
-      #ifndef CODECOV
       pLCD->print(level13);
-      #endif
   }
 
   else if (data == 14)
   {
       char level14[] = {fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, blank, blank, blank, blank, '\0'};
-      #ifndef CODECOV
       pLCD->print(level14);
-      #endif
   }
 
   else if (data == 15)
   {
       char level15[] = {fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, blank, blank, blank, '\0'};
-      #ifndef CODECOV
       pLCD->print(level15);
-      #endif
   }
 
   else if (data == 16)
   {
       char level16[] = {fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, blank, blank, '\0'};
-      #ifndef CODECOV
       pLCD->print(level16);
-      #endif
   }
 
   else if (data == 17)
   {
       char level17[] = {fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, blank, '\0'};
-      #ifndef CODECOV
       pLCD->print(level17);
-      #endif
   }
 
   else if (data == 18)
   {
       char level18[] = {fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, '\0'};
-      #ifndef CODECOV
       pLCD->print(level18);
-      #endif
   }
 
   #ifndef CODECOV
