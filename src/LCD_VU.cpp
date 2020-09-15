@@ -380,9 +380,11 @@ void LCD_VU::clear() {
   #endif
 }
 
+#ifndef CODECOV
 String LCD_VU::getVersion() {
     return "LCD_VU v1.1.0";
 }
+#endif
 
 int LCD_VU::mapdBuToVU(double dBuLevel) {
   int retVal = 0;
@@ -423,7 +425,7 @@ void LCD_VU::drawBar20(short data, short peakData, short row)
   #ifndef CODECOV
   pLCD->setCursor(1,row);
   #endif
-  
+
   if (data == 0)
   {
       char level0[] = {blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, '\0'};

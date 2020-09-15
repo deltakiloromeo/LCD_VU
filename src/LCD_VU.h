@@ -164,7 +164,9 @@ class LCD_VU {
 		void print(const String& text);
 		void clear();
 		void setReference(double mvRef = VREF, double mvCenter = VCENTER, double mvOffset = VOFFSET);
+		#ifndef CODECOV
 		String getVersion();
+		#endif
 };
 
 #endif
