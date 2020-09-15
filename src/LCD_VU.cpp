@@ -399,7 +399,11 @@ int LCD_VU::mapdBuToVU(double dBuLevel) {
   return retVal;
 }
 
+#ifndef CODECOV
 void LCD_VU::setReference(double mvRef = VREF, double mvCenter = VCENTER, double mvOffset = VOFFSET) {
+#else
+void LCD_VU::setReference(double mvRef, double mvCenter, double mvOffset) {
+#endif
   this->mvCenter = mvCenter;
   this->mvOffset = mvOffset;
   this->mvRef = mvRef;
