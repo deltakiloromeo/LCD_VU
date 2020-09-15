@@ -7,6 +7,9 @@
 #include <string>
 #include <stddef.h>
 
+#define A3 3
+#define A2 2
+
 using namespace std;
 typedef u_int8_t uint8_t;
 typedef uint8_t byte;
@@ -19,20 +22,24 @@ class LiquidCrystal_I2C {
         void backlight();
         void createChar(uint8_t location, const char* charmap);
         void setCursor(uint8_t col, uint8_t row);
-        size_t write(uint8_t c);
-        
+        size_t write(uint8_t c);        
 };
 
-static class Serial {
+class Serial {
     public:
         static size_t print(const char * str);
-        static size_t print(int n); 
+        static size_t print(int n);
+        static void begin(unsigned long baud);
+    
+    private:
+        Serial();
 };
 
 long millis();
 void analogReference(uint8_t mode);
 void pinMode(uint8_t pin, uint8_t mode);
 int analogRead(uint8_t pin);
+void delay(unsigned long ms);
 #endif
 
 #endif
