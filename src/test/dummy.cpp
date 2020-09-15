@@ -37,7 +37,7 @@ size_t LiquidCrystal_I2C::print(int n) {
 
 void LiquidCrystal_I2C::clear() {}
 
-DummySerial::Serial() { printf("Instantiate DummySerial\n"); }
+DummySerial::DummySerial() { printf("Instantiate DummySerial\n"); }
 
 size_t DummySerial::print(const char * str) {
     printf("%s\n", str);
@@ -51,6 +51,14 @@ size_t DummySerial::print(int n) {
 
 void DummySerial::begin(unsigned long baud) {
     printf("DummySerial.begin(%lu\n", baud);
+}
+
+size_t DummySerial::println(const char * str) {
+    return print(str);
+}
+
+size_t DummySerial::println(int n) { 
+    return print(n);
 }
 
 long millis() {
