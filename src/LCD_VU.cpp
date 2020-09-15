@@ -374,7 +374,7 @@ void LCD_VU::setCursor(uint8_t col, uint8_t row) {
 void LCD_VU::print(const String& text) {
   pLCD->print(text);
 #else
-void print(char* text) {
+void LCD_VU::print(char* text) {
 #endif
 }
 
