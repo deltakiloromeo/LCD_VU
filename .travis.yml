@@ -63,4 +63,4 @@ after_success:
 #  - lcov --remove coverage.info '/usr/*' --output-file coverage.info # filter system-files
 #  - lcov --list coverage.info # debug info
 # Uploading report to CodeCov
-  - bash <(curl -s https://codecov.io/bash)
+  - bash <(curl -s https://codecov.io/bash) -t ${{Secrets.CODECOV_TOKEN}}
