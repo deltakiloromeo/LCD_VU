@@ -54,11 +54,11 @@ void DummySerial::begin(unsigned long baud) {
 }
 
 size_t DummySerial::println(const char * str) {
-    return print(str);
+    return this->print(str);
 }
 
 size_t DummySerial::println(int n) { 
-    return print(n);
+    return this->print(n);
 }
 
 long millis() {

@@ -17,6 +17,72 @@ typedef u_int8_t uint8_t;
 typedef uint8_t byte;
 typedef string String;
 
+byte Bar[8] = {
+    0x11111,
+    0x00000,
+    0x11111,
+    0x11111,
+    0x11111,
+    0x11111,
+    0x00000,
+    0x11111
+};
+
+byte L[8] = {
+    0x00111,
+    0x01000,
+    0x10100,
+    0x10100,
+    0x10100,
+    0x10111,
+    0x01000,
+    0x00111
+};
+
+byte R[8] = {
+    0x00111,
+    0x01000,
+    0x10110,
+    0x10101,
+    0x10110,
+    0x10101,
+    0x01000,
+    0x00111
+};
+
+byte EndMark[8] = {
+    0x10000,
+    0x01000,
+    0x00100,
+    0x00100,
+    0x00100,
+    0x00100,
+    0x01000,
+    0x10000
+};
+
+byte EmptyBar[8] = {
+    0x1111,
+    0x00000,
+    0x00000,
+    0x00000,
+    0x00000,
+    0x00000,
+    0x00000,
+    0x11111
+};
+
+byte peakHoldChar[8] = {
+    0x11111,
+    0x00000,
+    0x01110,
+    0x01110,
+    0x01110,
+    0x01110,
+    0x00000,
+    0x11111
+};
+
 class LiquidCrystal_I2C {
     public:
         LiquidCrystal_I2C(uint8_t address, uint8_t col, uint8_t row);
