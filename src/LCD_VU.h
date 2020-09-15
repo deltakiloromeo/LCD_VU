@@ -36,8 +36,8 @@
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
+#include <cstddef.h>
 using namespace std;
-#define byte BYTE
 #define uint8_t u_int8_t
 #endif
 
