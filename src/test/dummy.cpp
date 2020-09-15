@@ -88,4 +88,6 @@ int analogRead(uint8_t pin) {
 void delay(unsigned long ms) {
     printf("delay(%lu\n", ms);
 }
+
+DummySerial Serial;
 #endif

@@ -55,9 +55,7 @@ class DummySerial {
         void begin(unsigned long baud);
 };
 
-#ifndef Serial
-DummySerial Serial;
-#endif
+external DummySerial Serial;
 
 long millis();
 void analogReference(uint8_t mode);
