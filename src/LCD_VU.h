@@ -161,7 +161,9 @@ class LCD_VU {
 		void init();
 		void loop();
 		void setCursor(uint8_t col, uint8_t row);
+		#ifndef CODECOV
 		void print(const String& text);
+		#endif
 		void clear();
 		void setReference(double mvRef = VREF, double mvCenter = VCENTER, double mvOffset = VOFFSET);
 		#ifndef CODECOV

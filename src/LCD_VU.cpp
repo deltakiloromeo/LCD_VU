@@ -369,11 +369,13 @@ void LCD_VU::setCursor(uint8_t col, uint8_t row) {
   pLCD->setCursor(col, row);
   #endif
 }
+
+#ifndef CODECOV
 void LCD_VU::print(const String& text) {
-  #ifndef CODECOV
   pLCD->print(text);
-  #endif
 }
+#endif
+
 void LCD_VU::clear() {
   #ifndef CODECOV
   pLCD->clear();
