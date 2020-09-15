@@ -27,7 +27,7 @@ size_t LiquidCrystal_I2C::write(uint8_t c) {
 }
 
 size_t LiquidCrystal_I2C::print(const String& str) {
-    printf("%s\n", str);
+    printf("%s\n", &str[0]);
     return sizeof str;
 }
 size_t LiquidCrystal_I2C::print(int n) {
