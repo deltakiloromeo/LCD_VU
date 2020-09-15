@@ -87,11 +87,21 @@ void loop() {
 }
 
 #ifdef CODECOV
+time_t startTime;
+
 int main()
 {
-    printf("Entering main()\n");
+    printf("main()\n");
+    
+    startTime = time(NULL);
+    srand(time(NULL));
+
     setup();
-    loop();
+    for(int i=0; i<=10; i++) {
+        loop();
+        lastTime += 20;
+    }
+
     return 0;
 }
 #endif

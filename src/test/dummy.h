@@ -6,6 +6,8 @@
 #include <math.h>
 #include <string>
 #include <stddef.h>
+#include <stdlib.h>
+#include <time.h>
 
 #define A3 3
 #define A2 2
@@ -24,6 +26,7 @@ extern char R[];
 extern char EndMark[];
 extern char EmptyBar[];
 extern char peakHoldChar[];
+extern time_t startTime;
 
 class LiquidCrystal_I2C {
     public:

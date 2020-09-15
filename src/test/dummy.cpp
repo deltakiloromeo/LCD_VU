@@ -80,7 +80,7 @@ void pinMode(uint8_t pin, uint8_t mode) {
 }
 
 int analogRead(uint8_t pin) {
-    int ret = 950;
+    int ret = rand() % 1024 + 1;
     printf("analogRead(%u) returns %d\n", pin, ret);
     return ret;
 }
