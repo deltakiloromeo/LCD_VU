@@ -375,6 +375,7 @@ void LCD_VU::print(const String& text) {
   pLCD->print(text);
 #else
 void LCD_VU::print(const string& text) {
+  printf("%s\n", text);
 #endif
 }
 
