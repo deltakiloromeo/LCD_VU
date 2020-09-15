@@ -17,71 +17,17 @@ typedef u_int8_t uint8_t;
 typedef uint8_t byte;
 typedef string String;
 
-char Bar[8] = {
-    0x11111,
-    0x00000,
-    0x11111,
-    0x11111,
-    0x11111,
-    0x11111,
-    0x00000,
-    0x11111
-};
+char Bar[] = {'='};
 
-char L[8] = {
-    0x00111,
-    0x01000,
-    0x10100,
-    0x10100,
-    0x10100,
-    0x10111,
-    0x01000,
-    0x00111
-};
+char L[] = {'L'};
 
-char R[8] = {
-    0x00111,
-    0x01000,
-    0x10110,
-    0x10101,
-    0x10110,
-    0x10101,
-    0x01000,
-    0x00111
-};
+char R[] = {'R'};
 
-char EndMark[8] = {
-    0x10000,
-    0x01000,
-    0x00100,
-    0x00100,
-    0x00100,
-    0x00100,
-    0x01000,
-    0x10000
-};
+char EndMark[] = {')'};
 
-char EmptyBar[8] = {
-    0x1111,
-    0x00000,
-    0x00000,
-    0x00000,
-    0x00000,
-    0x00000,
-    0x00000,
-    0x11111
-};
+char EmptyBar[] = {' '};
 
-char peakHoldChar[8] = {
-    0x11111,
-    0x00000,
-    0x01110,
-    0x01110,
-    0x01110,
-    0x01110,
-    0x00000,
-    0x11111
-};
+char peakHoldChar[] = {'#'};
 
 class LiquidCrystal_I2C {
     public:
