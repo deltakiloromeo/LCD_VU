@@ -14,7 +14,7 @@ void LCD_VU::init() {
 
   pLCD->init();
   pLCD->backlight();
-
+  
   decayTime = millis();
 
   analogReference(EXTERNAL);    // use external voltage reference in pin AREF
@@ -193,7 +193,6 @@ void LCD_VU::loop()
   
   #ifndef CODECOV
   Serial.print(" L: "); Serial.print(volL); Serial.print(", "); Serial.print(leftPeak);
-  #endif
 
   if (decayTime < actualMillis)
     decayTime = (millis() + 50);
@@ -205,7 +204,6 @@ void LCD_VU::loop()
     leftPeak = -1;
   }
 
-  #ifndef CODECOV
   Serial.println();
   #endif
 }
@@ -422,7 +420,10 @@ void LCD_VU::drawBar20(short data, short peakData, short row)
     peakData = -1;
   }
 
+  #ifndef CODECOV
   pLCD->setCursor(1,row);
+  #endif
+  
   if (data == 0)
   {
       char level0[] = {blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, '\0'};
