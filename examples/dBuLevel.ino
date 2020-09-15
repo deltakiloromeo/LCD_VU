@@ -13,8 +13,13 @@
 #include <LCD_VU.h>
 
 /****************** Definition for audio input pins *******************/
+#ifndef CODECOV
 #define pinAudioLeft    A3
 #define pinAudioRight   A2
+#else
+#define pinAudioLeft    3
+#define pinAudioRight   2
+#endif
 
 /******************* LCD declaration **********************
  * 1st argument: address of LCD with I2C backpack, this address may vary between LCD device
