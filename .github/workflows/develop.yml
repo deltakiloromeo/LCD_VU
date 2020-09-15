@@ -51,7 +51,8 @@ jobs:
     #---------Need to find out about this section--------
     - name: Generate code coverage
       run: |
-        g++  ${{ matrix.ccov-options }} ${{ matrix.log-options }} ${{ matrix.other-optons }} -I./src/ ./examples/dBuLevel.ino ./src/LCD_VU.cpp -o program
+        mv ./examples/dBuLevel.ino ./examples/dBuLevel.cpp 
+        g++  ${{ matrix.ccov-options }} ${{ matrix.log-options }} ${{ matrix.other-optons }} -I./src/ ./examples/dBuLevel.cpp ./src/LCD_VU.cpp -o program
         ./program
 
     - name: Codecov Bash Uploader
