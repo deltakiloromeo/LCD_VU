@@ -20,6 +20,7 @@ jobs:
           - arduino:avr:uno
         log-options: [-DDEBUG -DINFO]
         other-options: [-DTEST -DDUMMY]
+        cov-options: [-ftest-coverage]
         os: [ubuntu-latest]
 
     env:
@@ -46,7 +47,7 @@ jobs:
       uses: ArminJo/arduino-test-compile@master
       with:
         arduino-board-fqbn: ${{ matrix.arduino-boards-fqbn }}
-        build-properties: '{ "All": "${{ matrix.log-options }} ${{ matrix.other-options }}"}'
+        build-properties: '{ "All": "${{ matrix.cov-options }} ${{ matrix.log-options }} ${{ matrix.other-options }}"}'
         
     - name: Codecov Bash Uploader
       run: bash <(curl -s https://codecov.io/bash) -t ${{ Secrets.CODECOV_TOKEN }}
