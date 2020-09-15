@@ -110,7 +110,6 @@ int main()
     setup();
     for(int i=0; i<=10; i++) {
         loop();
-        lastTime += 20;
     }
 
     return 0;

@@ -27,6 +27,8 @@ extern char EndMark[];
 extern char EmptyBar[];
 extern char peakHoldChar[];
 extern time_t startTime;
+extern void setup();
+extern void loop();
 
 class LiquidCrystal_I2C {
     public:
