@@ -32,6 +32,10 @@
 #ifndef CODECOV
 #include <Arduino.h>
 #include <LiquidCrystal_I2C.h>
+#else
+#include <stdio.h>
+#include <math.h>
+using namespace std
 #endif
 
 #define VREF		1500 // reference voltage in mV, measured at AREF pin
