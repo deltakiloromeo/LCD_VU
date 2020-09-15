@@ -20,8 +20,8 @@ jobs:
         log-options: [-DDEBUG -DINFO]
         other-options: [-DTEST -DDUMMY]
         ccov-options: [-fprofile-arcs -ftest-coverage -DCODECOV] #--> this result in compile error, cannot link
-        include-paths: [-I./src/ -I./test]
-        sources: [./examples/dBuLevel.cpp ./src/LCD_VU.cpp ./test/dummy.cpp]
+        include-paths: [-I./src/ -I./src/test]
+        sources: [./examples/dBuLevel.cpp ./src/LCD_VU.cpp ./src//test/dummy.cpp]
         os: [ubuntu-latest]
 
     env:
