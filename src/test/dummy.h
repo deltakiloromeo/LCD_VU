@@ -22,7 +22,9 @@ class LiquidCrystal_I2C {
         void backlight();
         void createChar(uint8_t location, const char* charmap);
         void setCursor(uint8_t col, uint8_t row);
-        size_t write(uint8_t c);        
+        size_t write(uint8_t c);
+        size_t print(const char * str);
+        size_t print(int n);       
 };
 
 class Serial {

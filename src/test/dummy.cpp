@@ -7,6 +7,8 @@ void LiquidCrystal_I2C::backlight() {}
 void LiquidCrystal_I2C::createChar(uint8_t location, const char* charmap) {}
 void LiquidCrystal_I2C::setCursor(uint8_t col, uint8_t row) {}
 size_t LiquidCrystal_I2C::write(uint8_t c) {return sizeof c;}
+size_t LiquidCrystal_I2C::print(const char * str) {return sizeof str;}
+size_t LiquidCrystal_I2C::print(int n) {return n;} 
 
 Serial::Serial() {}
 static size_t Serial::print(const char * str) {return sizeof str;}
