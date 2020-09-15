@@ -12,7 +12,7 @@ void LCD_VU::init() {
   #ifndef CODECOV
   pLCD = new LiquidCrystal_I2C(address, col, row);
 
-  pLCD->begin();
+  pLCD->init();
   pLCD->backlight();
 
   decayTime = millis();
