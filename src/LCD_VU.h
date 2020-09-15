@@ -29,7 +29,7 @@
 #ifndef LCD_VU_H
 #define LCD_VU_H
 
-#ifndef DUMMY
+#ifndef CODECOV
 #include <Arduino.h>
 #include <LiquidCrystal_I2C.h>
 #endif
@@ -72,7 +72,7 @@ class LCD_VU {
 		double mvCenter;
 		double mvOffset;
 
-		#ifndef DUMMY
+		#ifndef CODECOV
 		LiquidCrystal_I2C *pLCD;
 		#endif
 

@@ -19,7 +19,7 @@ jobs:
           #- arduino:avr:nano
         log-options: [-DDEBUG -DINFO]
         other-options: [-DTEST -DDUMMY]
-        ccov-options: [-fprofile-arcs -ftest-coverage] #--> this result in compile error, cannot link
+        ccov-options: [-fprofile-arcs -ftest-coverage -DCODECOV] #--> this result in compile error, cannot link
         os: [ubuntu-latest]
 
     env:

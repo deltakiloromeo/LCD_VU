@@ -7,7 +7,7 @@
  * Aug 10th, 2020 - initial release (v1.0.0)
  * Aug 21st, 2020 - Adding support for 20x4 LCD device (v.1.1.0)
  * *************************************************/
-#ifdef DUMMY
+#ifdef CODECOV
 #include <stdio.h>
 #endif
 #include <LCD_VU.h>
@@ -29,7 +29,7 @@ LCD_VU lcd (0x127, 16, 2, pinAudioLeft, pinAudioRight);
 //LCD_VU lcd (0x127, 16, 2, pinAudioLeft, pinAudioRight);
 
 void setup() {
-    #ifndef DUMMY
+    #ifndef CODECOV
     // Activate Serial if you want to debug or calibrate
     Serial.begin(9600);
     #endif
@@ -46,7 +46,7 @@ void setup() {
     lcd.print(lcd.getVersion());
     lcd.print("--");
 
-    #ifndef DUMMY
+    #ifndef CODECOV
     delay(2000);
     #endif
     lcd.clear();
@@ -79,7 +79,7 @@ void setup() {
     // or if you need only to set offset value, and keep the rest the same
     //lcd.setReference(VREF, VCENTER, 200);
 
-    #ifdef DUMMY
+    #ifdef CODECOV
     printf("setup()\n");
     #endif
 }
@@ -88,12 +88,12 @@ void loop() {
     // call this method to refresh data readings and display VU meter
     lcd.loop();
 
-    #ifdef DUMMY
+    #ifdef CODECOV
     printf("loop()\n");
     #endif
 }
 
-#ifdef DUMMY
+#ifdef CODECOV
 int main()
 {
     printf("Entering main()\n");
