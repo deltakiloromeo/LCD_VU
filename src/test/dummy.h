@@ -17,7 +17,7 @@ typedef u_int8_t uint8_t;
 typedef uint8_t byte;
 typedef string String;
 
-byte Bar[8] = {
+char Bar[8] = {
     0x11111,
     0x00000,
     0x11111,
@@ -28,7 +28,7 @@ byte Bar[8] = {
     0x11111
 };
 
-byte L[8] = {
+char L[8] = {
     0x00111,
     0x01000,
     0x10100,
@@ -39,7 +39,7 @@ byte L[8] = {
     0x00111
 };
 
-byte R[8] = {
+char R[8] = {
     0x00111,
     0x01000,
     0x10110,
@@ -50,7 +50,7 @@ byte R[8] = {
     0x00111
 };
 
-byte EndMark[8] = {
+char EndMark[8] = {
     0x10000,
     0x01000,
     0x00100,
@@ -61,7 +61,7 @@ byte EndMark[8] = {
     0x10000
 };
 
-byte EmptyBar[8] = {
+char EmptyBar[8] = {
     0x1111,
     0x00000,
     0x00000,
@@ -72,7 +72,7 @@ byte EmptyBar[8] = {
     0x11111
 };
 
-byte peakHoldChar[8] = {
+char peakHoldChar[8] = {
     0x11111,
     0x00000,
     0x01110,
