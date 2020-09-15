@@ -19,10 +19,7 @@ jobs:
           #- arduino:avr:nano
         log-options: [-DDEBUG -DINFO]
         other-options: [-DTEST -DDUMMY]
-        #ccov-options: [-fprofile-arcs -ftest-coverage] #--> this result in compile error, cannot link
-        ccov-options: [-ftest-coverage]
-        include-paths: [-I/github/home/.arduino15/packages/arduino/hardware/avr/1.8.3/cores/arduino/ -I/github/home/.arduino15/packages/arduino/hardware/avr/1.8.3/variants/standard/ -I/github/home/Arduino/libraries/ -I./src/]
-        #include-paths: [-I/github/home/.arduino15/packages/arduino/hardware/avr/1.8.3/cores/arduino/ -I/github/home/Arduino/libraries/ -I./src/]
+        ccov-options: [-fprofile-arcs -ftest-coverage] #--> this result in compile error, cannot link
         os: [ubuntu-latest]
 
     env:
@@ -45,60 +42,17 @@ jobs:
       with:
         python-version: 3.8
 
-    #- name: Install gcovr
-    #  run: pip install gcovr
-
     - name: Compile
       uses: ArminJo/arduino-test-compile@master
       with:
         arduino-board-fqbn: ${{ matrix.arduino-boards-fqbn }}
-        build-properties: '{ "All": "${{ matrix.log-options }} ${{ matrix.other-options }} ${{ matrix.ccov-options }}" }'
+        build-properties: '{ "All": "${{ matrix.log-options }} ${{ matrix.other-options }}" }'
 
     #---------Need to find out about this section--------
-    #- name: Generate code coverage
-    #  run: |
-    #    cp ${{ matrix.example-path }}.ino ${{ matrix.example-path }}.cpp
-    #    g++ ${{ matrix.ccov-options }} ${{ matrix.include-paths }} ${{ matrix.example-path }}.cpp -o program
-    #    ./program
-
-    #- name: Invoke gcovr
-    #  run: gcovr -r .
-
-    #- name: Send unit tests coverage to Codecov
-    #  uses: codecov/codecov-action@master
-    #  with:
-    #    token: ${{secrets.CODECOV_TOKEN}}
-    #    file: ./coverage_unit.txt
-    #    flags: unit
-    #--------------end of code coverage----------------
-
-    #- name: Setup Python
-    #  uses: actions/setup-python@master
-    #  with:
-    #    python-version: 3.8
-
-    #- name: Generate coverage report
-    #  run: |
-    #    pip install pytest
-    #    pip install pytest-cov
-    #    pytest --cov=./ --cov-report=xml
-
-    #- name: Upload coverage to Codecov
-    #  uses: codecov/codecov-action@v1
-    #  with:        
-    #    file: ./coverage.xml
-    #    files: ./coverage1.xml,./coverage2.xml
-    #    directory: ./coverage/reports/
-    #    flags: unittests
-    #    env_vars: OS,PYTHON
-    #    name: codecov-umbrella
-    #    fail_ci_if_error: true
-    #    path_to_write_report: ./coverage/codecov_report.gz
-
-    #- name: Run gcov --> gcov not found
-    #  run: |
-    #    chmod +x ./scripts/get_code_cov.sh
-    #    ./scripts/get_code_cov.sh
+    - name: Generate code coverage
+      run: |
+        g++  ${{ matrix.ccov-options }} -I./src/ ./examples/dBuLevel.ino -o program
+        ./program
 
     - name: Codecov Bash Uploader
       run: bash <(curl -s https://codecov.io/bash) -t ${{ Secrets.CODECOV_TOKEN }}

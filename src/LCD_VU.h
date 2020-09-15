@@ -29,8 +29,10 @@
 #ifndef LCD_VU_H
 #define LCD_VU_H
 
+#ifndef DUMMY
 #include <Arduino.h>
 #include <LiquidCrystal_I2C.h>
+#endif
 
 #define VREF		1500 // reference voltage in mV, measured at AREF pin
 #define VCENTER		450 // center voltage in mV, measured at voltage divider resistor 100K
@@ -70,7 +72,9 @@ class LCD_VU {
 		double mvCenter;
 		double mvOffset;
 
+		#ifndef DUMMY
 		LiquidCrystal_I2C *pLCD;
+		#endif
 
 		byte Bar[8] = {
 			B11111,

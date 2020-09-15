@@ -15,17 +15,7 @@
             "defines": [
                 "_DEBUG",
                 "UNICODE",
-                "_UNICODE",
-                "INFO",
-                "TEST",
-                "DUMMY"
-            ],
-            "compilerArgs": [
-                "--coverage",
-                "-fprofile-arcs",
-                "-ftest-coverage",
-                "-fPIC",
-                "-O0"
+                "_UNICODE"
             ],
             "intelliSenseMode": "clang-x64",
             "forcedInclude": [
