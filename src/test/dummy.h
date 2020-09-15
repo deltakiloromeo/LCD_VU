@@ -9,6 +9,8 @@
 
 #define A3 3
 #define A2 2
+#define EXTERNAL -1
+#define INPUT 0
 
 using namespace std;
 typedef u_int8_t uint8_t;
@@ -24,17 +26,16 @@ class LiquidCrystal_I2C {
         void setCursor(uint8_t col, uint8_t row);
         size_t write(uint8_t c);
         size_t print(const char * str);
-        size_t print(int n);       
+        size_t print(int n);
+        void clear();       
 };
 
-class Serial {
+class DummySerial {
     public:
-        static size_t print(const char * str);
-        static size_t print(int n);
-        static void begin(unsigned long baud);
-    
-    private:
-        Serial();
+        DummySerial();
+        size_t print(const char * str);
+        size_t print(int n);
+        void begin(unsigned long baud);
 };
 
 long millis();

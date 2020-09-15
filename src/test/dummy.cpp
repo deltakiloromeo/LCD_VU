@@ -9,11 +9,12 @@ void LiquidCrystal_I2C::setCursor(uint8_t col, uint8_t row) {}
 size_t LiquidCrystal_I2C::write(uint8_t c) {return sizeof c;}
 size_t LiquidCrystal_I2C::print(const char * str) {return sizeof str;}
 size_t LiquidCrystal_I2C::print(int n) {return n;} 
+void LiquidCrystal_I2C::clear() {}
 
-Serial::Serial() {}
-static size_t Serial::print(const char * str) {return sizeof str;}
-static size_t Serial::print(int n) {return n;} 
-static void Seriall::begin(unsigned long baud);
+DummySerial::Serial() {}
+size_t DummySerial::print(const char * str) {return sizeof str;}
+size_t DummySerial::print(int n) {return n;} 
+void DummySerial::begin(unsigned long baud);
 
 long millis() {return 2000;}
 void analogReference(uint8_t mode) {}
