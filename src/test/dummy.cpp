@@ -90,4 +90,11 @@ void delay(unsigned long ms) {
 }
 
 DummySerial Serial;
+
+char Bar[] = {'='};
+char L[] = {'L'};
+char R[] = {'R'};
+char EndMark[] = {')'};
+char EmptyBar[] = {' '};
+char peakHoldChar[] = {'#'};
 #endif

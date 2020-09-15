@@ -30,15 +30,13 @@ void LCD_VU::loop()
   double data;
 
   /*********** Refresh display for basic elements *********/
-  #ifndef CODECOV
   pLCD->createChar(1, Bar);
   pLCD->createChar(2, L);
   pLCD->createChar(3, R);
   pLCD->createChar(4, EmptyBar);
   pLCD->createChar(5, EndMark);
   pLCD->createChar(6, peakHoldChar);
-  #endif
-  
+
   pLCD->setCursor(0, 0);        //L channel index
   pLCD->write(2);               //L symbol 
   pLCD->setCursor(0, 1);        //R channel index
@@ -486,7 +484,6 @@ void LCD_VU::drawBar20(short data, short peakData, short row)
       pLCD->print(level18);
   }
 
-  #ifndef CODECOV
   if (peakData == data)
   {
       pLCD->setCursor(data,row);
@@ -497,5 +494,4 @@ void LCD_VU::drawBar20(short data, short peakData, short row)
       pLCD->setCursor(peakData,row);
       pLCD->write(6); //write the peak marker
   }
-  #endif
 }
