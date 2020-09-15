@@ -35,7 +35,10 @@
 #else
 #include <stdio.h>
 #include <math.h>
+#include <string.h>
 using namespace std;
+#define byte BYTE
+#define uint8_t u_int8_t
 #endif
 
 #define VREF		1500 // reference voltage in mV, measured at AREF pin
