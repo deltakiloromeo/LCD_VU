@@ -26,7 +26,7 @@ size_t LiquidCrystal_I2C::write(uint8_t c) {
     return sizeof c;
 }
 
-size_t LiquidCrystal_I2C::print(const char * str) {
+size_t LiquidCrystal_I2C::print(const String& str) {
     printf("%s\n", str);
     return sizeof str;
 }
@@ -50,7 +50,7 @@ size_t DummySerial::print(int n) {
 } 
 
 void DummySerial::begin(unsigned long baud) {
-    printf("DummySerial.begin(%l\n", baud);
+    printf("DummySerial.begin(%lu\n", baud);
 }
 
 long millis() {
@@ -74,6 +74,6 @@ int analogRead(uint8_t pin) {
 }
 
 void delay(unsigned long ms) {
-    printf("delay(%ul\n", ms);
+    printf("delay(%lu\n", ms);
 }
 #endif
