@@ -35,7 +35,7 @@
 #else
 #include <stdio.h>
 #include <math.h>
-using namespace std
+using namespace std;
 #endif
 
 #define VREF		1500 // reference voltage in mV, measured at AREF pin
