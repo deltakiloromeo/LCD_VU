@@ -2,7 +2,7 @@
 
 #ifdef CODECOV
 LiquidCrystal_I2C::LiquidCrystal_I2C(uint8_t address, uint8_t col, uint8_t row) { 
-    printf("Instantiate LiquidCrystal_I2C(%0x, %u, %u\n", address, col, row);
+    printf("Instantiate LiquidCrystal_I2C(%0x, %u, %u)\n", address, col, row);
 }
 
 void LiquidCrystal_I2C::init() {
@@ -14,7 +14,7 @@ void LiquidCrystal_I2C::backlight() {
 }
 
 void LiquidCrystal_I2C::createChar(uint8_t location, const char* charmap) {
-    printf("LiquidCrystal_I2C.createChar(%u, %s\n", location, charmap);
+    printf("LiquidCrystal_I2C.createChar(%u, %s)\n", location, charmap);
 }
 
 void LiquidCrystal_I2C::setCursor(uint8_t col, uint8_t row) {
@@ -50,7 +50,7 @@ size_t DummySerial::print(int n) {
 } 
 
 void DummySerial::begin(unsigned long baud) {
-    printf("DummySerial.begin(%lu\n", baud);
+    printf("DummySerial.begin(%lu)\n", baud);
 }
 
 size_t DummySerial::println(const char * str) {
@@ -76,7 +76,7 @@ void analogReference(uint8_t mode) {
 }
 
 void pinMode(uint8_t pin, uint8_t mode) {
-    printf("pinMode(%u, %u\n", pin, mode);
+    printf("pinMode(%u, %u)\n", pin, mode);
 }
 
 int analogRead(uint8_t pin) {
@@ -86,7 +86,7 @@ int analogRead(uint8_t pin) {
 }
 
 void delay(unsigned long ms) {
-    printf("delay(%lu\n", ms);
+    printf("delay(%lu)\n", ms);
 }
 
 DummySerial Serial;
@@ -108,8 +108,11 @@ int main()
     srand(time(NULL));
 
     setup();
+    printf("setup()\n");
+
     for(int i=0; i<=10; i++) {
         loop();
+        printf("loop()->%d\n", i+1);
     }
 
     return 0;

@@ -71,17 +71,9 @@ void setup() {
     
     // or if you need only to set offset value, and keep the rest the same
     //lcd.setReference(VREF, VCENTER, 200);
-
-    #ifdef CODECOV
-    printf("setup()\n");
-    #endif
 }
 
 void loop() {
     // call this method to refresh data readings and display VU meter
     lcd.loop();
-
-    #ifdef CODECOV
-    printf("loop()\n");
-    #endif
 }

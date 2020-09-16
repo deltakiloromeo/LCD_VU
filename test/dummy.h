@@ -2,6 +2,7 @@
 #define DUMMY_H
 
 #ifdef CODECOV
+
 #include <stdio.h>
 #include <math.h>
 #include <string>
@@ -19,7 +20,6 @@ typedef u_int8_t uint8_t;
 typedef uint8_t byte;
 typedef string String;
 
-
 extern char Bar[];
 extern char L[];
 extern char R[];
@@ -27,8 +27,6 @@ extern char EndMark[];
 extern char EmptyBar[];
 extern char peakHoldChar[];
 extern time_t startTime;
-extern void setup();
-extern void loop();
 
 class LiquidCrystal_I2C {
     public:
@@ -56,11 +54,14 @@ class DummySerial {
 
 extern DummySerial Serial;
 
-long millis();
-void analogReference(uint8_t mode);
-void pinMode(uint8_t pin, uint8_t mode);
-int analogRead(uint8_t pin);
-void delay(unsigned long ms);
-#endif
+extern long millis();
+extern void analogReference(uint8_t mode);
+extern void pinMode(uint8_t pin, uint8_t mode);
+extern int analogRead(uint8_t pin);
+extern void delay(unsigned long ms);
+extern void setup();
+extern void loop();
 
-#endif
+#endif // CODECOV
+
+#endif // DUMMY_H

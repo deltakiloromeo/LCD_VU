@@ -46,18 +46,22 @@ void LCD_VU::loop()
   pLCD->setCursor(col-1, 1);    //closing tag / end mark index 2
   pLCD->write(5);               //closing tag / end mark
 
-
   actualMillis = millis();
 
   // Data reading on left channel
   data = analogRead(pinLeft);
-  //Serial.print("Read L: "); Serial.print(data);
+
+  #ifdef DEBUG
+  Serial.print("Read L: "); Serial.print(data);
+  #endif
 
   data = volt(data);
-  Serial.print(" Volt L: "); Serial.print(data); Serial.print("mV ");
-
   totalL = dBu(data);
+
+  #ifdef DEBUG
+  Serial.print(" Volt L: "); Serial.print(data); Serial.print("mV ");
   Serial.print("L data: "); Serial.print(totalL); Serial.print("dBu ");
+  #endif
 
   totalL = mapdBuToVU(totalL);
   if(totalL > maxL)
@@ -76,13 +80,18 @@ void LCD_VU::loop()
   
   // Data reading on right channel
   data = analogRead(pinRight);
-  //Serial.print("Read R: "); Serial.print(data);
-  
+
+  #ifdef DEBUG
+  Serial.print("Read R: "); Serial.print(data);
+  #endif
+
   data = volt(data);
-  Serial.print(" Volt R: "); Serial.print(data); Serial.print("mV ");
-  
   totalR = dBu(data);
+  
+  #ifdef DEBUG
+  Serial.print(" Volt R: "); Serial.print(data); Serial.print("mV ");
   Serial.print(" R data: "); Serial.print(totalR); Serial.print("dBu ");
+  #endif
   
   totalR = mapdBuToVU(totalR);
   if(totalR > maxR)
@@ -136,7 +145,9 @@ void LCD_VU::loop()
     drawBar20(volR, rightPeak, 1);
   }
 
+  #ifdef DEBUG
   Serial.print(" R: "); Serial.print(volR); Serial.print(", "); Serial.print(rightPeak);
+  #endif
   
   volL = left;   
   if(volL > (col-2))
@@ -175,7 +186,9 @@ void LCD_VU::loop()
     drawBar20(volL, leftPeak, 0);
   }
   
+  #ifdef DEBUG
   Serial.print(" L: "); Serial.print(volL); Serial.print(", "); Serial.print(leftPeak);
+  #endif
 
   if (decayTime < actualMillis)
     decayTime = (millis() + 50);
@@ -187,7 +200,9 @@ void LCD_VU::loop()
     leftPeak = -1;
   }
 
+  #ifdef DEBUG
   Serial.println();
+  #endif
 }
 
 void LCD_VU::drawBar16(short data, short peakData, short row)

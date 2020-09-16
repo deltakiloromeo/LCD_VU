@@ -20,7 +20,9 @@ jobs:
           - arduino:avr:uno
         log-options: [-DDEBUG -DINFO]
         other-options: [-DTEST -DDUMMY]
-        cov-options: [-ftest-coverage]
+        ccov-options: [-fprofile-arcs -ftest-coverage -DCODECOV]
+        include-paths: [-I./src/ -I./test]
+        sources: [./examples/dBuLevel.cpp ./src/LCD_VU.cpp ./test/dummy.cpp]
         os: [ubuntu-latest]
 
     env:
@@ -35,7 +37,6 @@ jobs:
       uses: actions/checkout@master
       with:
         repository: johnrickman/LiquidCrystal_I2C
-        ref: master
         path: CustomLiquidCrystal_I2C
 
     - name: Setup Python
@@ -47,7 +48,13 @@ jobs:
       uses: ArminJo/arduino-test-compile@master
       with:
         arduino-board-fqbn: ${{ matrix.arduino-boards-fqbn }}
-        build-properties: '{ "All": "${{ matrix.cov-options }} ${{ matrix.log-options }} ${{ matrix.other-options }}"}'
+        build-properties: '{ "All": "${{ matrix.log-options }} ${{ matrix.other-options }}"}'
+
+    - name: Generate code coverage
+      run: |
+        mv ./examples/dBuLevel.ino ./examples/dBuLevel.cpp 
+        g++  ${{ matrix.ccov-options }} ${{ matrix.log-options }} ${{ matrix.other-optons }} ${{ matrix.include-paths }} ${{ matrix.sources }} -o program
+        ./program
         
     - name: Codecov Bash Uploader
       run: bash <(curl -s https://codecov.io/bash) -t ${{ Secrets.CODECOV_TOKEN }}

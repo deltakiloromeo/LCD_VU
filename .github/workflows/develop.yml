@@ -20,8 +20,8 @@ jobs:
         log-options: [-DDEBUG -DINFO]
         other-options: [-DTEST -DDUMMY]
         ccov-options: [-fprofile-arcs -ftest-coverage -DCODECOV] #--> this result in compile error, cannot link
-        include-paths: [-I./src/ -I./src/test]
-        sources: [./examples/dBuLevel.cpp ./src/LCD_VU.cpp ./src//test/dummy.cpp]
+        include-paths: [-I./src/ -I./test]
+        sources: [./examples/dBuLevel.cpp ./src/LCD_VU.cpp ./test/dummy.cpp]
         os: [ubuntu-latest]
 
     env:
@@ -36,7 +36,6 @@ jobs:
       uses: actions/checkout@master
       with:
         repository: johnrickman/LiquidCrystal_I2C
-        ref: master
         path: CustomLiquidCrystal_I2C
 
     - name: Setup Python
@@ -50,7 +49,6 @@ jobs:
         arduino-board-fqbn: ${{ matrix.arduino-boards-fqbn }}
         build-properties: '{ "All": "${{ matrix.log-options }} ${{ matrix.other-options }}" }'
 
-    #---------Need to find out about this section--------
     - name: Generate code coverage
       run: |
         mv ./examples/dBuLevel.ino ./examples/dBuLevel.cpp 
