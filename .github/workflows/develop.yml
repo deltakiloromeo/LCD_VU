@@ -14,19 +14,15 @@ jobs:
     strategy:
       matrix:
         arduino-boards-fqbn: 
-          - arduino:avr:mega
+          - arduino:avr:uno
           #- arduino:avr:leonardo
           #- arduino:avr:nano
         log-options: [-DDEBUG -DINFO]
         other-options: [-DTEST -DDUMMY]
-        ccov-options: [-fprofile-arcs -ftest-coverage -DCODECOV] #--> this result in compile error, cannot link
+        ccov-options: [-fprofile-arcs -ftest-coverage -DCODECOV]
         include-paths: [-I./src/ -I./test]
         sources: [./examples/dBuLevel.cpp ./src/LCD_VU.cpp ./test/dummy.cpp]
         os: [ubuntu-latest]
-
-    env:
-      OS: ${{ matrix.os }}
-      PYTHON: '3.8'
 
     steps:
     - name: Checkout
@@ -37,11 +33,6 @@ jobs:
       with:
         repository: johnrickman/LiquidCrystal_I2C
         path: CustomLiquidCrystal_I2C
-
-    - name: Setup Python
-      uses: actions/setup-python@master
-      with:
-        python-version: 3.8
 
     - name: Compile
       uses: ArminJo/arduino-test-compile@master

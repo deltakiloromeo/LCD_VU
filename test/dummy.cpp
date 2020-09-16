@@ -1,7 +1,7 @@
 #include "dummy.h"
 
 #ifdef CODECOV
-LiquidCrystal_I2C::LiquidCrystal_I2C(uint16_t address, uint8_t col, uint8_t row) { 
+LiquidCrystal_I2C::LiquidCrystal_I2C(uint8_t address, uint8_t col, uint8_t row) { 
     printf("Instantiate LiquidCrystal_I2C(%0x, %u, %u)\n", address, col, row);
 }
 
@@ -110,12 +110,12 @@ int main()
     startTime = time(NULL);
     srand(time(NULL));
 
-    setup();
     printf("setup()\n");
+    setup();
 
     for(int i=0; i<=10; i++) {
-        loop();
         printf("loop()->%d\n", i+1);
+        loop();
     }
 
     return 0;

@@ -1,6 +1,6 @@
 #include "LCD_VU.h"
 
-LCD_VU::LCD_VU(uint16_t address, uint8_t col, uint8_t row, byte audioPinLeft, byte audioPinRight) {
+LCD_VU::LCD_VU(uint8_t address, uint8_t col, uint8_t row, byte audioPinLeft, byte audioPinRight) {
   this->address = address;
   this->col = col;
   this->row = row;

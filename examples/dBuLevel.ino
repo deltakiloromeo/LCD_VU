@@ -21,9 +21,9 @@
  * 5th argument: analog pin for audio input right channel
  * ********************************************************/
 // This is for 16x2 size LCD
-LCD_VU lcd (0x127, 16, 2, pinAudioLeft, pinAudioRight);
+LCD_VU lcd (0x27, 16, 2, pinAudioLeft, pinAudioRight);
 // Use following declaration if your LCD is 20x4 size
-//LCD_VU lcd (0x127, 16, 2, pinAudioLeft, pinAudioRight);
+//LCD_VU lcd (0x27, 16, 2, pinAudioLeft, pinAudioRight);
 
 void setup() {
     // Activate Serial if you want to debug or calibrate
