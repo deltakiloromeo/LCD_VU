@@ -22,16 +22,16 @@ void LiquidCrystal_I2C::setCursor(uint8_t col, uint8_t row) {
 }
 
 size_t LiquidCrystal_I2C::write(uint8_t c) {
-    printf("%u\n", c);
+    printf("%u", c);
     return sizeof c;
 }
 
 size_t LiquidCrystal_I2C::print(const String& str) {
-    printf("%s\n", &str[0]);
+    printf("%s", &str[0]);
     return sizeof str;
 }
 size_t LiquidCrystal_I2C::print(int n) {
-    printf("%d\n", n);
+    printf("%d", n);
     return n;
 }
 
@@ -40,12 +40,12 @@ void LiquidCrystal_I2C::clear() {}
 DummySerial::DummySerial() { printf("Instantiate DummySerial\n"); }
 
 size_t DummySerial::print(const char * str) {
-    printf("%s\n", str);
+    printf("%s", str);
     return sizeof str;
 }
 
 size_t DummySerial::print(int n) {
-    printf("%d\n", n);
+    printf("%d", n);
     return sizeof n;
 } 
 
@@ -54,14 +54,17 @@ void DummySerial::begin(unsigned long baud) {
 }
 
 size_t DummySerial::println(const char * str) {
-    return this->print(str);
+    printf("%s\n", str);
+    return sizeof str;
 }
 
 size_t DummySerial::println(int n) { 
-    return this->print(n);
+    printf("%d\n", n);
+    return sizeof n;
 }
 
 size_t DummySerial::println() { 
+    printf("\n");
     return 0;
 }
 
