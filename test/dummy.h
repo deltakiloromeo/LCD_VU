@@ -17,6 +17,7 @@
 
 using namespace std;
 typedef u_int8_t uint8_t;
+typedef u_int16_t uint16_t;
 typedef uint8_t byte;
 typedef string String;
 
@@ -30,7 +31,7 @@ extern time_t startTime;
 
 class LiquidCrystal_I2C {
     public:
-        LiquidCrystal_I2C(uint8_t address, uint8_t col, uint8_t row);
+        LiquidCrystal_I2C(uint16_t address, uint8_t col, uint8_t row);
         void init();
         void backlight();
         void createChar(uint8_t location, const char* charmap);
