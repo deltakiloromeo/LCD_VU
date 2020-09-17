@@ -108,6 +108,7 @@ int main()
 {
     int incr = 64/14;
     segment = 64;
+    LiquidCrystal_I2C lcd20(0x27, 20, 4);
 
     printf("main()\n");
 
@@ -116,10 +117,12 @@ int main()
 
     printf("setup()\n");
     setup();
+    lcd20.init();
 
     for(int i=0; i<=128; i++) {
         printf("loop()->%d\n", i+1);
         loop();
+        lcd20.loop();
         segment -= incr;
     }
 
