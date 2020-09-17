@@ -117,7 +117,7 @@ int main()
     printf("setup()\n");
     setup();
 
-    for(int i=0; i<=30; i++) {
+    for(int i=0; i<=64; i++) {
         printf("loop()->%d\n", i+1);
         loop();
         segment -= incr;
