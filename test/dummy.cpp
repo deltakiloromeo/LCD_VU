@@ -1,6 +1,15 @@
 #include "dummy.h"
 
 #ifdef CODECOV
+int segment;
+char Bar[] = {'='};
+char L[] = {'L'};
+char R[] = {'R'};
+char EndMark[] = {')'};
+char EmptyBar[] = {' '};
+char peakHoldChar[] = {'#'};
+time_t startTime;
+
 LiquidCrystal_I2C::LiquidCrystal_I2C(uint8_t address, uint8_t col, uint8_t row) { 
     printf("Instantiate LiquidCrystal_I2C(%0x, %u, %u)\n", address, col, row);
 }
@@ -83,7 +92,8 @@ void pinMode(uint8_t pin, uint8_t mode) {
 }
 
 int analogRead(uint8_t pin) {
-    int ret = rand() % 1024 + 1;
+    //int ret = rand() % 1024 + 700;
+    int ret = segment;
     printf("analogRead(%u) returns %d\n", pin, ret);
     return ret;
 }
@@ -94,18 +104,11 @@ void delay(unsigned long ms) {
 
 DummySerial Serial;
 
-char Bar[] = {'='};
-char L[] = {'L'};
-char R[] = {'R'};
-char EndMark[] = {')'};
-char EmptyBar[] = {' '};
-char peakHoldChar[] = {'#'};
-
-time_t startTime;
-
 int main()
 {
     printf("main()\n");
+
+    segment = (1024 - 700)/14; 
     
     startTime = time(NULL);
     srand(time(NULL));
@@ -116,6 +119,7 @@ int main()
     for(int i=0; i<=10; i++) {
         printf("loop()->%d\n", i+1);
         loop();
+        segment += segment;
     }
 
     return 0;
