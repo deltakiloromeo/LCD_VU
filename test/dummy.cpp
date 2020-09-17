@@ -107,17 +107,17 @@ DummySerial Serial;
 int main()
 {
     int incr = 64/14;
+    segment = 64;
+
     printf("main()\n");
 
-    segment = 64; 
-    
     startTime = time(NULL);
     srand(time(NULL));
 
     printf("setup()\n");
     setup();
 
-    for(int i=0; i<=10; i++) {
+    for(int i=0; i<=15; i++) {
         printf("loop()->%d\n", i+1);
         loop();
         segment -= incr;
