@@ -120,7 +120,7 @@ int main()
     for(int i=0; i<=10; i++) {
         printf("loop()->%d\n", i+1);
         loop();
-        segment -= incrs;
+        segment -= incr;
     }
 
     return 0;
