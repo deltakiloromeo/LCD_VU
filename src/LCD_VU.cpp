@@ -23,13 +23,8 @@ void LCD_VU::init() {
   mvCenter = VCENTER;
   mvOffset = VOFFSET;
   mvRef = VREF;
-}
 
-void LCD_VU::loop()
-{    
-  double data;
-
-  /*********** Refresh display for basic elements *********/
+  /************ moved here from start of loop *************/
   pLCD->createChar(1, Bar);
   pLCD->createChar(2, L);
   pLCD->createChar(3, R);
@@ -45,6 +40,30 @@ void LCD_VU::loop()
   pLCD->write(5);               //closing tag / end mark
   pLCD->setCursor(col-1, 1);    //closing tag / end mark index 2
   pLCD->write(5);               //closing tag / end mark
+}
+
+void LCD_VU::loop()
+{    
+  double data;
+
+  /*********** Refresh display for basic elements *********
+   * moved to loop
+  pLCD->createChar(1, Bar);
+  pLCD->createChar(2, L);
+  pLCD->createChar(3, R);
+  pLCD->createChar(4, EmptyBar);
+  pLCD->createChar(5, EndMark);
+  pLCD->createChar(6, peakHoldChar);
+
+  pLCD->setCursor(0, 0);        //L channel index
+  pLCD->write(2);               //L symbol 
+  pLCD->setCursor(0, 1);        //R channel index
+  pLCD->write(3);               //R symbol
+  pLCD->setCursor(col-1, 0);    //closing tag / end mark index 1
+  pLCD->write(5);               //closing tag / end mark
+  pLCD->setCursor(col-1, 1);    //closing tag / end mark index 2
+  pLCD->write(5);               //closing tag / end mark
+  */
 
   actualMillis = millis();
 
