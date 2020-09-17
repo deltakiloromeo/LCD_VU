@@ -1,3 +1,4 @@
+#include <LCD_VU.h>
 #include "dummy.h"
 
 #ifdef CODECOV
