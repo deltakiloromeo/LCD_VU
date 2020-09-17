@@ -108,7 +108,7 @@ int main()
 {
     int incr = 64/14;
     segment = 64;
-    LiquidCrystal_I2C lcd20(0x27, 20, 4);
+    LCD_VU lcd20(0x27, 20, 4);
 
     printf("main()\n");
 
