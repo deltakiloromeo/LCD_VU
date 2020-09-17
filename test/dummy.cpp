@@ -106,10 +106,10 @@ DummySerial Serial;
 
 int main()
 {
-    int incr = (1024 - 700)/14;
+    int incr = 64/14;
     printf("main()\n");
 
-    segment = incr; 
+    segment = 64; 
     
     startTime = time(NULL);
     srand(time(NULL));
@@ -120,7 +120,7 @@ int main()
     for(int i=0; i<=10; i++) {
         printf("loop()->%d\n", i+1);
         loop();
-        segment += incr*(i+1);
+        segment -= incrs;
     }
 
     return 0;
