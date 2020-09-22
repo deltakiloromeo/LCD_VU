@@ -10,8 +10,8 @@
 #include <LCD_VU.h>
 
 /****************** Definition for audio input pins *******************/
-#define pinAudioLeft    A3
-#define pinAudioRight   A2
+#define pinAudioLeft    A7
+#define pinAudioRight   A6
 
 /******************* LCD declaration **********************
  * 1st argument: address of LCD with I2C backpack, this address may vary between LCD device
@@ -21,9 +21,9 @@
  * 5th argument: analog pin for audio input right channel
  * ********************************************************/
 // This is for 16x2 size LCD
-LCD_VU lcd (0x27, 16, 2, pinAudioLeft, pinAudioRight);
-// Use following declaration if your LCD is 20x4 size
 //LCD_VU lcd (0x27, 16, 2, pinAudioLeft, pinAudioRight);
+// Use following declaration if your LCD is 20x4 size
+LCD_VU lcd (0x27, 20, 4, pinAudioLeft, pinAudioRight);
 
 void setup() {
     // Activate Serial if you want to debug or calibrate
@@ -33,16 +33,15 @@ void setup() {
     lcd.init();
     
     /****** The introduction block ******/
-    lcd.setCursor(0,0);
+    lcd.setCursor(0,2);
     lcd.print("* dBu VU meter *");
 
-    lcd.setCursor(0,1);
+    lcd.setCursor(0,3);
     lcd.print("--");
     lcd.print(lcd.getVersion());
     lcd.print("--");
 
     delay(2000);
-    lcd.clear();
     /****** End of The introduction block ******/
 
     /**** call this method to calibrate the VU meter ****

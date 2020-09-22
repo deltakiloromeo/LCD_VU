@@ -1,15 +1,15 @@
 #include "LCD_VU.h"
 
-LCD_VU::LCD_VU(uint8_t address, uint8_t col, uint8_t row, byte audioPinLeft, byte audioPinRight) {
+LCD_VU::LCD_VU(uint8_t address, uint8_t col, uint8_t row, short audioPinLeft, short audioPinRight) {
   this->address = address;
-  this->col = col;
-  this->row = row;
+  this->m_col = col;
+  this->m_row = row;
   this->pinLeft = audioPinLeft;
   this->pinRight = audioPinRight;
 }
 
 void LCD_VU::init() {
-  pLCD = new LiquidCrystal_I2C(address, col, row);
+  pLCD = new LiquidCrystal_I2C(address, m_col, m_row);
 
   pLCD->init();
   pLCD->backlight();
@@ -31,53 +31,35 @@ void LCD_VU::init() {
   pLCD->createChar(4, EmptyBar);
   pLCD->createChar(5, EndMark);
   pLCD->createChar(6, peakHoldChar);
-
+  /********************************************************/
   pLCD->setCursor(0, 0);        //L channel index
   pLCD->write(2);               //L symbol 
   pLCD->setCursor(0, 1);        //R channel index
   pLCD->write(3);               //R symbol
-  pLCD->setCursor(col-1, 0);    //closing tag / end mark index 1
+  pLCD->setCursor(m_col-1, 0);    //closing tag / end mark index 1
   pLCD->write(5);               //closing tag / end mark
-  pLCD->setCursor(col-1, 1);    //closing tag / end mark index 2
+  pLCD->setCursor(m_col-1, 1);    //closing tag / end mark index 2
   pLCD->write(5);               //closing tag / end mark
+  /********************************************************/
 }
 
 void LCD_VU::loop()
 {    
   double data;
 
-  /*********** Refresh display for basic elements *********
-   * moved to loop
-  pLCD->createChar(1, Bar);
-  pLCD->createChar(2, L);
-  pLCD->createChar(3, R);
-  pLCD->createChar(4, EmptyBar);
-  pLCD->createChar(5, EndMark);
-  pLCD->createChar(6, peakHoldChar);
-
-  pLCD->setCursor(0, 0);        //L channel index
-  pLCD->write(2);               //L symbol 
-  pLCD->setCursor(0, 1);        //R channel index
-  pLCD->write(3);               //R symbol
-  pLCD->setCursor(col-1, 0);    //closing tag / end mark index 1
-  pLCD->write(5);               //closing tag / end mark
-  pLCD->setCursor(col-1, 1);    //closing tag / end mark index 2
-  pLCD->write(5);               //closing tag / end mark
-  */
-
   actualMillis = millis();
 
   // Data reading on left channel
   data = analogRead(pinLeft);
 
-  #ifdef DEBUG
+  #ifdef _DEBUG
   Serial.print("Read L: "); Serial.print(data);
   #endif
 
   data = volt(data);
   totalL = dBu(data);
 
-  #ifdef DEBUG
+  #ifdef _DEBUG
   Serial.print(" Volt L: "); Serial.print(data); Serial.print("mV ");
   Serial.print("L data: "); Serial.print(totalL); Serial.print("dBu ");
   #endif
@@ -100,14 +82,14 @@ void LCD_VU::loop()
   // Data reading on right channel
   data = analogRead(pinRight);
 
-  #ifdef DEBUG
+  #ifdef _DEBUG
   Serial.print("Read R: "); Serial.print(data);
   #endif
 
   data = volt(data);
   totalR = dBu(data);
   
-  #ifdef DEBUG
+  #ifdef _DEBUG
   Serial.print(" Volt R: "); Serial.print(data); Serial.print("mV ");
   Serial.print(" R data: "); Serial.print(totalR); Serial.print("dBu ");
   #endif
@@ -128,9 +110,9 @@ void LCD_VU::loop()
   } 
     
   volR = right;
-  if(volR > (col-2))
+  if(volR > (m_col-2))
   {
-    volR = col-2;
+    volR = m_col-2;
   }
 
   if (volR < (rightAvg - 2))
@@ -155,7 +137,7 @@ void LCD_VU::loop()
     rightPeak = volR;    
   }
 
-  if(col == 16)
+  if(m_col == 16)
   {
     drawBar16(volR, rightPeak, 1);
   }
@@ -164,14 +146,14 @@ void LCD_VU::loop()
     drawBar20(volR, rightPeak, 1);
   }
 
-  #ifdef DEBUG
+  #ifdef _DEBUG
   Serial.print(" R: "); Serial.print(volR); Serial.print(", "); Serial.print(rightPeak);
   #endif
   
   volL = left;   
-  if(volL > (col-2))
+  if(volL > (m_col-2))
   {
-    volL = col-2;
+    volL = m_col-2;
   }
 
   if (volL < (leftAvg - 2))
@@ -196,7 +178,7 @@ void LCD_VU::loop()
     leftPeak = volL;
   }
 
-  if(col == 16)
+  if(m_col == 16)
   {
     drawBar16(volL, leftPeak, 0);
   }
@@ -205,7 +187,7 @@ void LCD_VU::loop()
     drawBar20(volL, leftPeak, 0);
   }
   
-  #ifdef DEBUG
+  #ifdef _DEBUG
   Serial.print(" L: "); Serial.print(volL); Serial.print(", "); Serial.print(leftPeak);
   #endif
 
@@ -219,7 +201,7 @@ void LCD_VU::loop()
     leftPeak = -1;
   }
 
-  #ifdef DEBUG
+  #ifdef _DEBUG
   Serial.println();
   #endif
 }
@@ -327,12 +309,6 @@ void LCD_VU::drawBar16(short data, short peakData, short row)
       pLCD->print(level14);
   }
 
-  else if (data == 15)
-  {
-      char level15[] = {fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, fill, '\0'};
-      pLCD->print(level15);
-  }
-
   if (peakData == data)
   {
       pLCD->setCursor(data,row);
@@ -358,7 +334,11 @@ void LCD_VU::clear() {
 }
 
 String LCD_VU::getVersion() {
+  #ifdef _DEBUG
+  return "LCD_VU v1.1.0 DBG";
+  #else
   return "LCD_VU v1.1.0";
+  #endif
 }
 
 
@@ -367,7 +347,7 @@ int LCD_VU::mapdBuToVU(double dBuLevel) {
   int vuRange = DBHI - DBLO;
 
   if(dBuLevel >= DBLO) {
-    retVal = ceil((dBuLevel - DBLO) / vuRange * (col-2));
+    retVal = ceil((dBuLevel - DBLO) / vuRange * (m_col-2));
   }
 
   return retVal;

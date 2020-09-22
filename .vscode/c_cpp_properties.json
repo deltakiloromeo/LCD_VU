@@ -14,12 +14,16 @@
             ],
             "defines": [
                 "_DEBUG",
+                "DEBUG",
                 "UNICODE",
                 "_UNICODE"
             ],
             "intelliSenseMode": "clang-x64",
             "forcedInclude": [
                 "C:\\Damar\\Projects\\Arduino\\arduino-1.8.12\\hardware\\arduino\\avr\\cores\\arduino\\Arduino.h"
+            ],
+            "compilerArgs": [
+                "-D_DEBUG"
             ]
         }
     ],

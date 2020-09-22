@@ -28,7 +28,11 @@
  ******************************************/
 #ifndef LCD_VU_H
 #define LCD_VU_H
-
+/*
+#ifndef _DEBUG
+#define _DEBUG
+#endif
+*/
 #ifndef CODECOV
 #include <Arduino.h>
 #include <LiquidCrystal_I2C.h>
@@ -55,8 +59,8 @@ class LCD_VU {
 		short indexR = 0;                         
 		double totalR = 0;                         
 		int maxR = 0;
-		byte pinLeft;	//Input analog pin for LEFT channel
-		byte pinRight;	//Input analog pin for RIGHT channel
+		short pinLeft;	//Input analog pin for LEFT channel
+		short pinRight;	//Input analog pin for RIGHT channel
 		short volL = 0;
 		short volR = 0;
 		int rightAvg = 0;
@@ -68,8 +72,8 @@ class LCD_VU {
 		long decayTime = 0;
 		long actualMillis = 0;
 		uint8_t address;
-		uint8_t col; 
-		uint8_t row;
+		uint8_t m_col; 
+		uint8_t m_row;
 		double mvRef;
 		double mvCenter;
 		double mvOffset;
@@ -151,7 +155,7 @@ class LCD_VU {
 		void drawBar20(short data, short peakData, short row);
 
 	public:
-		LCD_VU(uint8_t address, uint8_t col, uint8_t row, byte audioPinLeft, byte audioPinRight);
+		LCD_VU(uint8_t address, uint8_t col, uint8_t row, short audioPinLeft, short audioPinRight);
 		void init();
 		void loop();
 		void setCursor(uint8_t col, uint8_t row);
@@ -166,4 +170,4 @@ class LCD_VU {
 		#endif
 };
 
-#endif
+#endif // LCD_VU_H
