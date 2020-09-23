@@ -25,7 +25,6 @@
 
 using namespace std;
 typedef u_int8_t uint8_t;
-typedef uint8_t byte;
 typedef string String;
 
 extern char Bar[];
