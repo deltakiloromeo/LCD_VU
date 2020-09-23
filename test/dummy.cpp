@@ -110,6 +110,7 @@ int main()
     int incr = 64/14;
     segment = 64;
     LCD_VU lcd20(0x27, 20, 4, 3, 2);
+    LCD_VU lcd16(0x27, 16, 2, 3, 2);
 
     printf("main()\n");
 
@@ -119,11 +120,13 @@ int main()
     printf("setup()\n");
     setup();
     lcd20.init();
+    lcd16.init();
 
     for(int i=0; i<=128; i++) {
         printf("loop()->%d\n", i+1);
         loop();
         lcd20.loop();
+        lcd16.loop();
         segment -= incr;
     }
 
