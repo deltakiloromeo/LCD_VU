@@ -6,11 +6,11 @@
                 "${workspaceFolder}/**",
                 "C:\\Damar\\OneDrive\\Documents\\Arduino\\libraries\\**",
                 "C:\\Users\\damar.kristianto\\AppData\\Local\\Arduino15\\**",
-                "C:\\Damar\\Projects\\Arduino\\arduino-1.8.13\\hardware\\arduino\\avr\\cores\\arduino\\**",
-                "C:\\Damar\\Projects\\Arduino\\arduino-1.8.13\\hardware\\arduino\\avr\\libraries\\**",
-                "C:\\Damar\\Projects\\Arduino\\arduino-1.8.13\\tools\\**",
-                "C:\\Damar\\Projects\\Arduino\\arduino-1.8.13\\hardware\\arduino\\avr\\**",
-                "C:\\Damar\\Projects\\Arduino\\arduino-1.8.13\\hardware\\tools\\avr\\**"
+                "C:\\Damar\\Projects\\Arduino\\arduino-1.8.16\\hardware\\arduino\\avr\\cores\\arduino\\**",
+                "C:\\Damar\\Projects\\Arduino\\arduino-1.8.16\\hardware\\arduino\\avr\\libraries\\**",
+                "C:\\Damar\\Projects\\Arduino\\arduino-1.8.16\\tools\\**",
+                "C:\\Damar\\Projects\\Arduino\\arduino-1.8.16\\hardware\\arduino\\avr\\**",
+                "C:\\Damar\\Projects\\Arduino\\arduino-1.8.16\\hardware\\tools\\avr\\**"
             ],
             "defines": [
                 "_DEBUG",
@@ -20,7 +20,7 @@
             ],
             "intelliSenseMode": "clang-x64",
             "forcedInclude": [
-                "C:\\Damar\\Projects\\Arduino\\arduino-1.8.13\\hardware\\arduino\\avr\\cores\\arduino\\Arduino.h"
+                "C:\\Damar\\Projects\\Arduino\\arduino-1.8.16\\hardware\\arduino\\avr\\cores\\arduino\\Arduino.h"
             ],
             "compilerArgs": [
                 "-D_DEBUG"
