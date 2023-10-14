@@ -1,16 +1,20 @@
 {
+    "env": {
+        "arduinoPath":"C/:Users/damar.kristianto/AppData/Local/Arduino15/",
+        "arduinoLib":"C:/Damar/OneDrive/Documents/Arduino/libraries/"
+    },
     "configurations": [
         {
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/**",
-                "C:\\Damar\\OneDrive\\Documents\\Arduino\\libraries\\**",
-                "C:\\Users\\damar.kristianto\\AppData\\Local\\Arduino15\\**",
-                "C:\\Damar\\Projects\\Arduino\\arduino-1.8.16\\hardware\\arduino\\avr\\cores\\arduino\\**",
-                "C:\\Damar\\Projects\\Arduino\\arduino-1.8.16\\hardware\\arduino\\avr\\libraries\\**",
-                "C:\\Damar\\Projects\\Arduino\\arduino-1.8.16\\tools\\**",
-                "C:\\Damar\\Projects\\Arduino\\arduino-1.8.16\\hardware\\arduino\\avr\\**",
-                "C:\\Damar\\Projects\\Arduino\\arduino-1.8.16\\hardware\\tools\\avr\\**"
+                "C:/Damar/OneDrive/Documents/Arduino/libraries/**",
+                "${arduinoPath}/**",
+                "${arduinoPath}/packages/arduino/hardware/avr/1.8.6/cores/arduino/**",
+                "${arduinoPath}/packages/arduino/hardware/avr/1.8.6/libraries/**",
+                "${arduinoPath}/packages/arduino/tools/**",
+                "${arduinoPath}/packages/arduino/hardware/avr/**",
+                "${arduinoPath}/packages/arduino/tools/avr-gcc/**"
             ],
             "defines": [
                 "_DEBUG",
@@ -20,7 +24,7 @@
             ],
             "intelliSenseMode": "clang-x64",
             "forcedInclude": [
-                "C:\\Damar\\Projects\\Arduino\\arduino-1.8.16\\hardware\\arduino\\avr\\cores\\arduino\\Arduino.h"
+                "${arduinoPath}/packages/arduino/hardware/avr/1.8.6/cores/arduino/Arduino.h"
             ],
             "compilerArgs": [
                 "-D_DEBUG"
